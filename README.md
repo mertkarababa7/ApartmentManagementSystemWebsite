@@ -6,7 +6,9 @@ Abilities>>
 
 
 +Register Apartment Customer
+
  -Register Customer with Name,Surname,Phone Number,Door Number
+ 
  -Check if Customer Paid Depozit or not
  
 +Register Admin 
