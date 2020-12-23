@@ -11,6 +11,8 @@ Abilities>>
  
  -Check if Customer Paid Depozit or not
  
+ -Register Customer with Registered Admin id
+ 
 +Register Admin 
 +Checking Empty Doors
 +
