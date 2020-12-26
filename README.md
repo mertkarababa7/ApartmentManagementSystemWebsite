@@ -2,7 +2,7 @@
 
 
 
-# # Abilities>>
+## Abilities>>
 
 Register Admin
 
@@ -13,7 +13,7 @@ Check Costumers, Delete, Update
 
 Login with Costumer
  
-# ## #Updates>>
+#### Updates>>
 
 Update 1   (26.12.2020)
-- asdasd
+- To better visual and easy reach , splitted folders as Admin and Costumer.
