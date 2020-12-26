@@ -7,18 +7,16 @@ if (!isset($_SESSION['id'])) {
 
 <html>
 <head>
-<title>Sign In</title>
+<title>Admin Login</title>
 
 <link rel="stylesheet" href="Main.css">
     
 </head>
 <div class="topnav">
-<a href="registerCustomer.php" class="active">Register Customer</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
+<a href="index.php" class="active">Login As Admin</a>
+ <a href="LoginCustomer.php" class="active">Login As Customer</a>
   <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
-  <a href="Landlord.php">Costumers</a>
+  
   
  
 </div>
@@ -26,8 +24,8 @@ if (!isset($_SESSION['id'])) {
 	<header>		
 		<div id="login-box">
 		   <div class="one-box">
-		      <h2> Login</h2>
-		          <form action="login.php" method="post">
+		      <h2> Admin Login</h2>
+		          <form action="admin/login.php" method="post">
                              <div class="input-group">
 <?php  if (isset($_GET['error'])) {  ?>
      		<p class="error"><?php  echo   $_GET['error'] ; ?>	<?php } ?>
