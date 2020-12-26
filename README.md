@@ -17,5 +17,6 @@ Login with Costumer
 
 Update 1   (26.12.2020)
 - To better visual and easy reach , splitted folders as Admin and Costumer.
+
 Update 2 (26.12.2020)
 - Delete and Update Customers via Php in html from database.
