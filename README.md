@@ -1,22 +1,19 @@
-This is an Apartment Manager system by Mert Karababa
+# This is an Apartment Manager system by Mert Karababa
 
 
 
-Abilities>>
+# # Abilities>>
 
+Register Admin
 
-+Register Apartment Customer
+Register Costumer with Name,Surname,Phone Number,Door Number,password
 
- -Register Customer with Name,Surname,Phone Number,Door Number
+Login with Admin
+Check Costumers, Delete, Update
+
+Login with Costumer
  
- -Check if Customer Paid Depozit or not
- 
- -Register Customer with Registered Admin id
- 
-+Register Admin 
-+Checking Empty Doors
-+
+# ## #Updates>>
 
-
-
-Features>>
+Update 1   (26.12.2020)
+- asdasd
