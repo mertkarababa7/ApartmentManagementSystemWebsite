@@ -20,3 +20,6 @@ Update 1   (25.12.2020)
 
 Update 2 (26.12.2020)
 - Delete and Update Customers via Php in html from database.
+
+Update 3 (27.12.2020)
+- Created admin/admin2.css and implement on Landlord.php for better table
