@@ -1,0 +1,104 @@
+body {
+ background-image: url("homepage.jpg");
+ background-color: #cccccc;
+   background-repeat: no-repeat;
+   background-size: cover;
+ 
+}   
+
+  select{
+    width:20%;
+
+    padding: 16px 20px;
+
+    -moz-appearance: none;/*firefox oku kaldırır*/
+
+    border: none;
+
+    font-size: 16px;
+
+    border-radius: 4px;
+
+    background-color: #4CAF50;
+}
+input[type=text], select {
+  width:35%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+label {
+    cursor: pointer;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+}
+input[type=submit] {
+  width:100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+ 
+  padding: 9px;
+}
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  
+  width: 50%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #45a049;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+ 
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
