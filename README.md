@@ -15,11 +15,14 @@ Register New Costumers.
 Update Delete and Search costumers.
 
 Check payments from Tenants.php page with table and  Delete payments also available.
+
 --------------------------------------------------------------------------------
-###Costumer Side
-Login with costumer name and password which registered from admin side.
+### Costumer Side
+Login with costumer name and password which registered from admin side. 
+
 Check Our costumer informations, our name, our surname, our door number , etc.
-Pay our current rent.
+
+Pay our current rent that information taken from our door number.
 
 
 -------------------------------------------------------------------------------
