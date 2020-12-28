@@ -3,7 +3,7 @@
 
 
 ## Abilities
-----------------------------------------------------------------------
+
 ### Admin Side
 
 Register another admin with admin permission.
