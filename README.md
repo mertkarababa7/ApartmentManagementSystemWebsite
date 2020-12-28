@@ -2,18 +2,24 @@
 
 
 
-## Abilities>>
+## Abilities
 
-Register Admin
+###Admin Side
+--------------------------------------------------------------------------------
+Register another admin with admin permission.
+Login with any admin registered in to system.
+Register New Costumers.
+-Update Delete and Search costumers .
+Check payments from Tenants.php page with table and  Delete payments also available.
+--------------------------------------------------------------------------------
+###Costumer Side
+Login with costumer name and password which registered from admin side.
+Check Our costumer informations, our name, our surname, our door number , etc.
+Pay our current rent.
 
-Register Costumer with Name,Surname,Phone Number,Door Number,password
 
-Login with Admin
-Check Costumers, Delete, Update
-
-Login with Costumer
- 
-#### Updates>>
+-------------------------------------------------------------------------------
+#### Updates
 
 Update 1   (25.12.2020)
 - To better visual and easy reach , splitted folders as Admin and Costumer.
