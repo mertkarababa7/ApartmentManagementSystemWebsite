@@ -7,9 +7,11 @@
 ###Admin Side
 --------------------------------------------------------------------------------
 Register another admin with admin permission.
+
 Login with any admin registered in to system.
-Register New Costumers.
--Update Delete and Search costumers .
+
+Register New Costumers.   
+-Update Delete and Search costumers.
 Check payments from Tenants.php page with table and  Delete payments also available.
 --------------------------------------------------------------------------------
 ###Costumer Side
