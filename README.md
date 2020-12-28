@@ -23,3 +23,8 @@ Update 2 (26.12.2020)
 
 Update 3 (27.12.2020)
 - Created admin/admin2.css and implement on Landlord.php for better table
+
+Update 4 (28.12.2020)
+-Added Payment function for costumer
+-New css for costumer side
+-Added payment check table for admin and delete button on it.
