@@ -3,9 +3,9 @@
 
 
 ## Abilities
+----------------------------------------------------------------------
+### Admin Side
 
-###Admin Side
---------------------------------------------------------------------------------
 Register another admin with admin permission.
 
 Login with any admin registered in to system.
