@@ -1,7 +1,7 @@
 
 <?php 
 include 'checklogin.php';
-
+include '../db_conn.php';
 
  ?>
 <!DOCTYPE html>
@@ -14,12 +14,33 @@ body {
    background-repeat: no-repeat;
    background-size: cover;
  
-}   
+
+}  
+td {
+    display: table-cell;
+    vertical-align: inherit;
+} 
+ #updatebutton
+  {
+    background-color:green;
+    color:white;
+    width:%100;
+    height:%100;
+    font-size:15px;
+  }
+  #dltbutton
+  {
+    background-color:red;
+    color:white;
+    width:%100;
+    height:%100;
+    font-size:15px;
+  }
 </style>
 	<title> Table for Tenants </title>
 
-<link rel="stylesheet" href="Main.css">
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="Admin.css">
 <div class="topnav">
  <a href="registerCustomer.php" class="active">Register Customer</a>
  <a href="registerAdmin.php" class="active">Register Admin</a>
@@ -35,42 +56,49 @@ body {
 
 <h2> Tenants </h2>
 
-<table style="width:75%">
-
-  <tr>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Contact No</th>
-	<th>Room No</th>
-	 <th>Contract Term</th>
-	 <th>Payment Status</th>
-	 <th> Edit </th>
+<table class="styled-table" border="2" cellspacing="7">
+   
+  <tr "active-row">
+    <th colspan="2" align="center">Costumer Full Name</th>
+    <th>Paid Date</th>
+    <th>Amount Paid</th>
+    <th>Payment ID</th>
+       <th>Operations </th>
   </tr>
-  <tr>
-    <td>Mert</td>
-    <td>Karababa</td>
-    <td>0555-555-555</td>
-	 <td>32D</td>
-	 <td>12/12/2021</td>
-	 <td>Rent Paid</td>
-	 	 <td><button class="editbtn">edit</button></td>
-
-  </tr>
-  <tr>
-        <td>ALİ</td>
-    <td>ALİ</td>
-    <td>0555-444-444</td>
-	 <td>33D</td>
-	 <td>12/12/2020</td>
-	 <td>Rent Not Paid</td>
-		 <td><button class="editbtn">edit</button></td>
-
-  </tr>
-  <button type="button" class ="button" >Add New Tenant</button>
-    <button type="button" class ="button" >Delete Tenant</button>
-	  <button type="button" class ="button" >Renew-Add Contract</button>
 
 
+    <?php 
+
+$query = "SELECT * FROM transaction ORDER BY name ASC; ";
+//TO see better with ascending door numbers
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total!=0)
+   {
+while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
+
+echo "  <tbody><tr class='active-row'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['date']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['id']."</td>
+<td><a href='deletepayment.php?ci=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+</tr>";
+
+}
+}
+else{
+  echo "no records";
+}
+?>
+  
+  <script>
+  function checkdelete()
+  {
+    return confirm('Are you sure you want to delete this Payment')
+  }
+</script>
 </table>
 </body>
 </html>
