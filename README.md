@@ -1,4 +1,4 @@
-# This is an Apartment Manager system by Mert Karababa
+# This is an Apartment Management system by Mert Karababa
 
 
 
