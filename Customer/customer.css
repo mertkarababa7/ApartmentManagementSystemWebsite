@@ -1,0 +1,135 @@
+body {
+ background-image: url("homepage.jpg");
+ background-color: #cccccc;
+   background-repeat: no-repeat;
+   background-size: cover;
+ 
+}   
+
+  select{
+    width:20%;
+
+    padding: 16px 20px;
+
+    -moz-appearance: none;/*firefox oku kaldırır*/
+
+    border: none;
+
+    font-size: 16px;
+
+    border-radius: 4px;
+
+    background-color: #4CAF50;
+}
+input[type=text], select {
+  width:35%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+label {
+    cursor: pointer;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+}
+input[type=submit] {
+  width:100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+ 
+  padding: 9px;
+}
+input[type=number], select {
+  width: 100%
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  
+  width: 50%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #45a049;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+ 
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding:1px 50px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 3px solid green;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
