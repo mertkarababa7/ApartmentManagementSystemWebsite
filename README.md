@@ -25,6 +25,6 @@ Update 3 (27.12.2020)
 - Created admin/admin2.css and implement on Landlord.php for better table
 
 Update 4 (28.12.2020)
--Added Payment function for costumer, also added tenants.php on admin side to see payment tables.
+- Added Payment function for costumer, also added tenants.php on admin side to see payment tables.
 
 
