@@ -16,6 +16,14 @@ Update Delete and Search costumers.
 
 Check payments from Tenants.php page with table and  Delete payments also available.
 
+Update Fee
+
+Open Expenses with price and description
+
+Create new Apartment Block with new Flat
+
+Delete and update Flats like change their price etc.
+
 --------------------------------------------------------------------------------
 ### Costumer Side
 Login with costumer name and password which registered from admin side. 
@@ -40,5 +48,13 @@ Update 3 (27.12.2020)
 --------------------------------------------------------------------------------
 Update 4 (28.12.2020)
 - Added Payment function for costumer, also added tenants.php on admin side to see payment tables.
+
+--------------------------------------------------------------------------------
+Update 5 (29.12.2020)
+- Adden Flat Function for adding new flats and creating new apartments 
+
+-Create expenses with price and description
+
+-Changing the fees of the selected Apartment
 
 --------------------------------------------------------------------------------
