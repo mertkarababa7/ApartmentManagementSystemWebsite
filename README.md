@@ -51,7 +51,7 @@ Update 4 (28.12.2020)
 
 --------------------------------------------------------------------------------
 Update 5 (29.12.2020)
--Changing the fees of the selected Apartment
+- Changing the fees of the selected Apartment
 - Create expenses with price and description
 - Added Flat Function for adding new flats and creating new apartments 
 
