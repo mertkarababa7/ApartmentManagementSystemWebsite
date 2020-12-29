@@ -1,71 +1,88 @@
-<?php 
+<?php
 include 'checklogin.php';
-
-
- ?>
+include 'registerapartment.php';
+include '../db_conn.php';
+?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body {
- background-image: url("homepage.jpg");
- background-color: #cccccc;
-   background-repeat: no-repeat;
-   background-size: cover;
- 
-}   
-</style>
-	<title> Table for LandLord </title>
 
+  <style>
+a.button {
+    background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 25px 20px 25px 0px;
+  width: 1000px;
+   border:2px solid black;
+  
+}
+</style>
+<meta charset="UTF-8">
+<title>Add Admin </title>
 <link rel="stylesheet" href="Main.css">
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="Admin2.css">
+
+</head>
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
+    <a href="registerCustomer.php" >Register Customer</a>
+ <a href="registerAdmin.php" >Register Admin</a>
   <a href="logout.php">Admin LogOut </a>
-  <a href="admin.php" class="active">Return Home</a>
+  <a href="Admin.php"class="active" >Return Home</a>
   <a href="Tenants.php">Tenants</a>
-  <a href="Landlord.php">Costumers</a>
+   <a href="Landlord.php">Costumers</a>
+   <a href="expenses.php">Expenses</a>
+    
   
 </div>
-</head>
 <body>
 
+   <div class="rlform-group">         
+    <label>Block No</label>
+    <br>
+    <select name="Block">
+    <option value="Block">Choose Block No</option>
+     <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+  </select>
+     </div>
+  
+    <p>
+        <label for="name">Door No</label>
+        <br>
+        <input type="text" name="door_number"  value="<?php echo $_POST['Block'] ?? ''; ?>" id="lastName">
+    </p>
+    
+        <label for="password">Floor:</label>
+        <br>
+        <input type="text" name="floor" id="emailAddress">
+         <p>
+        <label for="name"> Price:</label>
+        <br>
+        <input type="text" name="price"  value="<?php echo $_POST['price'] ?? ''; ?>" id="lastName">
+    </p>
+        <div>
+          
+    
+   <div>
+    <button class="rlform-btn" name="signUp">Add New Flats
+    </button>
+    <form  method="post">
 
-<h2> Available Rooms </h2>
+<a href="viewflats.php" class="button">View/Update/Delete Flats</a>
+   
+</form>
 
-<table style="width:75%">
-
-  <tr>
-    <th>Address</th>
-    <th>Room No</th>
-    <th>Available</th>
-    <th>Room Type</th>
-	<th>Room Price</th>
-	<th>Edit</th>
-  </tr>
-  <tr>
-    <td>kültür 123x mah x</td>
-    <td>32D</td>
-    <td>Full</td>
-    <td>2+1</td>
-	 <td>750TL</td>
-	 <td><button class="editbtn">edit</button></td>
-	 
-  </tr>
-  <tr>
-      <td>kültür 1515x mah x</td>
-    <td>33D</td>
-    <td>Empty</td>
-    <td>3+1</td>
-	<td>1000 TL</td>
-	 <td><button class="editbtn">edit</button></td>
-  </tr>
-  <button type="button" class ="button" >Add New Room</button>
-    <button type="button" class ="button" >Delete Room</button>
-
-
-</table>
+  </div>
+</form>
 </body>
 </html>
