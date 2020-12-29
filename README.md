@@ -51,9 +51,10 @@ Update 4 (28.12.2020)
 
 --------------------------------------------------------------------------------
 Update 5 (29.12.2020)
-- Create expenses with price and description
-- Adden Flat Function for adding new flats and creating new apartments 
-
 -Changing the fees of the selected Apartment
+- Create expenses with price and description
+- Added Flat Function for adding new flats and creating new apartments 
+
+
 
 --------------------------------------------------------------------------------
