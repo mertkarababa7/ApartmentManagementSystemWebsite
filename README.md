@@ -70,6 +70,7 @@ Update 5 (29.12.2020)
 --------------------------------------------------------------------------------
 
 Update 6 (30.12.2020)
+- Costumer can see Change her/his registered phone number and email.
 - Change Rents with given rate (1 to 100  for ex 1=%1, 100=%100).
 - Costumer can see expenses and fees and can pay them.
 - Added Some extra Css lines To Costumer side for view expenses and fees in tables.
