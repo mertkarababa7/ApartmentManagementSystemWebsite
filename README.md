@@ -24,6 +24,10 @@ Create new Apartment Block with new Flat
 
 Delete and update Flats like change their price etc.
 
+Update Rents with given rate value.
+
+
+
 --------------------------------------------------------------------------------
 ### Costumer Side
 Login with costumer name and password which registered from admin side. 
@@ -31,6 +35,12 @@ Login with costumer name and password which registered from admin side.
 Check Our costumer informations, our name, our surname, our door number , etc.
 
 Pay our current rent that information taken from our door number.
+
+See Expenses with details and can pay expenses.
+
+See Monthly Fees and can pay Fees. 
+
+
 
 
 -------------------------------------------------------------------------------
@@ -54,6 +64,15 @@ Update 5 (29.12.2020)
 - Changing the fees of the selected Apartment
 - Create expenses with price and description
 - Added Flat Function for adding new flats and creating new apartments 
+
+
+
+--------------------------------------------------------------------------------
+
+Update 6 (30.12.2020)
+- Change Rents with given rate (1 to 100  for ex 1=%1, 100=%100).
+- Costumer can see expenses and fees and can pay them.
+- Added Some extra Css lines To Costumer side for view expenses and fees in tables.
 
 
 
