@@ -1,72 +1,137 @@
-<?php 
+  <?php 
+  include 'checkCustomerLogin.php';
+  include '../db_conn.php';
+
+  ?>
+
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+  	<title> Table for LandLord </title>
+    <style>
+      body {
+
+       background-color: #cccccc;
+       background-repeat: no-repeat;
+       background-size: cover;
+
+     }   
+
+   </style>
 
 
 
-$conn = mysqli_connect('localhost', 'root', '' , 'apartment'); //The Blank string is the password
+   <link rel="stylesheet" href="main.css">
+   <link rel="stylesheet" href="customer.css">
 
-
-$query = "SELECT * FROM customer"; //You don't need a ; like you do in SQL
-$result = mysqli_query($conn,$query);
-
-
-
-echo "</table>"; //Close the table in HTML
-
-
-
- ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Table for LandLord </title>
-<style>
-body {
- background-image: url("homepage.jpg");
- background-color: #cccccc;
-   background-repeat: no-repeat;
-   background-size: cover;
- 
-}   
-</style>
-
-
-
-<link rel="stylesheet" href="Main.css">
-
-<div class="topnav">
-   <a href="registerCustomer.php" class="active">Register Customer</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
-  <a href="Landlord.php">Costumers</a>
+ <div class="topnav">
+<a href="LoggedCustomer.php">My Details</a>
+<a href="LoggedCustomer.php"  class="active">Home Page</a>
+<a href="fee.php" >Pay Fee</a>
+<a href="expenses.php" >Expenses</a>
+<a href="logoutCustomer.php">Costumer LogOut </a>
+  
  
 </div>
 </head>
 <body>
+  <h1 style="color: #fff;background: #4CAF50;padding: 15px;border-radius: 10px">Rent</h1><br><br>
 
+  <table class="styled-table" border="2" cellspacing="7">
 
-<h2> Tenants </h2>
+    <tr class="active-row">
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Rent</th>
+      <th>Email</th>
+      <th>Door Number</th>
+      <th>Deposit</th>
+      <th>Your Apartment</th>
+    </tr>
 
-<table style="width:75%">
-
-
-  <tr>
     <?php 
-    echo "<table>"; // start a table tag in the HTML
-   
-while($row = mysqli_fetch_assoc($result)){   //Creates a loop to loop through results
-echo "<tr><td>" . $row['name'] . "</td><td>" . $row['surname'] ."</td><td>".  $row['email']."</td><td>".  $row['door_number']."</td><td>".  $row['deposit']. "</td></tr>";  
-}?>
-       
-    
+    include '../db_conn.php';
+    $tid=$_SESSION['customer_id'];
 
-	 <td><button class="editbtn">edit</button></td>
-	
-  </tr>
-  <button type="button" class ="button" >Add New LandLord</button>
-    <button type="button" class ="button" >Delete LandLord</button>
+    $sql = "select *,(select price from flats where door_number=t.door_number)as price,(select Block from flats where door_number=t.door_number)as Block from customer t where customer_id=$tid";
+
+    $run= mysqli_query($conn, $sql);{
+
+      while ($row = $run->fetch_assoc()) {
+
+
+
+        echo "  <tbody><tr class='active-row'>
+        <td>".$row['name']."</td>
+        <td>".$row['surname']."</td>
+        <td>".$row['price']."</td>
+        <td>".$row['email']."</td>
+        <td>".$row['door_number']."</td>
+        <td>".$row['deposit']."</td>
+        <td>".$row['Block']."</td>
+        </tr>"
+        ;
+        ?>
+      </table>
+
+      <form action="payment.php" method="POST">
+        <div class="button" style="padding: 25px; margin: 55px">
+          <input type="hidden" name="tid" value="<?php echo  $tid;?>" />
+          <button style="margin:0px" class="btn btn-success pull-right " type="submit">PayRent</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <?php
+}}
+?>
+</div>
+<div  class="col-sm-3 box" style="background-color:#4CAF50; margin-left:10px;">
+ <h3><b>Previous payments</b>
+   <table class="styled-table" border="2" cellspacing="7">
+
+    <tr class="active-row">
+      <th>Payment ID</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th colspan="2">Costumer Full name</th>
+    </tr>
+  </thead>
+  <tbody>
+   <?php 
+   include '../db_conn.php';
+   $sql = "select * from transaction where customer_id=$tid";
+   if ($result = $conn->query($sql)) {
+
+
+    while ($row = $result->fetch_assoc()) {
+
+      ?>
+      <tr>
+
+        <td><?php echo $row['id']?></td>
+        <td><?php echo $row['date']?></td>
+        <td><?php echo $row['amount']?></td>
+        <td><?php echo $row['name']?></td>
+        <td><?php echo $row['surname']?></td>
+      </tr> 
+      <?php  
+
+
+    }
+
+    /* free result set */
+    $result->close();
+  }
+
+
+
+  ?>   
+
 
 
 </table>

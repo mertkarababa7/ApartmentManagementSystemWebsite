@@ -2,17 +2,13 @@
 include 'checkCustomerLogin.php';
 include '../db_conn.php';
 
-
-
-
-
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Table for LandLord </title>
+  <title> Expenses </title>
   <style>
     body {
 
@@ -21,7 +17,19 @@ include '../db_conn.php';
      background-size: cover;
 
    }   
-
+  
+ #updatebutton {
+  border: none;
+  color: black;
+  padding: 12px 45px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #4CAF50
+}
  </style>
 
 
@@ -50,14 +58,15 @@ include '../db_conn.php';
       <th>Block</th>
       <th>Expense opened Date</th>
       <th>Expense Created By</th>
-      
+     <th>Pay Expense </th>
+     <th>Check Details</th>
     </tr>
 
     <?php 
     include '../db_conn.php';
     $tid=$_SESSION['customer_id'];
 
-    $sql = "select *,(select expense from expenses where Block=t.Block)as expense,(select details from expenses where Block=t.Block)as details,(select Block from flats where door_number=t.door_number)as Block,(select user_name from expenses where Block=t.Block)as user_name,(select date from expenses where Block=t.Block)as date from customer t where customer_id=$tid";
+    $sql = "select *,(select expense from expenses where Block=t.Block)as expense,(select details from expenses where Block=t.Block)as details,(select Block from flats where door_number=t.door_number)as Block,(select user_name from expenses where Block=t.Block)as user_name,(select date from expenses where Block=t.Block)as date from customer t where customer_id=$tid ";
 
     $run= mysqli_query($conn, $sql);{
 
@@ -71,18 +80,19 @@ include '../db_conn.php';
         <td>".$row['Block']."</td>
         <td>".$row['date']."</td>
         <td>".$row['user_name']."</td>
+        <td><form action='paymentexpense.php' method='POST'>
+        <div class='updatebutton'>
+          <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
+          <button class='updatebutton' type='submit'>Pay Expense</button>
+        </div></form></td>
+        <td><a href='viewexpense.php' ><input type='submit' value='Check Details' id='updatebutton' ></a> </td>
         </tr>"
         ;
         ?>
       </table>
 
-      <form action="paymentexpense.php" method="POST">
-        <div class="button" style="padding: 25px; margin: 55px">
-          <input type="hidden" name="tid" value="<?php echo  $tid;?>" />
-          <button style="margin:0px" class="btn btn-success pull-right " type="submit">Pay Expense</button>
-        </div>
+    
 
-      </form>
 
     </div>
   </div>
@@ -107,7 +117,7 @@ include '../db_conn.php';
   <tbody>
    <?php 
    include '../db_conn.php';
-   $sql = "select * from transactionExpenses where customer_id=$tid";
+   $sql = "select * from transactionExpenses where customer_id=$tid ORDER BY date DESC";
    if ($result = $conn->query($sql)) {
 
 

@@ -2,7 +2,7 @@
 // database bağlantısını yan dosyadan çekiyor
 session_start(); 
 include "../db_conn.php";
-if (isset($_POST['uname']) && isset($_POST['password'])) {
+if (isset($_POST['cname']) && isset($_POST['password'])) {
   // datayı trim-strip-special karakter var mı diye kontrol ediyor
 	function validate($data){
        $data = trim($data);
@@ -11,12 +11,12 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	   return $data;
 	}
 	// datayı validate ile kontrol ettikten sonra html sayfasında ki text valuesinden postladı
-	$uname = validate($_POST['uname']);
+	$cname = validate($_POST['cname']);
 	$pass = validate($_POST['password']);
 	
  
 	// valueleri tuttuktan sonra boş olup olmadıklarını anlamak için basit bir if else
-	if (empty($uname)) {
+	if (empty($cname)) {
 	   //username boşsa yönlendirme yap sen değiştir kafana göre echo at istersen
 		header("Location: ../LoginCustomer.php?error=User Name is required");
 	    exit();
@@ -26,7 +26,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	    exit();
 	}else{
 	  // databasede kayıtlı olan kolona text value eşitledik.
-		$sql = "SELECT * FROM customer WHERE name='$uname' AND CustomerPassword='$pass'";
+		$sql = "SELECT * FROM customer WHERE name='$cname' AND CustomerPassword='$pass'";
      //bağlantıyı  result fonksiyonuna atadık
 		$result = mysqli_query($conn, $sql);
 	 // mysqli_num_rows databaseden resultun döndürdüğü cevabın kolon sayısına bakan özel bir fonksiyon.
@@ -35,9 +35,9 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		//assoc yine özel bir fonksiyon çektiğimiz result bilgisini array şeklinde tutuyor ki parçalara ayırabil.
 			$row = mysqli_fetch_assoc($result);
 			// girilen bilgi database ile uyuyorsa home.php sayfasına git ve bilgileri depola
-            if ($row['name'] === $uname && $row['CustomerPassword'] === $pass) {
+            if ($row['name'] === $cname && $row['CustomerPassword'] === $pass) {
 			  // session yine özel bir fonksiyon süper global şeklinde datayı tutmanı sağlar ve her sayfadan çekebilirsin artık bu bilgileri.
-            	$_SESSION['name'] = $row['user_name'];
+            	$_SESSION['name'] = $row['name'];
             	$_SESSION['surname'] = $row['surname'];
             	$_SESSION['customer_id'] = $row['customer_id'];
             	header("Location: LoggedCustomer.php");	

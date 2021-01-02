@@ -22,7 +22,7 @@ body {
     background-color: #4CAF50;
 }
 input[type=text], select {
-  width:35%;
+  width:100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -37,7 +37,7 @@ label {
     font-weight: bold;
 }
 input[type=submit] {
-  width:100%;
+  width: 100%;
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -57,7 +57,7 @@ div {
   padding: 9px;
 }
 input[type=number], select {
-  width: 100%
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -74,8 +74,8 @@ form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
-  
-  width: 50%;
+  float: left;
+  width: 80%;
   background: #f1f1f1;
 }
 
@@ -84,52 +84,27 @@ form.example button {
   float: left;
   width: 20%;
   padding: 10px;
-  background: #45a049;
+  background: #2196F3;
   color: white;
   font-size: 17px;
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
- 
+  cursor: pointer;
 }
 
 form.example button:hover {
   background: #0b7dda;
 }
 
+/* Clear floats */
 form.example::after {
   content: "";
   clear: both;
   display: table;
 }
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 1.2em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-.styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
-.styled-table th,
-.styled-table td {
-    padding:1px 50px;
-}
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
 
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 3px solid green;
-}
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
+.balance-wrapper{
+  display: flex;
+  flex-direction: row;
+  
 }
