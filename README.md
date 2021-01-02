@@ -26,6 +26,12 @@ Delete and update Flats like change their price etc.
 
 Update Rents with given rate value.
 
+Extended Search page with customer name and flat door number.
+
+Create A New Announcement or Event that customer can see if it assign on their apartment.
+
+Admin dashboard added for easy reach (css taken from https://fonts.googleapis.com/).
+
 
 
 --------------------------------------------------------------------------------
@@ -36,11 +42,11 @@ Check Our costumer informations, our name, our surname, our door number , etc.
 
 Pay our current rent that information taken from our door number.
 
-See Expenses with details and can pay expenses.
+See Expenses and can pay expenses.
 
 See Monthly Fees and can pay Fees. 
 
-
+See expense details with how much money spent on what and what balance is.
 
 
 -------------------------------------------------------------------------------
@@ -66,7 +72,6 @@ Update 5 (29.12.2020)
 - Added Flat Function for adding new flats and creating new apartments 
 
 
-
 --------------------------------------------------------------------------------
 
 Update 6 (30.12.2020)
@@ -75,6 +80,12 @@ Update 6 (30.12.2020)
 - Costumer can see expenses and fees and can pay them.
 - Added Some extra Css lines To Costumer side for view expenses and fees in tables.
 
+--------------------------------------------------------------------------------
 
+Update 7 (02.01.2021)
+- Added Some extra Css for admin dashboard
+- Admin can write how much money spent on specific expense detail.
+- Costumer can see expense details and how much money spent on what.
+- Admin can create announcement/event for selected apartment.
 
 --------------------------------------------------------------------------------
