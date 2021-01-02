@@ -32,18 +32,24 @@ a.button {
 
 </head>
 <div class="topnav">
- <a href="registerCustomer.php" >Register Customer</a>
- 
- <a href="registerAdmin.php" >Return Admin</a>
+ <a href="registerCustomer.php"  >Register Costumer</a>
+ <a href="registerAdmin.php" >Register Admin</a>
   <a href="logout.php">Admin LogOut </a>
   <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
+  <a href="tenants.php">Payments</a>
   <a href="Landlord.php">Costumers</a>
-     <a href="Admin.php" class="active">Return Home</a>
-    
-  
+  <a href="admin.php"class="active">Return Home</a>
+  <a href="registerAnnouncement.php">Create Announcements </a>
+  <a href="registerStaff.php">Register Staff</a>
+   <a href="search.php">Search</a>
 </div>
 <body>
+
+<form  method="post">
+
+<a href="viewExpenses.php" class="button">View Sended EXPENSES</a>
+    <h2>Add Expense </h2>
+</form>
 <form  method="post">
     <p>
         <label for="User name">Expense</label><br>
@@ -57,7 +63,8 @@ a.button {
      <div class="rlform-group">    
     
   <?php 
-  $result = $conn->query("SELECT Block FROM flats ORDER BY flat_id DESC ") or die($conn->error);?>
+  
+  $result = $conn->query("SELECT Block FROM flats GROUP BY Block ") or die($conn->error);?>
 <select name="Block">
     <option value="Block">Select Block</option>
     <?php
@@ -73,11 +80,6 @@ a.button {
     <button class="rlform-btn" name="signUp">Send Expenses To Costumers
     </button>
   </div>
-</form>
-<form  method="post">
 
-<a href="viewExpenses.php" class="button">View/Update/Delete Flats</a>
-   
-</form>
 </body>
 </html>

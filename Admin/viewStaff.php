@@ -26,7 +26,7 @@ include '../db_conn.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Customers</title>
+	<title> Table for Staff </title>
 <style>
 body {
  background-image: url("homepage.jpg");
@@ -43,22 +43,23 @@ body {
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="Admin2.css">
 <div class="topnav">
- <a href="registerCustomer.php"  >Register Costumer</a>
+ <a href="registerCustomer.php" >Register Customer</a>
  <a href="registerAdmin.php" >Register Admin</a>
   <a href="logout.php">Admin LogOut </a>
   <a href="Apartments.php">Apartments</a>
   <a href="Tenants.php">Payments</a>
-  <a href="admin.php"class="active">Return Home</a>
+  <a href="Landlord.php">Costumers</a>
   <a href="expenses.php">Expenses</a>
-  <a href="registerAnnouncement.php">Create Announcements </a>
-  <a href="registerStaff.php">Register Staff</a>
-  <a href="search.php">Search</a>
+  <a href="registerAnnouncement.php">Create Announcements</a>
+  <a href="admin.php" class="active">Return Home</a>
+   <a href="search.php">Search</a>
 </div>
 </head>
 <body>
 
 
-<h2>Table For Customers </h2>
+<h2> Staff </h2>
+
 
 
 
@@ -66,20 +67,17 @@ body {
 <table class="styled-table" border="2" cellspacing="7">
    
   <tr "active-row">
-    <th>Name</th>
-    <th>Move_in_Date</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Door Number</th>
-     
-      <th colspan="2" align="center">Database Operations</th>
+    <th>name</th>
+    <th>job</th>
+    <th>Block</th>
+    <th>phone number</th>
+    <th>Details</th>
   </tr>
-
 
     <?php 
 
-$query = "SELECT * FROM customer ORDER BY date DESC; ";
-//TO see better with ascending door numbers
+$query = "SELECT * FROM staff ORDER BY id ASC; ";
+
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
    if($total!=0)
@@ -88,16 +86,16 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
 
 echo "  <tbody><tr class='active-row'>
 <td>".$result['name']."</td>
-<td>".$result['date']."</td>
-<td>".$result['email']."</td>
-<td>".$result['phone_number']."</td>
-<td>".$result['door_number']."</td>
+<td>".$result['job']."</td>
+<td>".$result['phoneNumber']."</td>
+<td>".$result['Details']."</td>
 
-<td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
-<td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+<td><a href='deletestaff.php?si=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+
 </tr>";
 
 }
+
 }
 else{
   echo "no records";
@@ -109,7 +107,7 @@ else{
 <script>
   function checkdelete()
   {
-    return confirm('Are you sure you want to delete this Customer')
+    return confirm('Are you sure you want to delete this Expense')
   }
 </script>
 

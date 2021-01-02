@@ -67,7 +67,7 @@ $fe=$_GET['fe'];
  
    <div>
 
-   <input type="submit" name="submit" value="Update Costumer" />
+   <input type="submit" name="submit" class="updatebutton"  value="Update Costumer" />
 
   </div>
 </form>

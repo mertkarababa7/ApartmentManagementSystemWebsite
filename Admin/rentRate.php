@@ -32,28 +32,23 @@ include '../db_conn.php';
   }
 </style>
 <meta charset="UTF-8">
-<title>Update Fees </title>
+<title>Rent Rate </title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="Admin.css">
 
 </head>
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
+
+  <a href="viewflats.php" class="active" >Back</a> 
+  <a href="admin.php" class="active" >Return Home</a>
+
  
- <a href="admin.php" class="active">Return Home</a>
- <a href="logout.php">Admin LogOut </a>
- <a href="Apartments.php">Apartments</a>
- <a href="Tenants.php">Tenants</a>
- <a href="Landlord.php">Costumers</a>
-
-
-
 </div>
 <body>
   <form action="" method="GET">
    
     <p>
-      <label for="name">Write Rate 1 to 100 </label>
+      <label for="name">Write Rate Between 1 to 100 </label>
       <input type="text" name="rate"   id="Fee">
     </p>
      <div class="rlform-group">    
@@ -84,16 +79,6 @@ include '../db_conn.php';
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-
 <?php
 
 if (isset($_GET['submit']))
@@ -109,7 +94,7 @@ if (isset($_GET['submit']))
   ?>
   <script>
 
-    alert('Payment Successfull !!');
+    alert('Successfull !!');
     window.open('viewflats.php','_self');
 
   </script>

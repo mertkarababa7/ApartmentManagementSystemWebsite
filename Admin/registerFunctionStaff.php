@@ -14,27 +14,32 @@ if($link === false){
 }
 
 if (isset($_POST['signUp'])) {
-if (empty($_POST['Block']) || empty($_POST['door_number']) || empty($_POST['floor'])|| empty($_POST['price']) || empty($_POST['fee'])) {
+if (empty($_POST['name']) || empty($_POST['job']) || empty($_POST['phoneNumber'])|| empty($_POST['Details']) ) {
 echo "Please fill up all the required field.";
 }
 else{
 
-$fee=validate($_POST['fee']);
-$Block=validate($_POST['Block']);
-$door_number=validate($_POST['door_number']);
-$floor=validate($_POST['floor']);
-$price=validate($_POST['price']);
-$new =validate($_POST['Block'] . '-' . $_POST['door_number']); 
-$sql = "INSERT INTO flats  (Block, door_number, floor,price,fee) VALUES ('$Block','$new','$floor','$price','$fee')";
-if(mysqli_query($link, $sql)){
-	
-    echo "Records added successfully.";
-} else{ 
 
+$name=validate($_POST['name']);
+$job=validate($_POST['job']);
+$phoneNumber=validate($_POST['phoneNumber']);
+$Details=validate($_POST['Details']);
+
+ 
+$sql = "INSERT INTO staff (name, job, phoneNumber,Details) VALUES ('$name', '$job', '$phoneNumber','$Details')";
+if(mysqli_query($link, $sql)){
+    ?>
+        <script>
+
+            alert('Successfull !!');
+            window.open('admin.php','_self');
+            
+        </script>
+        <?php
+
+} else{ 
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
-
-
 
 
 mysqli_close($link);

@@ -39,29 +39,35 @@ $fe=$_GET['fe'];
 
 </head>
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
+
+  <a href="viewflats.php" class="active" >Back</a> 
+  <a href="admin.php" class="active" >Return Home</a>
+
  
- <a href="admin.php" class="active">Return Home</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
-  <a href="Landlord.php">Costumers</a>
-  
-    
-  
 </div>
 <body>
 <form action="" method="GET">
+   
     <p>
-        <label for="User name">Block No</label>
-        <input type="text" name="Block"  id="Block No">
-    </p>
-    <p>
-        <label for="name">Fee </label>
+        <label for="name">Select Block And Enter Fee </label>
         <input type="text" name="Fee"   id="Fee">
     </p>
     
-        
+         <div class="rlform-group">    
+    
+  <?php 
+  
+  $result = $conn->query("SELECT Block FROM flats GROUP BY Block ") or die($conn->error);?>
+<select name="Block">
+    <option value="Block">Select Block</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
+    }
+    ?>        
+</select>
+ </div>
+
     
     
           

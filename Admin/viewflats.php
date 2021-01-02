@@ -43,22 +43,20 @@ body {
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="Admin2.css">
 <div class="topnav">
-   <a href="registerCustomer.php" class="active">Register Customer</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
+  <a href="registerCustomer.php"  >Register Costumer</a>
+  <a href="registerAdmin.php" >Return Home</a>
   <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
   <a href="admin.php" class="active">Return Home</a>
- 
+  <a href="Tenants.php">Payments</a>
+  <a href="Landlord.php">Costumers</a>
+  <a href="expenses.php">Expenses</a>
+  <a href="registerAnnouncement.php">Create Announcements </a>
+  <a href="registerStaff.php">Register Staff</a>
+  <a href="search.php" >Search</a>
+
 </div>
 </head>
 <body>
-
-
-<h2> Flats </h2>
-
-
-
 
 
 <table class="styled-table" border="2" cellspacing="7">
@@ -79,7 +77,7 @@ $query = "SELECT * FROM flats ; ";
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
 $result = mysqli_fetch_assoc($data);
-echo "<a href='deneme1.php?bl=$result[Block]&fe=$result[fee]' ><input type='submit' value='Update Fee' id='updatebutton' ></a>"; ?>
+echo "<a href='rentRate.php' ><input type='submit' value='Rent Rate' id='dltbutton' ></a>"; ?>
 
 <?php 
 //update fees
@@ -88,7 +86,7 @@ $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
 $result = mysqli_fetch_assoc($data);
 echo "<a href='updatefee.php?bl=$result[Block]&fe=$result[fee]' ><input type='submit' value='Update Fee' id='updatebutton' ></a>"; ?>
-
+<h2> Flats </h2>
 
     <?php 
 

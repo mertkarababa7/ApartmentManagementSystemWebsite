@@ -18,18 +18,20 @@ include '../db_conn.php';
 
 </head>
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
- 
- <a href="admin.php" class="active">Return Home</a>
+ <a href="registerCustomer.php"  >Register Costumer</a>
+ <a href="admin.php"class="active" >Return Home</a>
   <a href="logout.php">Admin LogOut </a>
   <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
+  <a href="Tenants.php">Payments</a>
   <a href="Landlord.php">Costumers</a>
-  
-    
+  <a href="expenses.php">Expenses</a>
+  <a href="registerAnnouncement.php">Create Announcements </a>
+  <a href="registerStaff.php">Register Staff</a>
+  <a href="search.php" >Search</a>
   
 </div>
 <body>
+  <h2>Admin Create Page</h2>
 <form  method="post">
     <p>
         <label for="User name">User Name:</label>
@@ -46,7 +48,7 @@ include '../db_conn.php';
           
     
    <div>
-    <button class="rlform-btn" name="signUp">Create A New Admin
+    <button class="updatebutton" name="signUp">Create A New Admin
     </button>
 
   </div>

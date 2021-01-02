@@ -16,18 +16,20 @@ include '../db_conn.php';
 <title>Add Customer</title>
 
 <link rel="stylesheet" href="Main.css">
-  <link rel="stylesheet" href="admin.css">  
+  <link rel="stylesheet" href="x.css">  
 </head>
 <div class="topnav">
-
-  <a href="admin.php" class="active">Return Home</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
+ <a href="admin.php" class="active" >Return Home</a>
+ <a href="registerAdmin.php" >Register Admin</a>
   <a href="logout.php">Admin LogOut </a>
   <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
+  <a href="Tenants.php">Payments</a>
   <a href="Landlord.php">Costumers</a>
+  <a href="expenses.php">Expenses</a>
+  <a href="registerAnnouncement.php">Create Announcements </a>
+  <a href="registerStaff.php">Register Staff</a>
+   <a href="search.php">Search</a>
   
- 
 </div>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -90,27 +92,40 @@ include '../db_conn.php';
   </select>
      </div>
    
-	 
-	
-  <div class="rlform-group">    
-    <label>Door Number</label>
+	   <div class="rlform-group">    
+    <label>Block Number</label>
   <?php 
-  $result = $conn->query("SELECT flat_id,price,door_number FROM flats ORDER BY flat_id DESC LIMIT  0,12") or die($conn->error);?>
-<select name="door_number">
-    <option value="Door Number">Select Door Number</option>
+  $result = $conn->query("SELECT flat_id,price,door_number,Block FROM flats GROUP BY Block ASC") or die($conn->error);?>
+<select name="Block">
+    <option value="Block No">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['door_number'] . "'>" . $row['door_number'] . "\nPrice is>>'" . $row['price'] . "TL'</option>";
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "\nBlock No is>>''</option>";
     }
     ?>        
 </select>
  </div>
+	
   <div class="rlform-group">    
     <label>Door Number</label>
   <?php 
+  $result = $conn->query("SELECT flat_id,price,door_number,Block FROM flats ORDER BY flat_id ASC") or die($conn->error);?>
+<select name="door_number">
+    <option value="Door Number">Select Door Number</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['door_number'] . "'>" . $row['door_number'] . "\nBlock No is>>''</option>";
+    }
+    ?>        
+</select>
+ </div>
+ 
+  <div class="rlform-group">    
+    <label>Admin</label>
+  <?php 
   $result2 = $conn->query("SELECT id,user_name,name FROM users ORDER BY id DESC LIMIT  0,6") or die($conn->error);?>
 <select name="user_name">
-    <option value="user_name">Select Door Number</option>
+    <option value="user_name">Admin name</option>
     <?php
     while ($row = mysqli_fetch_array($result2)) {
         echo "<option value='" . $row['user_name'] . "'>'Your Registered Name is>>" . $row['user_name'] . "</option>";

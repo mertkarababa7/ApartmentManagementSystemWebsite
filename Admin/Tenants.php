@@ -36,25 +36,50 @@ td {
     height:%100;
     font-size:15px;
   }
+  a.button {
+    background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 25px 20px 25px 0px;
+  width: 1000px;
+   border:2px solid black;
+  
+}
 </style>
-	<title> Table for Tenants </title>
+	<title> Payments</title>
+
+  
 
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="Admin.css">
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
- <a href="registerAdmin.php" class="active">Register Admin</a>
+  <a href="registerCustomer.php"  >Register Costumer</a>
+ <a href="registerAdmin.php" >Register Admin</a>
   <a href="logout.php">Admin LogOut </a>
   <a href="Apartments.php">Apartments</a>
   <a href="admin.php" class="active">Return Home</a>
   <a href="Landlord.php">Costumers</a>
+  <a href="expenses.php">Expenses</a>
+  <a href="registerAnnouncement.php">Create Announcements </a>
+  <a href="registerStaff.php">Register Staff</a>
+  <a href="search.php" >Search</a>
   
 </div>
 </head>
 <body>
 
+</form>
+<form  method="post">
 
-<h2> Tenants </h2>
+<a href="balance.php" class="button">View Rent Balance</a>
+   
+</form>
+<h2>Table for Payments </h2>
 
 <table class="styled-table" border="2" cellspacing="7">
    
@@ -69,7 +94,7 @@ td {
 
     <?php 
 
-$query = "SELECT * FROM transaction ORDER BY name ASC; ";
+$query = "SELECT * FROM transaction ORDER BY date DESC; ";
 //TO see better with ascending door numbers
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
@@ -92,7 +117,13 @@ else{
   echo "no records";
 }
 ?>
-  
+</table>
+
+
+
+
+
+
   <script>
   function checkdelete()
   {
@@ -100,6 +131,8 @@ else{
   }
 </script>
 </table>
+</div>
+</div>
 </body>
 </html>
 

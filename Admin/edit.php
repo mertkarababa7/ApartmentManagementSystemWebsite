@@ -24,13 +24,9 @@ $em=$_GET['em'];
 
 </head>
 <div class="topnav">
- <a href="registerCustomer.php" class="active">Register Customer</a>
- 
+<a href="Landlord.php" class="active">Back</a>
  <a href="admin.php" class="active">Return Home</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Tenants</a>
-  <a href="Landlord.php">Costumers</a>
+ 
   
     
   
@@ -67,7 +63,7 @@ $em=$_GET['em'];
  
    <div>
 
-   <input type="submit" name="submit" value="Sign in" />
+   <input type="submit" name="submit" value="Update Costumer" />
 
   </div>
 </form>
@@ -78,12 +74,7 @@ $em=$_GET['em'];
 
 if (isset($_GET['submit']))
 {
-  $ci=$_GET['ci'];
-$na=$_GET['na'];
-$su=$_GET['su'];
-$dn=$_GET['dn'];
-$pn=$_GET['pn'];
-$em=$_GET['em'];
+
   $customerID=$_GET['customerID'];
    $name=$_GET['name'];
     $surname=$_GET['surname'];
@@ -94,8 +85,9 @@ $query="UPDATE customer SET customer_id='$customerID',name='$name',surname='$sur
 $data=mysqli_query($conn,$query);
 if(isset($data))
 {
+
   echo "<script>alert('record is updated')</script>";
- 
+ header("Location: Landlord.php");
 }
 else{
  echo "There is an Error ";

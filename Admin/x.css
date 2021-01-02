@@ -22,7 +22,7 @@ body {
     background-color: #4CAF50;
 }
 input[type=text], select {
-  width:35%;
+  width:100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -37,7 +37,7 @@ label {
     font-weight: bold;
 }
 input[type=submit] {
-  width:100%;
+  width: 100%;
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -57,7 +57,7 @@ div {
   padding: 9px;
 }
 input[type=number], select {
-  width: 100%
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -74,8 +74,8 @@ form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
-  
-  width: 50%;
+  float: left;
+  width: 80%;
   background: #f1f1f1;
 }
 
@@ -84,12 +84,12 @@ form.example button {
   float: left;
   width: 20%;
   padding: 10px;
-  background: #45a049;
+  background: #2196F3;
   color: white;
   font-size: 17px;
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
- 
+  cursor: pointer;
 }
 
 form.example button:hover {
