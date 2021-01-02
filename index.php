@@ -50,7 +50,7 @@ if (!isset($_SESSION['id'])) {
 </html>
 <?php 
 }else{
-     header("Location: admin.php");
+     header("Location: Admin/admin.php");
      exit();
 }
  ?>

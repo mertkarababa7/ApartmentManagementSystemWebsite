@@ -13,7 +13,7 @@ session_start();
 <div class="topnav">
 <a href="index.php" class="active">Login As Admin</a>
  <a href="LoginCustomer.php" class="active">Login As Customer</a>
-  <a href="logout.php">Admin LogOut </a>
+  
   
   
  
@@ -29,7 +29,7 @@ session_start();
         <p class="error"><?php  echo   $_GET['error'] ; ?>  <?php } ?>
         <h3>Username<br><br>
         <span class="input-group-addon" id="basic-addon3"></span>
-               <input type="text" class="form-control" name="uname" value="<?php echo $_POST['uname'] ?? ''; ?>" />
+               <input type="text" class="form-control" name="cname" value="<?php echo $_POST['cname'] ?? ''; ?>" />
                <br> 
                <br>Password<br><br>
           <span class="input-group-addon" id="basic-addon3"></span>
