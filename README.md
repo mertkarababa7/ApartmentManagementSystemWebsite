@@ -99,6 +99,6 @@ Update 8 (04.01.2021)
 - Admin can see who paid expense,fee,rent and who did not.
 - Admin can see flat history
 - Costumer can see who paid expenses and expense spent on what
-- The customer password is hashed.
+- Customer passwords are hashed.
 
 --------------------------------------------------------------------------------
