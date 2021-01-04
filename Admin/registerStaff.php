@@ -65,12 +65,14 @@ a.button {
         <label for="job"> Available Hours</label>
         <input type="text" name="Details"  value="<?php echo $_POST['Details'] ?? ''; ?>" id="lastName">
     </p>
+     <p>
         <label for="phoneNumber">Phone Number:</label>
         <input type="text" name="phoneNumber" id="emailAddress">
-        <div>
-          
-    
-   <div>
+      </p>
+       <p>
+        <label for="Staff">Block name</label>
+        <input type="text" name="Block">
+    </p>
     <button class="updatebutton" name="signUp">Create A NEW STAFF
     </button>
 

@@ -2,8 +2,7 @@
 <?php 
 include 'checklogin.php';
 include '../db_conn.php';
-
-
+   $dr=$_GET['dr'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +38,7 @@ include '../db_conn.php';
     font-size:15px;
   }
 </style>
-<title> Rent Balance </title>
+<title> Fee Balance </title>
 
 
 
@@ -59,18 +58,20 @@ include '../db_conn.php';
 </div>
 </head>
 <body>
-
-  <h2> Balance 
-  <div class="balance-wrapper">
+ 
+  <h2>  Flat History FOR <?php echo "$dr"; ?>
     <div>
-      <label>Total Expected Rents This Month</label>
+     Current Tenant
       <table class="styled-table" border="2" cellspacing="7">
 
         <tr "active-row"> 
 
-          <th>Block No</th>
-          <th>Total Rents</th>
-            <th>Update Rent Rate</th>  
+     
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Move In</th>
+          <th>Phone Number</th>
 
         </tr>
 
@@ -78,16 +79,19 @@ include '../db_conn.php';
         <?php 
 
 
-        $query = "SELECT Block, SUM(price) FROM flats GROUP BY Block ";   
+        $query = "SELECT *FROM customer WHERE door_number='$dr'";   
         $result = mysqli_query($conn,$query) or die(mysql_error());
 
         while($row = mysqli_fetch_array($result)){
-          echo "  <tbody><tr class='active-row'>
-          <td>".$row['Block']."</td>
-          <td>".$row['SUM(price)']."</td>
-            <td><a href='rentRate.php' ><input type='submit' value='Update Rate' id='updatebutton' ></a></td>
-           
-          </tr>";
+            echo "  <tbody><tr class='active-row'>
+       
+          <td>".$row['customer_id']."</td>
+           <td>".$row['name']."</td>
+            <td>".$row['surname']."</td>
+             <td>".$row['date']."</td>
+              <td>".$row['phone_number']."</td>
+              </tr>
+          ";
           
         }
 
@@ -95,30 +99,37 @@ include '../db_conn.php';
       </table>
     </div>
     <div>
-      <label>Paid Amount This Month between 1-30</label>
+      Old Tenants
       <table class="styled-table" border="2" cellspacing="7">
 
         <tr "active-row">
-
-          <th>Block No</th>
-          <th>Paid Rents</th>
-<th>Who Paid Details</th>
+   
+          
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Move In</th>
+          <th>Move Out</th>
+  
 
         </tr>
 
 
         <?php 
-
-
-        $query = "SELECT Block, SUM(amount) FROM transaction  WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()) GROUP BY Block";   
+     
+       $dr=$_GET['dr'];
+        $query = "SELECT * FROM flathistory WHERE door_number='$dr' ";   
         $result = mysqli_query($conn,$query) or die(mysql_error());
 
         while($row = mysqli_fetch_array($result)){
           echo "  <tbody><tr class='active-row'>
-          <td>".$row['Block']."</td>
-          <td>".$row['SUM(amount)']."</td>
-           <td><a href='rentDetails.php?bl=$row[Block]' ><input type='submit' value='View Details' id='updatebutton' ></a></td>
-          </tr>";
+          
+          <td>".$row['customer_id']."</td>
+           <td>".$row['name']."</td>
+            <td>".$row['surname']."</td>
+             <td>".$row['MoveIn']."</td>
+              <td>".$row['MoveOut']."</td></tr>
+          ";
 
         }
 

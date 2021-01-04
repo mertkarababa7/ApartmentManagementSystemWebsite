@@ -71,7 +71,8 @@ body {
     <th>job</th>
     <th>Block</th>
     <th>phone number</th>
-    <th>Details</th>
+    <th>Available</th>
+       <th>Delete This Staff</th>
   </tr>
 
     <?php 
@@ -87,6 +88,7 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
 echo "  <tbody><tr class='active-row'>
 <td>".$result['name']."</td>
 <td>".$result['job']."</td>
+<td>".$result['Block']."</td>
 <td>".$result['phoneNumber']."</td>
 <td>".$result['Details']."</td>
 

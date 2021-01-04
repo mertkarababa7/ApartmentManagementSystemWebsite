@@ -24,6 +24,7 @@ $deposit=validate($_POST['deposit']);
 $user_name=validate($_POST['user_name']);
 $CustomerPassword=validate($_POST['CustomerPassword']);
 $Block=validate($_POST['Block']);
+$hash=password_hash($CustomerPassword, PASSWORD_DEFAULT); 
 include('../db_conn.php');
 $sQuery = "SELECT customer_id from customer where door_number=? LIMIT 1";
 $iQuery = "INSERT Into customer (name, surname, door_number,phone_number,email,people,deposit,user_name,CustomerPassword,date,Block) values(?,?,?, ?, ?,?,?,?,?,CURDATE(),?)";
@@ -46,7 +47,7 @@ if($rnum==0) { //if true, insert new data
           $stmt->close();
           
           $stmt = $conn->prepare($iQuery);
-        $stmt->bind_param("ssssssssss", $name, $surname, $door_number,$phone_number,$email,$people,$deposit,$user_name,$CustomerPassword,$Block);
+        $stmt->bind_param("ssssssssss", $name, $surname, $door_number,$phone_number,$email,$people,$deposit,$user_name,$hash,$Block);
           if($stmt->execute()) {
             echo 'Register successfully';}
             header("Location: Landlord.php");

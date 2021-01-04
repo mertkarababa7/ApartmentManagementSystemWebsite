@@ -58,6 +58,10 @@ include '../db_conn.php';
     <label>Customer Password</label>
     <input type="text" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
    </div>
+   <div class="rlform-group">         
+    <label>Customer LoginName</label>
+    <input type="text" name="CustomerLoginName" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
+   </div>
 	
    
 <div class="rlform-group">					

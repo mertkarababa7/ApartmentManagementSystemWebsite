@@ -2,9 +2,6 @@
 include 'checklogin.php';
 include '../db_conn.php';
 
-$bl=$_GET['bl'];
-$fe=$_GET['fe'];
-
 
 ?>
 

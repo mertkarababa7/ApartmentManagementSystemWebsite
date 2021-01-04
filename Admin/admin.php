@@ -20,6 +20,12 @@ body {
 .a{
   text-align: center;
 }
+table, th, td 
+{
+  margin-left: auto;
+  margin-right: auto;
+   border: 1px solid black;
+}
 </style>
 <link rel="stylesheet" href="Main.css">
 <link rel="stylesheet" href="admin.css">
@@ -42,10 +48,50 @@ body {
 </div>
 </head>
 <body>
+<h1 class="a";> Welcome to Apartment Management System </h1>  
 
-  <h1 class="a";>Hello Admin   <?php echo $_SESSION['user_name']; ?>
-</h1>
-<h1 class="a";> Welcome to Apartment Management System </h1>
+<h2><table class="center" >
+   
+  <tr >
+    
+    <th>user name</th>
+    <th>email</th>
+    <th>phone number</th>
+    <th>name</th>
+     <th>Update</th>
+ 
+  </tr>
+
+    <?php 
+ $id=$_SESSION['id'];
+$query = "SELECT * FROM users where id=$id; ";
+
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total!=0)
+   {
+while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
+
+echo "  <tr>
+
+<td>".$result['user_name']."</td>
+<td>".$result['email']."</td>
+<td>".$result['phoneNumber']."</td>
+<td>".$result['name']."</td>
+<td><a href='editadmin.php?ai=$result[id] &em=$result[email] &ph=$result[phoneNumber]' ><input type='submit' value='update' id='updatebutton' ></a></td>
+</tr>";
+
+}
+
+}
+else{
+  echo "no records";
+}
+?>
+  
+</table></h2>
+ 
+
 
 <div class="main-section">
     <div class="dashbord dashbord-skyblue">

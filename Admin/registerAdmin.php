@@ -43,10 +43,16 @@ include '../db_conn.php';
     </p>
     
         <label for="password">Password:</label>
-        <input type="text" name="password" id="emailAddress">
-        <div>
-          
-    
+        <input type="password" name="password" id="emailAddress">
+        
+          <p>
+              <label for="password">Phone Number:</label>
+        <input type="text" class="form-control"  name="phoneNumber"   "/>
+</p>
+<p> <label for="password">Email:</label>
+                 <input type="text" class="form-control" name="email"   "/>  
+</p>
+    <div>
    <div>
     <button class="updatebutton" name="signUp">Create A New Admin
     </button>

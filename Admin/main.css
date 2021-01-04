@@ -76,7 +76,7 @@ table, th, td {
 	box-sizing: border-box;
 	width: 450px;
 	height: 32px;
-	background: transparent;
+	
 	outline: none;
 	border: 0px solid;
 	border-bottom: 1.5px solid white;

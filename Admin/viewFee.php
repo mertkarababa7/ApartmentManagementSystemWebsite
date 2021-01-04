@@ -3,7 +3,6 @@
 include 'checklogin.php';
 include '../db_conn.php';
 
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +38,7 @@ include '../db_conn.php';
     font-size:15px;
   }
 </style>
-<title> Rent Balance </title>
+<title> Fee Balance </title>
 
 
 
@@ -60,17 +59,17 @@ include '../db_conn.php';
 </head>
 <body>
 
-  <h2> Balance 
+  <h2>  Fee Balance 
   <div class="balance-wrapper">
     <div>
-      <label>Total Expected Rents This Month</label>
+      <label>Total Expected Fee This Month</label>
       <table class="styled-table" border="2" cellspacing="7">
 
         <tr "active-row"> 
 
           <th>Block No</th>
-          <th>Total Rents</th>
-            <th>Update Rent Rate</th>  
+          <th>Total Fee</th>
+ <th>Update</th>
 
         </tr>
 
@@ -78,15 +77,14 @@ include '../db_conn.php';
         <?php 
 
 
-        $query = "SELECT Block, SUM(price) FROM flats GROUP BY Block ";   
+        $query = "SELECT Block, SUM(fee) FROM flats GROUP BY Block";   
         $result = mysqli_query($conn,$query) or die(mysql_error());
 
         while($row = mysqli_fetch_array($result)){
           echo "  <tbody><tr class='active-row'>
           <td>".$row['Block']."</td>
-          <td>".$row['SUM(price)']."</td>
-            <td><a href='rentRate.php' ><input type='submit' value='Update Rate' id='updatebutton' ></a></td>
-           
+          <td>".$row['SUM(fee)']."</td>
+          <td><a href='updatefee.php' ><input type='submit' value='Update Fees' id='updatebutton' ></a></td>
           </tr>";
           
         }
@@ -95,29 +93,29 @@ include '../db_conn.php';
       </table>
     </div>
     <div>
-      <label>Paid Amount This Month between 1-30</label>
+      <label>Paid Amount This Month Between 1-30</label>
       <table class="styled-table" border="2" cellspacing="7">
 
         <tr "active-row">
 
           <th>Block No</th>
-          <th>Paid Rents</th>
-<th>Who Paid Details</th>
+          <th>Paid Fees</th>
+  <th>View</th>
 
         </tr>
 
 
         <?php 
+     
 
-
-        $query = "SELECT Block, SUM(amount) FROM transaction  WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()) GROUP BY Block";   
+        $query = "SELECT Block, SUM(amount) FROM transactionfee WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()) GROUP BY Block";   
         $result = mysqli_query($conn,$query) or die(mysql_error());
 
         while($row = mysqli_fetch_array($result)){
           echo "  <tbody><tr class='active-row'>
           <td>".$row['Block']."</td>
           <td>".$row['SUM(amount)']."</td>
-           <td><a href='rentDetails.php?bl=$row[Block]' ><input type='submit' value='View Details' id='updatebutton' ></a></td>
+          <td><a href='feeDetails.php?bl=$row[Block]' ><input type='submit' value='View Details' id='updatebutton' ></a></td>
           </tr>";
 
         }

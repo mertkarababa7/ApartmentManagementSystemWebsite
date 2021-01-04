@@ -14,7 +14,7 @@ if($link === false){
 }
 
 if (isset($_POST['signUp'])) {
-if (empty($_POST['name']) || empty($_POST['job']) || empty($_POST['phoneNumber'])|| empty($_POST['Details']) ) {
+if (empty($_POST['name']) || empty($_POST['job']) || empty($_POST['phoneNumber'])|| empty($_POST['Details'])|| empty($_POST['Block']) ) {
 echo "Please fill up all the required field.";
 }
 else{
@@ -24,9 +24,10 @@ $name=validate($_POST['name']);
 $job=validate($_POST['job']);
 $phoneNumber=validate($_POST['phoneNumber']);
 $Details=validate($_POST['Details']);
+$Block=validate($_POST['Block']);
 
  
-$sql = "INSERT INTO staff (name, job, phoneNumber,Details) VALUES ('$name', '$job', '$phoneNumber','$Details')";
+$sql = "INSERT INTO staff (name, job, phoneNumber,Details,Block) VALUES ('$name', '$job', '$phoneNumber','$Details','$Block')";
 if(mysqli_query($link, $sql)){
     ?>
         <script>
