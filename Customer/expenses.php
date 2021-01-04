@@ -38,68 +38,79 @@ include '../db_conn.php';
  <link rel="stylesheet" href="customer.css">
 
  <div class="topnav">
-  <a href="LoggedCustomer.php">My Details</a>
-  <a href="borc.php" >Pay Rent</a>
-  <a href="fee.php">Pay Fee</a>
-  <a href="LoggedCustomer.php" class="active">Home Page</a>
-  <a href="logoutCustomer.php">Costumer LogOut </a>
-  
+    <a href="LoggedCustomer.php" >Home Page</a>
+<a href="borc.php">Pay Rent</a>
+<a href="fee.php" >Pay Fee</a>
+<a href="expenses.php"class="active" >Expenses</a>
+<a href="logoutCustomer.php">Costumer Log Out </a>
+  <a href="Announcement.php" >Announcements </a>
+   <a href="staff.php">Staff </a>
 
 </div>
 </head>
 <body>
   <h1 style="color: #fff;background: #4CAF50;padding: 15px;border-radius: 10px">Expenses</h1><br><br>
 
-  <table class="styled-table" border="2" cellspacing="7">
+  
+    
 
-    <tr class="active-row">
-      <th>Expense Amount</th>
-      <th>Expense Details</th>
-      <th>Block</th>
-      <th>Expense opened Date</th>
-      <th>Expense Created By</th>
-     <th>Pay Expense </th>
-     <th>Check Details</th>
-    </tr>
+
+  
+
+   <table class="styled-table" border="2" cellspacing="7">
+   
+  <tr "active-row">
+    
+ 
+
+    <th>expense</th>
+    <th>spent</th>
+     <th> Block</th>
+     <th>Details</th>
+     <th> Date</th>
+     <th>Pay</th>
+     <th> Details</th>
+  </tr>
+
 
     <?php 
-    include '../db_conn.php';
     $tid=$_SESSION['customer_id'];
+$block=$_SESSION['Block'];
+$query = "SELECT * FROM expenses where Block='$block'";
+$result = $conn->query($query);
 
-    $sql = "select *,(select expense from expenses where Block=t.Block)as expense,(select details from expenses where Block=t.Block)as details,(select Block from flats where door_number=t.door_number)as Block,(select user_name from expenses where Block=t.Block)as user_name,(select date from expenses where Block=t.Block)as date from customer t where customer_id=$tid ";
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total>0)
+   {
+while($result = mysqli_fetch_assoc($data)){   
 
-    $run= mysqli_query($conn, $sql);{
-
-      while ($row = $run->fetch_assoc()) {
-
-
-
-        echo "  <tbody><tr class='active-row'>
-        <td>".$row['expense']."</td>
-        <td>".$row['details']."</td>
-        <td>".$row['Block']."</td>
-        <td>".$row['date']."</td>
-        <td>".$row['user_name']."</td>
-        <td><form action='paymentexpense.php' method='POST'>
+echo "  <tbody><tr class='active-row'>
+<td>".$result['expense']."</td>
+<td>".$result['spent']."</td>
+<td>".$result['Block']."</td>
+<td>".$result['Details']."</td>
+<td>".$result['date']."</td>
+        <td><form action='paymentexpense.php?id=$result[id]' method='POST'>
         <div class='updatebutton'>
           <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
           <button class='updatebutton' type='submit'>Pay Expense</button>
         </div></form></td>
-        <td><a href='viewexpense.php' ><input type='submit' value='Check Details' id='updatebutton' ></a> </td>
-        </tr>"
-        ;
-        ?>
-      </table>
+        <td><a href='viewexpense.php?id=$result[id]' ><input type='submit' value='Check Details' id='updatebutton' ></a> </td>
+</tr>";
+
+}
+}
+else{
+  echo "no records";
+}
+?>
+  
+</table>
 
     
 
 
-    </div>
-  </div>
-
-  <?php
-}}
-?>
 </div>
 <div  class="col-sm-3 box" style="background-color:#4CAF50; margin-left:10px;">
  <h3><b>Previous payments</b>
@@ -117,6 +128,7 @@ include '../db_conn.php';
   <tbody>
    <?php 
    include '../db_conn.php';
+     $tid=$_SESSION['customer_id'];
    $sql = "select * from transactionExpenses where customer_id=$tid ORDER BY date DESC";
    if ($result = $conn->query($sql)) {
 
@@ -150,5 +162,7 @@ include '../db_conn.php';
 
 
 </table>
+
+
 </body>
 </html>

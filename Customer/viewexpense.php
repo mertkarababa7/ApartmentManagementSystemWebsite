@@ -2,6 +2,7 @@
 
 include '../db_conn.php';
 include 'checkCustomerLogin.php';
+$id=$_GET['id'];
  ?>
 
  <style>
@@ -41,24 +42,21 @@ body {
 
 
 <link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="Admin2.css">
+<link rel="stylesheet" href="customer.css">
 <div class="topnav">
- <a href="registerCustomer.php"  >Register Costumer</a>
- <a href="registerAdmin.php" >Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="tenants.php">Payments</a>
-  <a href="Landlord.php">Costumers</a>
-  <a href="admin.php"class="active">Return Home</a>
-  <a href="registerAnnouncement.php">Create Announcements </a>
-  <a href="registerStaff.php">Register Staff</a>
-   <a href="search.php">Search</a>
+  <a href="LoggedCustomer.php" >Home Page</a>
+<a href="borc.php">Pay Rent</a>
+<a href="fee.php" >Pay Fee</a>
+<a href="expenses.php"class="active" >Expenses</a>
+<a href="logoutCustomer.php">Costumer Log Out </a>
+  <a href="Announcement.php" >Announcements </a>
+   <a href="staff.php" class="active">Staff </a>
 </div>
 </head>
 <body>
 
 
-<h2>Expense Detail is >><?php 
+<h2>Expense Header <br><?php 
 $query = "SELECT * FROM expenses ORDER BY date DESC; ";
 
 $data = mysqli_query($conn,$query);
@@ -76,7 +74,7 @@ echo "  <tbody><tr class='active-row'>
 else{
   echo "no records";
 }
-?> </h2>
+?> 
 
 
 
@@ -89,12 +87,12 @@ else{
     <th>Spent</th>
     <th>Details</th>
     <th>Block</th>
-    <th>Date</th>
+    <th>Opened Date</th>
   </tr>
 
     <?php 
 
-$query = "SELECT * FROM expenses ORDER BY date DESC; ";
+$query = "SELECT * FROM expenses where id=$id; ";
 
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
@@ -118,23 +116,21 @@ else{
 }
 ?>
   
-</table>
-
+</table></h1>
+<div class="balance-wrapper">
+    <div>
+<br>
+<h2 >Customers Who Paid That Expense Price
 <table class="styled-table" border="2" cellspacing="7">
    
   <tr "active-row">
-    <th>Total Gathered Money From Customers</th>
- <div><?php
-      $tid = $_SESSION['customer_id'];
-
-    $sql = "select *,(select id from expenses where Block=t.Block)as expenseid from customer t where customer_id=$tid";
-    if($result= mysqli_query($conn, $sql)){
-        $row =$result->fetch_assoc();
-        $expenseid=$row['expenseid'];
-    }
-   
-
-$query = "SELECT  SUM(amount)  FROM transactionexpenses Where expid=$expenseid; ";
+    <th>Customer Name</th>
+    <th>Customer Surname</th>
+    <th>Amount Taken</th> 
+    <th>Paid Date</th> </tr>
+ <?php
+     
+$query = "SELECT  *  FROM transactionexpenses Where expid=$id; ";
 
 $run = mysqli_query($conn,$query);
 $total=mysqli_num_rows($run);
@@ -143,14 +139,49 @@ $total=mysqli_num_rows($run);
 while($result = mysqli_fetch_assoc($run)){ 
 
 echo "  <tbody><tr class='active-row'>
- <td>".$result['SUM(amount)']."</td>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['date']."</td>
 
-<tr>";
+</tr>";
 }
 }
 ?>
 
-    </div>
+    
 </table>
+</div>
+  <div>
+<br>
+<h2>Total Gathered Money
+<table class="styled-table" border="2" cellspacing="7">
+   
+  <tr "active-row">
+    <th>Total Gathered Money</th>
+    
+ <?php
+     
+$query = "SELECT SUM(amount) FROM transactionexpenses Where expid=$id; ";
+
+$run = mysqli_query($conn,$query);
+$total=mysqli_num_rows($run);
+   if($total!=0)
+   {
+while($result = mysqli_fetch_assoc($run)){ 
+
+echo "  <tbody><tr class='active-row'>
+<td>".$result['SUM(amount)']."</td>
+
+
+</tr>";
+}
+}
+?>
+
+  
+</table>
+</div>
+</div>
 </body>
 </html>

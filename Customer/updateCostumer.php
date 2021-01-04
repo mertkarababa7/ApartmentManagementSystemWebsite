@@ -25,7 +25,9 @@ $ci=$_GET['ci'];
 <a href="LoggedCustomer.php" class="active">Home Page</a>
 <a href="borc.php">Pay Rent</a>
 <a href="fee.php" >Pay Fee</a>
-<a href="logoutCustomer.php">Costumer LogOut </a>
+<a href="expenses.php" >Expenses</a>
+<a href="logoutCustomer.php">Costumer Log Out </a>
+<a href="Announcement.php" >Announcements </a>
   
     
   

@@ -1,3 +1,4 @@
+
 <?php 
 // database bağlantısını yan dosyadan çekiyor
 session_start(); 
@@ -26,7 +27,7 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
 	    exit();
 	}else{
 	  // databasede kayıtlı olan kolona text value eşitledik.
-		$sql = "SELECT * FROM customer WHERE name='$cname' AND CustomerPassword='$pass'";
+		$sql = "SELECT * FROM customer WHERE name='$cname' ";
      //bağlantıyı  result fonksiyonuna atadık
 		$result = mysqli_query($conn, $sql);
 	 // mysqli_num_rows databaseden resultun döndürdüğü cevabın kolon sayısına bakan özel bir fonksiyon.
@@ -40,6 +41,7 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
             	$_SESSION['name'] = $row['name'];
             	$_SESSION['surname'] = $row['surname'];
             	$_SESSION['customer_id'] = $row['customer_id'];
+            	$_SESSION['Block']=$row['Block'];
             	header("Location: LoggedCustomer.php");	
 		        exit();
             }else{
@@ -57,3 +59,5 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
 	header("Location: ../LoginCustomer.php?error=Incorect User name or password");
 	exit();
 }
+
+

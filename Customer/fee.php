@@ -8,7 +8,7 @@
   <!DOCTYPE html>
   <html>
   <head>
-  	<title> Table for LandLord </title>
+  	<title> Fee </title>
     <style>
       body {
 
@@ -26,14 +26,15 @@
    <link rel="stylesheet" href="customer.css">
 
    <div class="topnav">
-<a href="LoggedCustomer.php">My Details</a>
-<a href="borc.php" >Pay Rent</a>
-<a href="LoggedCustomer.php" class="active">Home Page</a>
-<a href="expenses.php" >Expenses</a>
-<a href="logoutCustomer.php">Costumer LogOut </a>
-  
- 
-</div>
+    <a href="LoggedCustomer.php" >Home Page</a>
+    <a href="borc.php">Pay Rent</a>
+    <a href="fee.php"class="active" >Pay Fee</a>
+    <a href="expenses.php" >Expenses</a>
+    <a href="logoutCustomer.php">Costumer Log Out </a>
+    <a href="Announcement.php" >Announcements </a>
+ <a href="staff.php" >Staff </a>
+
+  </div>
 </head>
 <body>
   <h1 style="color: #fff;background: #4CAF50;padding: 15px;border-radius: 10px">Fees</h1><br><br>
@@ -48,6 +49,7 @@
       <th>Door Number</th>
       <th>Deposit</th>
       <th>Your Apartment</th>
+      <th>Payment Button</th>
     </tr>
 
     <?php 
@@ -70,18 +72,20 @@
         <td>".$row['door_number']."</td>
         <td>".$row['deposit']."</td>
         <td>".$row['Block']."</td>
+        <td> <form action='paymentfee.php' method='POST'>
+        <div class='button'>
+        <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
+        <button style='margin:0px' class='btn btn-success pull-right 'type='submit'>PAY FEE</button>
+        </div>
+
+        </form></td>
+
+
         </tr>"
         ;
         ?>
       </table>
 
-      <form action="paymentfee.php" method="POST">
-        <div class="button" style="padding: 25px; margin: 55px">
-          <input type="hidden" name="tid" value="<?php echo  $tid;?>" />
-          <button style="margin:0px" class="btn btn-success pull-right " type="submit">PAY FEE</button>
-        </div>
-
-      </form>
 
     </div>
   </div>
