@@ -32,6 +32,10 @@ Create A New Announcement or Event that customer can see if it assign on their a
 
 Admin dashboard added for easy reach (css taken from https://fonts.googleapis.com/).
 
+Admin can see who paid expense-rent-fee and who did not.
+
+Flat history added to all flats , admin can see who moved out when in specific flat
+
 
 
 --------------------------------------------------------------------------------
@@ -87,5 +91,13 @@ Update 7 (02.01.2021)
 - Admin can write how much money spent on specific expense detail.
 - Costumer can see expense details and how much money spent on what.
 - Admin can create announcement/event for selected apartment.
+
+--------------------------------------------------------------------------------
+Update 8 (04.01.2021)
+- Admin can add spent details to show customers how much expense spent on what.
+- Added Some extra Css for Customer dashboard
+- Admin can see who paid expense,fee,rent and who did not.
+- Admin can see flat history
+- Costumer can see who paid expenses and expense spent on what
 
 --------------------------------------------------------------------------------
