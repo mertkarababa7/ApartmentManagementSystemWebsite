@@ -2,9 +2,9 @@
 ### Login informations
 Admin user name : mert
 
-admin password: mert
+admin password: mert   
 
-Customer user name : mert2
+Customer user name : mert2    
 customer password : mert2
 Databse name : apartment
 After logged in with admin name you can create a new admin or new customers and login with the informations you wrote.
