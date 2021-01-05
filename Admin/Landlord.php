@@ -1,7 +1,7 @@
 <?php 
 
 include '../db_conn.php';
-
+include 'checkLogin.php';
  ?>
 
  <style>
@@ -73,6 +73,7 @@ body {
     <th>Door Number</th>
      
       <th colspan="2" align="center">Database Operations</th>
+       <th>Move Out</th>
   </tr>
 
 
@@ -95,6 +96,7 @@ echo "  <tbody><tr class='active-row'>
 
 <td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
 <td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+<td><a href='moveout.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Move Out' id='dltbutton' ></a> </td>
 </tr>";
 
 }

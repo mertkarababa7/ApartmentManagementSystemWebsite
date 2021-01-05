@@ -58,7 +58,7 @@ $ex=$_GET['ex'];
 
    <div>
 
-   <input type="submit" name="submit" class="updatebutton"  value="Update Costumer" />
+   <input type="submit" name="submit" class="updatebutton"  value="Spend" />
 
   </div>
 </form>

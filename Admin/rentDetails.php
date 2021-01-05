@@ -2,6 +2,8 @@
 
 include '../db_conn.php';
 
+$bl=$_GET['bl'];
+
  ?>
 
  <style>
@@ -26,7 +28,7 @@ include '../db_conn.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Table for Expenses</title>
+  <title> Table For Rents </title>
 <style>
 body {
  background-image: url("homepage.jpg");
@@ -58,63 +60,105 @@ body {
 <body>
 
 
-<h2> Expenses Details </h2>
-
-
-
-
-
+<h2>PAID CUSTOMER LIST
 <table class="styled-table" border="2" cellspacing="7">
    
   <tr "active-row">
-    <th>Expense Price</th>
-    <th>Spent</th>
-    <th>Details</th>
-    <th>Block</th>
-    <th>Date</th>
-     <th>Delete</th>
-    <th>Spend</th>
-    <th>Who Paid</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Customer ID</th>
+    <th>Door Number</th>
+    <th>amount</th>
+  <th>Paid Date</th>
   </tr>
 
     <?php 
-
-$query = "SELECT * FROM expenses ORDER BY date DESC; ";
+    
+$query = "SELECT * FROM transaction where Block='$bl' and   MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()); ";
 
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
    if($total!=0)
    {
-while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
-
+while($result = mysqli_fetch_assoc($data)){ 
 echo "  <tbody><tr class='active-row'>
-<td>".$result['expense']."</td>
-<td>".$result['spent']."</td>
-<td>".$result['Details']."</td>
-<td>".$result['Block']."</td>
-<td>".$result['date']."</td>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['customer_id']."</td>
+<td>".$result['door_number']."</td>
 
-<td><a href='deleteExpense.php?id=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-<td><a href='editexpense.php?ei=$result[id]& sp=$result[spent]& dt=$result[Details]&ex=$result[expense]' ><input type='submit' value='Spend' id='updatebutton' ></a></td>
-<td><a href='expenseDetail.php?ei=$result[id] &dt=$result[Details] & block=$result[Block]' ><input type='submit' value='Check' id='updatebutton' ></a></td>
+<td>".$result['amount']."</td>
+<td>".$result['date']."</td>
 </tr>";
 
 }
 
 }
 else{
-  echo "no records";
+ echo "NO ONE PAID YET";
 }
 ?>
   
 </table>
 
-<script>
-  function checkdelete()
-  {
-    return confirm('Are you sure you want to delete this Expense')
-  }
-</script>
+ NOT PAID CUSTOMER LIST
+<table class="styled-table" border="2" cellspacing="7">
+   
+  <tr "active-row">
+    
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Customer ID</th>
+     <th>Door Number</th>
+    <th>Block</th>
+    
+  </tr>
+
+    <?php 
+
+$query="SELECT * FROM customer where  door_number NOT IN (select door_number from transaction  ) and Block='$bl' ";
+
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total!=0)
+   {
+while($result = mysqli_fetch_assoc($data)){ 
+echo "  <tbody><tr class='active-row'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['customer_id']."</td>
+<td>".$result['door_number']."</td>
+<td>".$result['Block']."</td>
+</tr>";
+
+}
+
+}
+else{
+  echo "ALL CUSTOMERS PAID";
+}
+?>
+  
+</table>
+
+
+
+
+
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
