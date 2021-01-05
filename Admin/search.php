@@ -88,6 +88,7 @@ td {
     <th>Surname</th>
     <th>DoorNo</th>
    <th>BlockNo</th>
+   
        
   </tr>
        <?php  
@@ -112,6 +113,7 @@ td {
 <td>".$row['surname']."</td>
 <td>".$row['door_number']."</td>
 <td>".$row['Block']."</td> 
+
 </tr>";
           }  
         }  
