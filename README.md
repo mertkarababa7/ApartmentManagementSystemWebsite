@@ -1,9 +1,7 @@
 # This is an Apartment Management system by Mert Karababa
 ### Login informations
-Admin user name : mert
-
-admin password: mert   
-
+Admin user name : mert  
+admin password: mert     
 Customer user name : mert2    
 customer password : mert2   
 Databse name : apartment   
