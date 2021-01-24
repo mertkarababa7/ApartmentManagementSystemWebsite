@@ -1,6 +1,8 @@
 <?php
+ob_start();
 include 'checklogin.php';
 include '../db_conn.php';
+include 'navbar.php';
 
 $ci=$_GET['ci'];
 $na=$_GET['na'];
@@ -23,14 +25,7 @@ $em=$_GET['em'];
 <link rel="stylesheet" href="admin.css">
 
 </head>
-<div class="topnav">
-<a href="Landlord.php" class="active">Back</a>
- <a href="admin.php" class="active">Return Home</a>
- 
-  
-    
-  
-</div>
+
 <body>
 <form action="" method="GET">
     <p>
@@ -93,4 +88,5 @@ else{
  echo "There is an Error ";
 }
 }
+ob_flush();
 ?>

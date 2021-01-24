@@ -1,4 +1,4 @@
-<?php
+n<?php
 
 $link = mysqli_connect("localhost", "root", "", "apartment");
  

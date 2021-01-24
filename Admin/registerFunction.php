@@ -8,7 +8,7 @@ function validate($data){
 
 //Register progess start, if user press the signup button
 if (isset($_POST['signUp'])) {
-if (empty($_POST['name']) || empty($_POST['surname']) || empty($_POST['door_number']) || empty($_POST['phone_number']) || empty($_POST['email'])  || empty($_POST['people']) || empty($_POST['deposit']) || empty($_POST['user_name']) || empty($_POST['CustomerPassword']) ) {
+if (empty($_POST['name']) || empty($_POST['surname']) || empty($_POST['door_number']) || empty($_POST['phone_number']) || empty($_POST['email'])   || empty($_POST['CustomerPassword']) ) {
 echo "Please fill up all the required field.";
 }
 else
@@ -19,46 +19,38 @@ $surname = validate($_POST['surname']);
 $door_number =validate($_POST['door_number']);
 $phone_number=validate($_POST['phone_number']);
 $email=validate($_POST['email']);
-$people=validate($_POST['people']);
-$deposit=validate($_POST['deposit']);
-$user_name=validate($_POST['user_name']);
+
+
+
 $CustomerPassword=validate($_POST['CustomerPassword']);
 $Block=validate($_POST['Block']);
 $hash=password_hash($CustomerPassword, PASSWORD_DEFAULT); 
 include('../db_conn.php');
-$sQuery = "SELECT customer_id from customer where door_number=? LIMIT 1";
-$iQuery = "INSERT Into customer (name, surname, door_number,phone_number,email,people,deposit,user_name,CustomerPassword,date,Block) values(?,?,?, ?, ?,?,?,?,?,CURDATE(),?)";
+
+
+ $user_check_query = "SELECT * FROM customer WHERE name='$name'  LIMIT 1";
+  $result = mysqli_query($conn, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  $admin_id=$_SESSION['id'];
+
+$Query = "INSERT Into customer (name, surname, door_number,phone_number,email,CustomerPassword,date,Block,Active,admin_id) VALUES('$name', '$surname', '$door_number', '$phone_number', '$email','$hash',CURDATE(),'$Block','1','$admin_id')";
+  mysqli_query($conn, $Query);
+    $query1 = "SELECT customer_id FROM customer WHERE name='$name'";
+    $result1 = mysqli_query($conn, $query1);
+    $user1 = mysqli_fetch_assoc($result1);
+    $userid = $user1['customer_id'];
+
+    $query2 = "UPDATE flats SET Ccustomer_id = '$userid', isfull = '1' WHERE door_number = '$door_number'";
+    mysqli_query($conn, $query2);
+    
+   $message = 'Customer Successfully Created.';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('Landlord.php');
+    </SCRIPT>";
+    
+}
+   }
  
- $check=mysqli_query($conn,"select * from customer where door_number='$door_number'");
-  $checkrows=mysqli_num_rows($check);
 
-   if($checkrows>0) {
-      echo "This Door Number already taken";
-   } else {
-
-$stmt = $conn->prepare($sQuery);
-$stmt->bind_param("s", $surname);
-$stmt->execute();
-$stmt->bind_result($customer_id);
-$stmt->store_result();
-$rnum = $stmt->num_rows;
-
-if($rnum==0) { //if true, insert new data
-          $stmt->close();
-          
-          $stmt = $conn->prepare($iQuery);
-        $stmt->bind_param("ssssssssss", $name, $surname, $door_number,$phone_number,$email,$people,$deposit,$user_name,$hash,$Block);
-          if($stmt->execute()) {
-            echo 'Register successfully';}
-            header("Location: Landlord.php");
-        
-
-        } else { 
-       echo 'some other problem triggered.';
-     }
-$stmt->close();
-$conn->close(); // Closing database Connection
-}
-}
-}
-?> 

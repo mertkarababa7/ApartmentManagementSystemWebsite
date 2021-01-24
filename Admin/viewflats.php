@@ -40,8 +40,8 @@ include '../db_conn.php';
 
 
 
- <link rel="stylesheet" href="main.css">
- <link rel="stylesheet" href="Admin2.css">
+ <link rel="stylesheet" href="Main.css">
+ <link rel="stylesheet" href="x.css">
  <div class="topnav">
   <a href="registerCustomer.php"  >Register Costumer</a>
   <a href="registerAdmin.php" >Return Home</a>
@@ -76,6 +76,7 @@ include '../db_conn.php';
   <?php 
 
   echo "<a href='viewFee.php' ><input type='submit' value='View Fee Details' id='updatebutton' ></a>"; ?>
+  <div class="rlform">
   <table class="styled-table" border="2" cellspacing="7">
    
     <tr "active-row">
@@ -134,7 +135,7 @@ else{
 ?>
 
 </table>
-
+</div>
 <script>
   function checkdelete()
   {

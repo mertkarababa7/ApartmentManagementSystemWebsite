@@ -1,21 +1,20 @@
-<?php
-include 'checkLogin.php';
+ <?php 
+include 'checklogin.php';
 include '../db_conn.php';
 include 'navbar.php';
-ob_start();
-$ai=$_GET['ai'];
-$em=$_GET['em'];
-$ph=$_GET['ph'];
-
+include 'registerdue.php';   
 ?>
+
 
 <style>
   .bg-password-image2 {
-  background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+   background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
   background-position: center;  
   background-size: cover;
 }
 </style>
+
+
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,26 +48,29 @@ $ph=$_GET['ph'];
                         <div class="p-5">
                             <div class="text-center">
                               
-                                <h1 class="h4 text-gray-900 mb-4">Change Your Informations!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create New Apartment</h1>
                                 <br><br><br><br>
                             </div>
 
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                      <label>E-mail </label>
-                                       <input type="text" name="email" value="<?php echo "$em" ?>" class="form-control form-control-user" id="exampleFirstName">
+                                      <label>Block </label>
+                                       <input type="text" name="Block"  class="form-control form-control-user" id="exampleFirstName">
 
-                                     <input type="hidden" name="ai"  value="<?php echo "$ai" ?>" id="lastName">
                                       <br><br>
                                     </div>
                                     <div class="col-sm-6">
-                                      <label>Phone Number </label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="phone"  value="<?php echo "$ph" ?>"
-                                            placeholder="Last Name">
+                                      <label>Address </label>
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="address"  >
  
   
+  
         
+                                  
+ 
+  
+        <br>
                                     </div>
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
                                </div>
@@ -79,12 +81,11 @@ $ph=$_GET['ph'];
 
 if (isset($_GET['submit']))
 {
+  $address=$_GET['address'];
+   $Block=$_GET['Block'];
+   
 
-  $email=$_GET['email'];
-   $phone=$_GET['phone'];
-    $ai=$_GET['ai'];
-
-$query="UPDATE users SET email='$email',phoneNumber='$phone' WHERE id='$ai'";
+$query="INSERT INTO apartment (Adress,Block) VALUES ('$address','$Block')";
 $data=mysqli_query($conn,$query);
 if(isset($data))
 {

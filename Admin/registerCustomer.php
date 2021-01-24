@@ -2,6 +2,8 @@
 include 'checklogin.php';
 include 'registerFunction.php';
 include '../db_conn.php';
+include 'navbar.php';
+
 
 ?>
 
@@ -14,23 +16,18 @@ include '../db_conn.php';
 </style>
 <head>
 <title>Add Customer</title>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 <link rel="stylesheet" href="Main.css">
-  <link rel="stylesheet" href="x.css">  
+  <link rel="stylesheet" href="admin.css">  
 </head>
-<div class="topnav">
- <a href="admin.php" class="active" >Return Home</a>
- <a href="registerAdmin.php" >Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Payments</a>
-  <a href="Landlord.php">Costumers</a>
-  <a href="expenses.php">Expenses</a>
-  <a href="registerAnnouncement.php">Create Announcements </a>
-  <a href="registerStaff.php">Register Staff</a>
-   <a href="search.php">Search</a>
-  
-</div>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Register Customer</title>
@@ -57,11 +54,7 @@ include '../db_conn.php';
 		 <div class="rlform-group">         
     <label>Customer Password</label>
     <input type="text" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
-   </div>
-   <div class="rlform-group">         
-    <label>Customer LoginName</label>
-    <input type="text" name="CustomerLoginName" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
-   </div>
+  
 	
    
 <div class="rlform-group">					
@@ -75,36 +68,19 @@ include '../db_conn.php';
     <input type="text" name="email" id="email" value="<?php echo $_POST['email'] ?? ''; ?>" class="rlform-input" >
      </div>
 
-     <div class="rlform-group">         
-    <label>Number of people</label>
-    <select name="people">
-    <option value="people">Number Of People</option>
-     <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-     </div>
+     
    
-   <div class="rlform-group">         
-    <label>Deposit</label>
-    <select name="deposit">
-    <option value="deposit">Deposit Paid</option>
-     <option value="paid">paid </option>
-    <option value="unpaid">unpaid</option>
-  </select>
-     </div>
+  
    
 	   <div class="rlform-group">    
     <label>Block Number</label>
   <?php 
-  $result = $conn->query("SELECT flat_id,price,door_number,Block FROM flats GROUP BY Block ASC") or die($conn->error);?>
+  $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
 <select name="Block">
     <option value="Block No">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "\nBlock No is>>''</option>";
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
     }
     ?>        
 </select>
@@ -113,30 +89,29 @@ include '../db_conn.php';
   <div class="rlform-group">    
     <label>Door Number</label>
   <?php 
-  $result = $conn->query("SELECT flat_id,price,door_number,Block FROM flats ORDER BY flat_id ASC") or die($conn->error);?>
+  $result = $conn->query("SELECT door_number FROM flats where isfull='0'  ORDER BY CASE WHEN door_number REGEXP '^[A-Z]{2}'
+    THEN 1 
+    ELSE 0
+    END ASC,
+    CASE WHEN door_number REGEXP '^[A-Z]{2}'
+    THEN LEFT(door_number, 2)
+    ELSE LEFT(door_number, 1)
+    END ASC,
+    CASE WHEN door_number REGEXP '^[A-Z]{2}'
+    THEN CAST(RIGHT(door_number, LENGTH(door_number) - 2) AS SIGNED)
+    ELSE CAST(RIGHT(door_number, LENGTH(door_number) - 1) AS SIGNED)
+    END DESC ") or die($conn->error);?>
 <select name="door_number">
     <option value="Door Number">Select Door Number</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['door_number'] . "'>" . $row['door_number'] . "\nBlock No is>>''</option>";
+        echo "<option value='" . $row['door_number'] . "'>" . $row['door_number'] . "</option>";
     }
     ?>        
 </select>
  </div>
  
-  <div class="rlform-group">    
-    <label>Admin</label>
-  <?php 
-  $result2 = $conn->query("SELECT id,user_name,name FROM users ORDER BY id DESC LIMIT  0,6") or die($conn->error);?>
-<select name="user_name">
-    <option value="user_name">Admin name</option>
-    <?php
-    while ($row = mysqli_fetch_array($result2)) {
-        echo "<option value='" . $row['user_name'] . "'>'Your Registered Name is>>" . $row['user_name'] . "</option>";
-    }
-    ?>        
-</select>
- </div>
+  
 
 
 <div>

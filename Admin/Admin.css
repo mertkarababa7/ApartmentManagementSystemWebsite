@@ -1,5 +1,5 @@
 body {
- background-image: url("homepage.jpg");
+ 
  background-color: #cccccc;
    background-repeat: no-repeat;
    background-size: cover;
@@ -19,7 +19,7 @@ body {
 
     border-radius: 4px;
 
-    background-color: #4CAF50;
+    background-color: #4e73df;
 }
 input[type=text], select {
   width:100%;
@@ -57,13 +57,14 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #4e73df;
 }
 
 div {
   border-radius: 5px;
  
-  padding: 9px;
+  padding-left: 3px;
+  padding-right:6px;
 }
 input[type=number], select {
   width: 100%;

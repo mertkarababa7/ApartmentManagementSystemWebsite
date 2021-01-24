@@ -2,12 +2,13 @@
 
 include '../db_conn.php';
 include 'checkLogin.php';
+include 'navbar.php';
  ?>
 
  <style>
   #updatebutton
   {
-    background-color:green;
+    background-color:#4e73df;
     color:white;
     width:%100;
     height:%100;
@@ -15,7 +16,7 @@ include 'checkLogin.php';
   }
   #dltbutton
   {
-    background-color:red;
+    background-color:#f7786b;
     color:white;
     width:%100;
     height:%100;
@@ -25,7 +26,19 @@ include 'checkLogin.php';
 
 <!DOCTYPE html>
 <html>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+ 
+
 <head>
+
+
 	<title> Customers</title>
 <style>
 body {
@@ -42,32 +55,35 @@ body {
 
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="Admin2.css">
-<div class="topnav">
- <a href="registerCustomer.php"  >Register Costumer</a>
- <a href="registerAdmin.php" >Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Payments</a>
-  <a href="admin.php"class="active">Return Home</a>
-  <a href="expenses.php">Expenses</a>
-  <a href="registerAnnouncement.php">Create Announcements </a>
-  <a href="registerStaff.php">Register Staff</a>
-  <a href="search.php">Search</a>
-</div>
+
 </head>
 <body>
+<script>
+     $(document).ready(function(){
+       $("#Input").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#Table tr").filter(function() {
+           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+       });
+     });
 
+  </script>
 
 <h2>Table For Customers </h2>
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
 
-
-
-<table class="styled-table" border="2" cellspacing="7">
-   
+    <thead>
   <tr "active-row">
     <th>Name</th>
-    <th>Move_in_Date</th>
+    <th>Move In Date</th>
     <th>Email</th>
     <th>Phone</th>
     <th>Door Number</th>
@@ -75,19 +91,22 @@ body {
       <th colspan="2" align="center">Database Operations</th>
        <th>Move Out</th>
   </tr>
+   </thead>
 
-
+ 
     <?php 
 
 $query = "SELECT * FROM customer ORDER BY date DESC; ";
 //TO see better with ascending door numbers
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
+ echo "<input class=Search id=Input type=text placeholder=Search..> <br>";
    if($total!=0)
+
    {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
 
-echo "  <tbody><tr class='active-row'>
+echo "  <tbody id=Table><tr class='active-row'>
 <td>".$result['name']."</td>
 <td>".$result['date']."</td>
 <td>".$result['email']."</td>
@@ -96,8 +115,8 @@ echo "  <tbody><tr class='active-row'>
 
 <td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
 <td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-<td><a href='moveout.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Move Out' id='dltbutton' ></a> </td>
-</tr>";
+<td><a href='moveout.php?ci=$result[customer_id]'onclick='return checkmoveout()' ><input type='submit' value='Move Out' id='dltbutton' ></a> </td>
+</tr></tbody>";
 
 }
 }
@@ -107,13 +126,19 @@ else{
 ?>
   
 </table>
-
+</div>
 <script>
   function checkdelete()
   {
     return confirm('Are you sure you want to delete this Customer')
   }
+   function checkmoveout()
+  {
+    return confirm('Are you sure you want to Move Out this Customer')
+  }
 </script>
 
 </body>
+
+
 </html>

@@ -1,7 +1,7 @@
 <?php 
 
 include '../db_conn.php';
-
+include 'checkLogin.php'
  ?>
 
  <!DOCTYPE html>
@@ -383,50 +383,43 @@ include '../db_conn.php';
                                         <tr>
                                              <tr >
 
-    <th>Head</th>
-    <th>Details</th>
+  <th>User Name</th>
+   <th>E-mail</th>
  
-    <th>Time</th>
-    <th>Mandatory</th>
-     <th>Opened Date</th>
-     <th>Delete</th>
+    <th>Phone Number</th>
+    
+     <th>Name</th>
+    <th>Update</th>
+ <th></th>
   </tr>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                           <tr >
+                                      
 
-    <th>Head</th>
-    <th>Details</th>
- 
-    <th>Time</th>
-    <th>Mandatory</th>
-     <th>Opened Date</th>
-     <th>Delete</th>
-  </tr>
                                         </tr>
                                     </tfoot>
-                                    <?php 
+                                   <?php 
+ $id=$_SESSION['id'];
+$query = "SELECT * FROM users where id=$id; ";
 
-$query = "SELECT * FROM announcement ORDER BY openedDate ASC; ";
-//TO see better with ascending door numbers
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
    if($total!=0)
    {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
 
-echo "  <tbody><tr class='active-row'>
-<td>".$result['head']."</td>
-<td>".$result['details']."</td>
-<td>".$result['time']."</td>
-<td>".$result['mandatory']."</td>
-<td>".$result['openedDate']."</td>
-<td><a href='deleteannouncement.php?ci=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td> 
-</tr></tbody>";
+echo "  <tr>
+<td>".$result['user_name']."</td>
+<td>".$result['email']."</td>
+<td>".$result['phoneNumber']."</td>
+<td>".$result['name']."</td>
+<td><a href='editadmin.php?ai=$result[id] &em=$result[email] &ph=$result[phoneNumber]' ><input type='submit' value='update' id='updatebutton' ></a></td>
+</tr>";
 
 }
+
 }
 else{
   echo "no records";
@@ -521,4 +514,12 @@ else{
 
 
  
+
+
+
+
+
+
+
+
 

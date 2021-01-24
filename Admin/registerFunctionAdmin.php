@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "apartment");
+$link = mysqli_connect("localhost", "root", "", "apartment2");
  
 function validate($data){
        $data = trim($data);
@@ -29,7 +29,13 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
  
 $sql = "INSERT INTO users (user_name, name, password,phoneNumber,email) VALUES ('$user_name', '$name', '$hash','$phoneNumber','$email')";
 if(mysqli_query($link, $sql)){
-    echo "Records added successfully.";
+        $message = 'Admin Successfully Created.';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('admin.php');
+    </SCRIPT>";
+    
 } else{ 
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }

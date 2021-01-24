@@ -2,6 +2,7 @@
 include 'checklogin.php';
 include 'registerFunctionAdmin.php';
 include '../db_conn.php';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,23 +14,19 @@ include '../db_conn.php';
 </style>
 <meta charset="UTF-8">
 <title>Add Admin </title>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 <link rel="stylesheet" href="Main.css">
-<link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css">  
 
 </head>
-<div class="topnav">
- <a href="registerCustomer.php"  >Register Costumer</a>
- <a href="admin.php"class="active" >Return Home</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Payments</a>
-  <a href="Landlord.php">Costumers</a>
-  <a href="expenses.php">Expenses</a>
-  <a href="registerAnnouncement.php">Create Announcements </a>
-  <a href="registerStaff.php">Register Staff</a>
-  <a href="search.php" >Search</a>
-  
-</div>
+
 <body>
   <h2>Admin Create Page</h2>
 <form  method="post">

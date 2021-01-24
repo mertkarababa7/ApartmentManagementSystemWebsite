@@ -1,21 +1,20 @@
-<?php
-include 'checkLogin.php';
+ <?php 
+include 'checklogin.php';
 include '../db_conn.php';
 include 'navbar.php';
-ob_start();
-$ai=$_GET['ai'];
-$em=$_GET['em'];
-$ph=$_GET['ph'];
-
+include 'registerdue.php';   
 ?>
+
 
 <style>
   .bg-password-image2 {
-  background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+   background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
   background-position: center;  
   background-size: cover;
 }
 </style>
+
+
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,26 +48,43 @@ $ph=$_GET['ph'];
                         <div class="p-5">
                             <div class="text-center">
                               
-                                <h1 class="h4 text-gray-900 mb-4">Change Your Informations!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create New Flat</h1>
                                 <br><br><br><br>
                             </div>
 
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                      <label>E-mail </label>
-                                       <input type="text" name="email" value="<?php echo "$em" ?>" class="form-control form-control-user" id="exampleFirstName">
+                                      <label>Floor </label>
+                                       <input type="text" name="floor"  class="form-control form-control-user" id="exampleFirstName">
 
-                                     <input type="hidden" name="ai"  value="<?php echo "$ai" ?>" id="lastName">
                                       <br><br>
+ <div class="rlform-group">    
+    <label>Block Number</label>
+  <?php 
+  $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
+<select name="Block">
+    <option value="Block No">Select Block</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
+    }
+    ?>        
+</select>
+ </div>
+
                                     </div>
                                     <div class="col-sm-6">
-                                      <label>Phone Number </label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="phone"  value="<?php echo "$ph" ?>"
-                                            placeholder="Last Name">
+                                      <label>Door Number </label>
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="doornumber"  >
  
   
+  
         
+                                  
+ 
+  
+        <br>
                                     </div>
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
                                </div>
@@ -77,14 +93,21 @@ $ph=$_GET['ph'];
                                 
        <?php
 
+
 if (isset($_GET['submit']))
 {
 
-  $email=$_GET['email'];
-   $phone=$_GET['phone'];
-    $ai=$_GET['ai'];
+  $floor=$_GET['floor'];
+ $Block=$_GET['Block'];
+   $doornumber=$_GET['doornumber'];
+  
+$query1 = "SELECT apartment_id FROM apartment WHERE Block ='$Block'";
+                    $result = mysqli_query($conn, $query1);
+                    while($row = mysqli_fetch_array($result)){
+                        $Apartid = $row['apartment_id'];
+                        $customer_id=NULL;
 
-$query="UPDATE users SET email='$email',phoneNumber='$phone' WHERE id='$ai'";
+$query="INSERT INTO flats (Ccustomer_id,Apart_id,isfull,Block,door_number,floor) VALUES ('$customer_id',' $Apartid','0','$Block','$doornumber','$floor')";
 $data=mysqli_query($conn,$query);
 if(isset($data))
 {
@@ -101,7 +124,9 @@ else{
  echo "There is an Error ";
 }
 }
+}
 ?>           
+                
                                 
                            
                         </div>
