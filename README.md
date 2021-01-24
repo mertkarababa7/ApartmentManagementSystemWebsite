@@ -41,7 +41,7 @@ Admin can see who paid expense-rent-fee and who did not.
 
 Flat history added to all flats , admin can see who moved out when in specific flat
 
-
+Admin Can open Due for all Customers
 
 --------------------------------------------------------------------------------
 ### Costumer Side
