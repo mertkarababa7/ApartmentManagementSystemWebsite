@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "apartment");
+$link = mysqli_connect("localhost", "root", "", "webapartment");
  
 function validate($data){
        $data = trim($data);
@@ -15,7 +15,11 @@ if($link === false){
 
 if (isset($_POST['signUp'])) {
 if (empty($_POST['name']) || empty($_POST['job']) || empty($_POST['phoneNumber'])|| empty($_POST['Details'])|| empty($_POST['Block']) ) {
-echo "Please fill up all the required field.";
+ $message = 'Please Fill In The Blanks!! .';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+    </SCRIPT>";
 }
 else{
 
@@ -25,18 +29,17 @@ $job=validate($_POST['job']);
 $phoneNumber=validate($_POST['phoneNumber']);
 $Details=validate($_POST['Details']);
 $Block=validate($_POST['Block']);
-
+ $admin_id=$_SESSION['id'];
  
-$sql = "INSERT INTO staff (name, job, phoneNumber,Details,Block) VALUES ('$name', '$job', '$phoneNumber','$Details','$Block')";
+$sql = "INSERT INTO staff (name, job, phoneNumber,Details,Block,admin_id) VALUES ('$name', '$job', '$phoneNumber','$Details','$Block','$admin_id')";
 if(mysqli_query($link, $sql)){
-    ?>
-        <script>
+    
+   $message = 'Staff Successfully Created.';
 
-            alert('Successfull !!');
-            window.open('admin.php','_self');
-            
-        </script>
-        <?php
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('Landlord.php');
+    </SCRIPT>";
 
 } else{ 
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);

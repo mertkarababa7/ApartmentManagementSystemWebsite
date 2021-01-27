@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "apartment");
+$link = mysqli_connect("localhost", "root", "", "beren");
  
 function validate($data){
        $data = trim($data);
@@ -14,19 +14,22 @@ if($link === false){
 }
 
 if (isset($_POST['signUp'])) {
-if (empty($_POST['Header']) || empty($_POST['Details'])|| empty($_POST['mandatory'])|| empty($_POST['Block'])   ) {
-echo "Please fill up all the required field.";
+if (empty($_POST['Header']) || empty($_POST['Details'])|| empty($_POST['Block'])   ) {
+ $message = 'Please Fill In The Blanks!! .';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+    </SCRIPT>";
 }
 else{
 
 
 $Header=validate($_POST['Header']);
 $Details=validate($_POST['Details']);
-$Time=validate($_POST['Time']);
-$mandatory=validate($_POST['mandatory']);
 $Block=validate($_POST['Block']);
+ $admin_id=$_SESSION['id'];
  
-$sql = "INSERT INTO announcement (head, details, time,openedDate,mandatory,Block) VALUES ('$Header', '$Details', '$Time',CURDATE(),'$mandatory','$Block')";
+$sql = "INSERT INTO announcement (head, details,openedDate,Block,admin_id) VALUES ('$Header', '$Details',CURDATE(),'$Block','$admin_id')";
 if(mysqli_query($link, $sql)){
     ?>
         <script>

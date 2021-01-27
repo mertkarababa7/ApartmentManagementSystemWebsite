@@ -28,6 +28,7 @@ include 'navbar.php';
 </head>
 
 <body>
+  
   <h2>Admin Create Page</h2>
 <form  method="post">
     <p>
@@ -51,7 +52,7 @@ include 'navbar.php';
 </p>
     <div>
    <div>
-    <button class="updatebutton" name="signUp">Create A New Admin
+    <button class="btn btn-primary btn-user" name="signUp">Create A New Admin
     </button>
 
   </div>

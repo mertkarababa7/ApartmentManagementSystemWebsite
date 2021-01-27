@@ -2,133 +2,256 @@
 <?php 
 include 'checklogin.php';
 include '../db_conn.php';
-
+include 'navbar.php';
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
+ 
+<title> Payment List </title>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    body {
-     background-image: url("homepage.jpg");
-     background-color: #cccccc;
-     background-repeat: no-repeat;
-     background-size: cover;
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      const urlParameters = new URLSearchParams(window.location.search);
+      let blockValue = urlParameters.get('block');
+      let yearValue = urlParameters.get('year');
+      let monthValue = urlParameters.get('month');
+      blockValue = blockValue !== null ? blockValue : 'A';
+      yearValue = yearValue !== null ? yearValue : '2021';
+      monthValue = monthValue !== null ? monthValue : '1';
+      document.addEventListener('DOMContentLoaded',function(){
+        const selectBlock = document.querySelector('#selectBlock');
+        const selectYear = document.querySelector('#selectYear');
+        const selectMonth = document.querySelector('#selectMonth');
+        const buttonFilter = document.querySelector('#buttonFilter');
+
+        selectBlock.value = blockValue;
+        selectYear.value = yearValue;
+        selectMonth.value = monthValue;
+        
+        function updateQuery(){
+          window.location = window.location.pathname + '?block=' + selectBlock.value + '&year=' + selectYear.value + '&month=' + selectMonth.value;          
+        }
+        
+        buttonFilter.addEventListener('click',updateQuery);
+
+      });
 
 
-   }  
-   td {
-    display: table-cell;
-    vertical-align: inherit;
-  } 
-  #updatebutton
-  {
-    background-color:green;
-    color:white;
-    width:%100;
-    height:%100;
-    font-size:15px;
-  }
-  #dltbutton
-  {
-    background-color:red;
-    color:white;
-    width:%100;
-    height:%100;
-    font-size:15px;
-  }
-</style>
-<title> Rent Balance </title>
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['customer_id', 'amount'],
+         <?php
+         $blockValue = 'A';
+         $yearValue = 2021;
+         $monthValue = 1;
+         if(isset($_GET['block']))
+         {
+          $blockValue = $_GET['block'];
+         }
+         if(isset($_GET['year']))
+         {
+          $yearValue = $_GET['year'];
+         }
+         if(isset($_GET['month']))
+         {
+          $monthValue = $_GET['month'];
+         }
+
+         $sqlQuery = "SELECT ispaid,Block,customer_id, SUM(amount) FROM depts where YEAR(OpenedDate) = $yearValue and MONTH(OpenedDate) = $monthValue and Block='$blockValue' GROUP BY ispaid";
+
+           $fire = mysqli_query($conn,$sqlQuery);
+           $result32='Not Paid';
+           $result33='Paid';
+           $once = false;
+          while ($result = mysqli_fetch_assoc($fire)) {
+          
+            if($result['ispaid']==1)
+            {
+           echo"['".$result33."',".$result['SUM(amount)']."],";
+           
+          
+            }else{
+             echo"['".$result32."',".$result['SUM(amount)']."],";
+            }
+          
+          }
+         ?>
+        ]);
+
+        
+        var options = {
+          title: 'Payment Chart For Block' ,
+          width: 1400,
+  height: 500,
+  colors: [ '#e6693e', '#4E73DF', ]
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+
+    </script>
 
 
-
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="Admin.css">
-<div class="topnav">
- <a href="registerCustomer.php"  >Register Costumer</a>
- <a href="registerAdmin.php" >Register Admin</a>
- <a href="logout.php">Admin LogOut </a>
- <a href="Apartments.php">Apartments</a>
- <a href="admin.php"class="active">Return Home</a>
- <a href="Landlord.php">Costumers</a>
- <a href="expenses.php">Expenses</a>
- <a href="registerAnnouncement.php">Create Announcements </a>
- <a href="registerStaff.php">Register Staff</a>
- <a href="search.php">Search</a>
-</div>
 </head>
 <body>
 
-  <h2> Balance 
-  <div class="balance-wrapper">
-    <div>
-      <label>Total Expected Rents This Month</label>
-      <table class="styled-table" border="2" cellspacing="7">
-
-        <tr "active-row"> 
-
-          <th>Block No</th>
-          <th>Total Rents</th>
-            <th>Update Rent Rate</th>  
-
-        </tr>
+  <h2> Payment List </h2>
 
 
-        <?php 
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+            <div class="container">
+              <div class="row">
+            <div class="col-md-3">
+            <select id="selectBlock" class="form-control">
+              <option value="A">A Blok</option>
+              <option value="B">B Blok</option>
+            </select>
+          </div>
+            <div class="col-md-3">
+            <select class="form-control" id="selectMonth">
+              <option value="1">Ocak</option>
+              <option value="2">Şubat</option>
+              <option value="3">Mart</option>
+              <option value="4">Nisan</option>
+              <option value="5">Mayıs</option>
+              <option value="6">Haziran</option>
+              <option value="7">Temmuz</option>
+              <option value="8">Ağustos</option>
+              <option value="9">Eylül</option>
+              <option value="10">Ekim</option>
+              <option value="11">Kasım</option>
+              <option value="12">Aralık</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select class="form-control" id="selectYear">
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+            </select>
+          </div>
+           <div class="col-md-2"><button id="buttonFilter" class="btn btn-danger navbar-btn" onclick="drawChart()">Filter</button>
+            </div>
+            <a href='DuesCustomerList.php'
+            <div class="col-md-2"><button class="btn btn-danger navbar-btn">See All Payment List</button></div></a>
+
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Table For Customers</h4>
+                        </div>
+
+                        <script>
+     $(document).ready(function(){
+       $("#Input").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#Table tr").filter(function() {
+           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+       });
+     });
+
+  </script>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
 
-        $query = "SELECT Block, SUM(price) FROM flats GROUP BY Block ";   
-        $result = mysqli_query($conn,$query) or die(mysql_error());
-
-        while($row = mysqli_fetch_array($result)){
-          echo "  <tbody><tr class='active-row'>
-          <td>".$row['Block']."</td>
-          <td>".$row['SUM(price)']."</td>
-            <td><a href='rentRate.php' ><input type='submit' value='Update Rate' id='updatebutton' ></a></td>
-           
-          </tr>";
-          
-        }
-
-        ?> 
-      </table>
-    </div>
-    <div>
-      <label>Paid Amount This Month between 1-30</label>
-      <table class="styled-table" border="2" cellspacing="7">
-
-        <tr "active-row">
-
-          <th>Block No</th>
-          <th>Paid Rents</th>
-<th>Who Paid Details</th>
-
-        </tr>
 
 
-        <?php 
+    <thead>
+  <tr "active-row">
+    <th>Customer Name </th>
+    <th>Surname </th>
+    <th>Paid Date</th>
+    <th>Amount</th>
+    <th>Due Detail</th>
+
+     
+
+  </tr>
+   </thead>
+
+ 
+    <?php 
+
+    $sql1 = "SELECT * FROM customer";
+ $result= mysqli_query($conn, $sql1);
+   $row =$result->fetch_assoc();
+   $name=$row['name'];
+   $surname=$row['surname'];
 
 
-        $query = "SELECT Block, SUM(amount) FROM transaction  WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()) GROUP BY Block";   
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id  and YEAR(OpenedDate) = $yearValue and MONTH(OpenedDate) = $monthValue and depts.Block='$blockValue' ORDER BY ispaid DESC";
+$once = false;
 
-        while($row = mysqli_fetch_array($result)){
-          echo "  <tbody><tr class='active-row'>
-          <td>".$row['Block']."</td>
-          <td>".$row['SUM(amount)']."</td>
-           <td><a href='rentDetails.php?bl=$row[Block]' ><input type='submit' value='View Details' id='updatebutton' ></a></td>
-          </tr>";
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
 
-        }
+ echo "<input class=Search id=Input type=text placeholder=Search..> <br>";
+   if($total!=0)
+
+   {
+while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
+ if($result["ispaid"] == 1)
+       {
+echo "  <tbody id=Table><tr class='active-row'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['PaymentDate']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['details']."</td>
+
+</tr></tbody>";
+  }
+       else {
+        echo "  <tbody id=Table><tr class='table-danger'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['PaymentDate']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['details']."</td>
+</tr></tbody>";
+
+}
+}}
+
+?>
+  
+</table>
+        </div>
 
 
-        ?> 
+        </div>
 
-      </table>
-    </div>
-  </div>
+
+
+
+
+
+
 </body>
+
+
+
+
 </html>
 
 

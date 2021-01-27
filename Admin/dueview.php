@@ -39,8 +39,16 @@ include 'navbar.php';
 <head>
 
 
-	<title> Customers</title>
+	<title>All Dues</title>
 <style>
+body {
+ background-image: url("homepage.jpg");
+ background-color: #cccccc;
+   background-repeat: no-repeat;
+   background-size: cover;
+ 
+}  
+
 </style>
 
 
@@ -64,7 +72,7 @@ include 'navbar.php';
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Table For Customers</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">All Dues</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -73,21 +81,25 @@ include 'navbar.php';
 
     <thead>
   <tr "active-row">
-    <th>Name</th>
-    <th>Move In Date</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Door Number</th>
+    <th>Due Details</th>
+    <th>Due Block</th>
+    <th>Opened Date</th>
+    <th>Closed Date</th>
+     <th>Collected Money</th>
+      <th>Outgoings</th>
+ <th>Expected Money</th>
+    <th>Is Due Active</th>
+   <th>Close The Due</th>
      
-      <th colspan="2" align="center">Database Operations</th>
-       <th>Move Out</th>
+   
+   
   </tr>
    </thead>
 
  
     <?php 
 
-$query = "SELECT * FROM customer order by Active Desc; ";
+$query = "SELECT * FROM dues ORDER BY date DESC; ";
 //TO see better with ascending door numbers
 $data = mysqli_query($conn,$query);
 $total=mysqli_num_rows($data);
@@ -96,37 +108,40 @@ $total=mysqli_num_rows($data);
 
    {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
-if ($result['Active']=='1')
-{
+if($result["isactive"] == 1)
+       {
 echo "  <tbody id=Table><tr class='active-row'>
-<td>".$result['name']." ".$result['surname']."</td>
-
+<td>".$result['details']."</td>
+<td>".$result['Block']."</td>
 <td>".$result['date']."</td>
-<td>".$result['email']."</td>
-<td>".$result['phone_number']."</td>
-<td>".$result['Block']."->".$result['door_number']."</td>
+<td>".$result['closeDate']."</td>
+<td>".$result['CollectedMoney']."</td>
+<td>".$result['SpentMoney']."</td>
+<td>".$result['ExpectedMoney']."</td>
+<td>".$result['isactive']."</td>
+<td><a href='closedue.php?ci=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Close' id='dltbutton' ></a> </td>
 
-<td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
-<td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-<td><a href='moveout.php?ci=$result[customer_id]'onclick='return checkmoveout()' ><input type='submit' value='Move Out' id='dltbutton' ></a> </td>
 </tr></tbody>";
 }
+else {
 
-else{
+
 echo "  <tbody id=Table><tr class='table-danger'>
-<td>".$result['name']." ".$result['surname']."</td>
+<td>".$result['details']."</td>
+<td>".$result['Block']."</td>
 <td>".$result['date']."</td>
-<td>".$result['email']."</td>
-<td>".$result['phone_number']."</td>
-<td>".$result['Block']."->".$result['door_number']."</td>
+<td>".$result['closeDate']."</td>
+<td>".$result['CollectedMoney']."</td>
+<td>".$result['SpentMoney']."</td>
+<td>".$result['ExpectedMoney']."</td>
+<td>".$result['isactive']."</td>
+<td><a href='opendue.php?ci=$result[id]'onclick='return checkdelete1()' ><input type='submit' value='Open' id='updatebutton' ></a> </td>
 
-<td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
-<td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-<td>".$result['OutDate']."</td>
 </tr></tbody>";
 }
 }
 }
+
 ?>
   
 </table>
@@ -134,11 +149,15 @@ echo "  <tbody id=Table><tr class='table-danger'>
 <script>
   function checkdelete()
   {
-    return confirm('Are you sure you want to delete this Customer')
+    return confirm('Are you sure you want to Close This Due')
   }
    function checkmoveout()
   {
     return confirm('Are you sure you want to Move Out this Customer')
+  }
+  function checkdelete1()
+  {
+    return confirm('Are you sure you want to Open This Due Again')
   }
 </script>
 

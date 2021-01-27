@@ -1,20 +1,15 @@
 <?php
-include 'checklogin.php';
+include 'checkLogin.php';
 include '../db_conn.php';
 include 'navbar.php';
 ob_start();
-$ai=$_GET['ci'];
-$bo=$_GET['bo'];
-$fl=$_GET['fl'];
 
-$dr=$_GET['dr'];
+
 ?>
-
-
 
 <style>
   .bg-password-image2 {
-  background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+  background: url("https://s3-us-west-1.amazonaws.com/assets.ruleoneinvesting.com/blog/wp-content/uploads/2018/04/04133136/spending-money-wisely1.jpeg");
   background-position: center;  
   background-size: cover;
 }
@@ -25,7 +20,7 @@ $dr=$_GET['dr'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Flat</title>
+    <title>Spend Dues</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,61 +47,64 @@ $dr=$_GET['dr'];
                         <div class="p-5">
                             <div class="text-center">
                               
-                                <h1 class="h4 text-gray-900 mb-4">Change Flat Informations!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Due Spend Details</h1>
                                 <br><br><br><br>
                             </div>
 
                             <form class="user">
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                      <label>Door Number </label>
-                                       <input type="text" name="door_number" value="<?php echo "$dr" ?>" class="form-control form-control-user" id="exampleFirstName">
-
-                                     <input type="hidden" name="ai"  value="<?php echo "$ai" ?>" id="lastName">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                      <label>Details </label>
+                                       <input type="text" name="details" class="form-control form-control-user" id="exampleFirstName">
                                       <br><br>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                      <label>Floor </label>
-                                       <input type="text" name="floor" value="<?php echo "$fl" ?>" class="form-control form-control-user" id="exampleFirstName">
+                                    <div class="col-sm-6">
+                                      <label>Amount </label>
+                                        <input  type="number" step="1" pattern="\d+" class="form-control form-control-user" id="exampleLastName" name="amount">
+                                        <br>
+                                      </div>
+        <div class="col-md-12">  
+        <label>Dues </label>                                 
+ <select name="Did" class="form-control">
 
-                                    
-                                      <br><br>
-                                    </div>
-                                    <div class="col-sm-4">
-                                      <label>Block</label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="Block"  value="<?php echo "$bo" ?>"
-                                            placeholder="Last Name">
- 
+    <option value="Did">Select Due</option>
+    <?php 
+  $result = $conn->query("SELECT CollectedMoney,details,id,Block FROM dues where isactive=1 ORDER BY date DESC ") or die($conn->error);?>
+   <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['id'] . "'>" . $row['details'] . " >" . $row['Block'] . "Block>" . $row['CollectedMoney'] . " TL Collected</option>";
+    }
+    ?>         
+</select>
+</div>
   
-                                   </div>
+        
                                     </div>
-                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Flat"  />
+                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Spend Money On Selected Due"  />
                                </div>
                                 <hr>
                                 <br><br><br><br><br><br>
-                                </form>
                                 
        <?php
 
 if (isset($_GET['submit']))
 {
 
-  $Block=$_GET['Block'];
-   $floor=$_GET['floor'];
-   $door_number=$_GET['door_number'];
-    $ai=$_GET['ai'];
+  $details=$_GET['details'];
+   $amount=$_GET['amount'];
+    $did=$_GET['Did'];
 
-$query="UPDATE flats SET floor='$floor',door_number='$door_number', Block='$Block' WHERE flat_id='$ai'";
+$query="INSERT INTO duespent (amount,details,due_id,SpentDate) VALUES('$amount', '$details','$did',CURDATE())"; 
 $data=mysqli_query($conn,$query);
 if(isset($data))
 {
-
-
+$query1="UPDATE dues SET SpentMoney=SpentMoney+'$amount' where id ='$did'"; 
+$data=mysqli_query($conn,$query1);
  $message = 'Updated Successfully!! .';
 
     echo "<SCRIPT> //not showing me this
         alert('$message')
-        window.location.replace('viewflats.php');
+        window.location.replace('admin.php');
     </SCRIPT>";
 }
 else{

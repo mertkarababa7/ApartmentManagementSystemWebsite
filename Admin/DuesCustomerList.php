@@ -39,7 +39,7 @@ include 'navbar.php';
 <head>
 
 
-  <title> Flats</title>
+	<title> Customer Payments</title>
 <style>
 body {
  background-image: url("homepage.jpg");
@@ -72,7 +72,7 @@ body {
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Flats</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Customers Payment List</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -81,65 +81,82 @@ body {
 
     <thead>
   <tr "active-row">
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Paid Date</th>
+    <th>Email</th>
+    <th>Phone</th>
     <th>Block</th>
-    <th>Door Number</th>
-    <th>Floor</th>
-       <th>Full</th>
-    <th>Update</th>
-     <th>Delete</th>
    
      
+    
      
-   
-   
   </tr>
    </thead>
 
  <?php 
 
-    $query = "SELECT * FROM flats ORDER BY flat_id ";
+    $sql1 = "SELECT * FROM customer";
+ $result= mysqli_query($conn, $sql1);
+   $row =$result->fetch_assoc();
+   $name=$row['name'];
+    $surname=$row['surname'];
+   
 
-    $data = mysqli_query($conn,$query);
-    $total=mysqli_num_rows($data);
-    if($total!=0)
-    {
+
+         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id ORDER BY  ispaid DESC";
+$once = false;
+
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+
+ echo "<input class=Search id=Input type=text placeholder=Search..> <br>";
+   if($total!=0)
+
+   {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
- if ($result['Block']=='B'){
-  echo "  <tbody><tr class='active-row'>
-  <td>".$result['Block']."</td>
-<td>".$result['door_number']."</td>
-  <td>".$result['floor']."</td>
-  <td>".$result['isfull']."</td>
- 
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-  
-  </tr>";
+ if($result["ispaid"] == '1')
+       {
+echo "  <tbody id=Table><tr class='active-row'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['PaymentDate']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['details']."</td>
+<td>".$result['Block']."</td>
+</tr></tbody>";
+  }
+       else {
+
+        echo "  <tbody id=Table><tr class='table-danger'>
+<td>".$result['name']."</td>
+<td>".$result['surname']."</td>
+<td>".$result['PaymentDate']."</td>
+<td>".$result['amount']."</td>
+<td>".$result['details']."</td>
+<td>".$result['Block']."</td>
+
+</tr></tbody>";
 
 }
-else{
- echo "  <tbody><tr class='table-success'>
-  <td>".$result['Block']."</td>
- <td>".$result['door_number']."</td>
-  <td>".$result['floor']."</td>
-<td>".$result['isfull']."</td>
- 
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
- 
-  </tr>";
 }
-}}
+ echo "</tbody></table></div></div>";}
+
 ?>
+  
+</table>
   
 </table>
 </div>
 <script>
   function checkdelete()
   {
-    return confirm('Are you sure you want to Close This Flat')
+    return confirm('Are you sure you want to delete this Customer')
   }
-
+   function checkmoveout()
+  {
+    return confirm('Are you sure you want to Move Out this Customer')
+  }
 </script>
 
 </body>

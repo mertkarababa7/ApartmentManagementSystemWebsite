@@ -42,7 +42,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                PAGES
+                VIEW PAGES
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -50,18 +50,18 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-money-bill-alt"></i>
-                    <span>Payments</span>
+                    <span>Dues</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> Payment Pages </h6>
-                        <a class="collapse-item" href="buttons.html">Due Pay <i class="fas fa-money-bill-alt"></i></a>
-                        <a class="collapse-item" href="cards.html">Expense <i class="fas fa-money-bill-alt"></i></a>
+                        <h6 class="collapse-header">Due Pages</h6>
+                        <a class="collapse-item" href="adddues.php">Open Due <i class="fas fa-money-bill-alt"></i></a>
+                        <a class="collapse-item" href="addduespent.php">Spent Due <i class="fas fa-money-bill-alt"></i></a>
                          <div class="collapse-divider"></div>
                         
                         <h6 class="collapse-header">Payment List</h6>
-                        <a class="collapse-item" href="buttons.html">Due Payment List <i class="fas fa-list"></i></a>
-                        
+                        <a class="collapse-item" href="balance.php">Due Payment List <i class="fas fa-list"></i></a>
+                        <a class="collapse-item" href="dueview.php">Due List <i class="fas fa-list"></i></a>
                       
                     </div>
                 </div>
@@ -79,12 +79,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Customer Pages</h6>
                         <a class="collapse-item" href="Landlord.php">Customer List <i class="fas fa-list"></i></a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                       
                        <div class="collapse-divider"></div>
-                         <h6 class="collapse-header">Flat Pages</h6>
-                           <a class="collapse-item" href="utilities-animation.html">Flat List <i class="fas fa-list"></i></a>
-
+                         <h6 class="collapse-header">Apartment & Flat</h6>
+                           <a class="collapse-item" href="viewflats.php">Flat List <i class="fas fa-list"></i></a>
+                            <a class="collapse-item" href="viewapartment.php">Apartment List  <i class="fas fa-list"></i></a>
                     </div>
                 </div>
             </li>
@@ -110,11 +109,13 @@
 
                         <a  class="collapse-item" href="registerCustomer.php"> Customer  <i class="fas fa-user"></i> </a>
                         <a class="collapse-item" href="registerAdmin.php"> Admin  <i class="fas fa-user"></i></a>
-                        <a class="collapse-item" href="forgot-password.html">Staff <i class="fas fa-user"></i></a>
+                        <a class="collapse-item" href="registerStaff.php">Staff <i class="fas fa-user"></i></a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Apartment:</h6>
-                        <a class="collapse-item" href="404.html">Flats <i class="fas fa-building"></i></a>
-                   
+                         <a class="collapse-item" href="addapartment.php">Apartment <i class="fas fa-building"></i></a>
+                        <a class="collapse-item" href="addflat.php">Flats <i class="fas fa-building"></i></a>
+                     <h6 class="collapse-header">Announcement:</h6>
+                      <a class="collapse-item" href="registerAnnouncement.php">Announcement <i class="fas fa-bullhorn"></i></a>
                     </div>
                 </div>
             </li>
@@ -125,7 +126,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Balance Pages
+               
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -133,16 +134,16 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="balance.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Balance</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="viewAnnouncement.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Announcements</span></a>
             </li>
 
             <!-- Divider -->
@@ -175,19 +176,17 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                     
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                          
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                               
+                                    <a href = logout.php
+                                    <i class="fas fa-sign-out-alt"></i> LOG OUT</a>
+                              
                             </div>
                         </div>
-                    </form>
-
+                  
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -338,7 +337,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin  <?php
                                 echo $_SESSION['name'];?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
@@ -354,12 +353,10 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                              
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item"  a href="" data-toggle="modal" data-target="#logoutModal">
+                                     <a href="logout.php"class="dropdown-item" href="#">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

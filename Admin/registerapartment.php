@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "apartment");
+$link = mysqli_connect("localhost", "root", "", "webapartment");
  
 function validate($data){
        $data = trim($data);
@@ -15,7 +15,11 @@ if($link === false){
 
 if (isset($_POST['signUp'])) {
 if (empty($_POST['Block']) || empty($_POST['door_number']) || empty($_POST['floor'])|| empty($_POST['price']) || empty($_POST['fee'])) {
-echo "Please fill up all the required field.";
+ $message = 'Please Fill In The Blanks!! .';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+    </SCRIPT>";
 }
 else{
 

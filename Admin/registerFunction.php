@@ -9,7 +9,11 @@ function validate($data){
 //Register progess start, if user press the signup button
 if (isset($_POST['signUp'])) {
 if (empty($_POST['name']) || empty($_POST['surname']) || empty($_POST['door_number']) || empty($_POST['phone_number']) || empty($_POST['email'])   || empty($_POST['CustomerPassword']) ) {
-echo "Please fill up all the required field.";
+ $message = 'Please Fill In The Blanks!! .';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+    </SCRIPT>";
 }
 else
 {
@@ -19,6 +23,7 @@ $surname = validate($_POST['surname']);
 $door_number =validate($_POST['door_number']);
 $phone_number=validate($_POST['phone_number']);
 $email=validate($_POST['email']);
+
 
 
 
@@ -40,7 +45,7 @@ $Query = "INSERT Into customer (name, surname, door_number,phone_number,email,Cu
     $user1 = mysqli_fetch_assoc($result1);
     $userid = $user1['customer_id'];
 
-    $query2 = "UPDATE flats SET Ccustomer_id = '$userid', isfull = '1' WHERE door_number = '$door_number'";
+    $query2 = "UPDATE flats SET Ccustomer_id = '$userid', isfull = '1' WHERE door_number = '$door_number' and Block='$Block'";
     mysqli_query($conn, $query2);
     
    $message = 'Customer Successfully Created.';

@@ -17,13 +17,19 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	
  
 	if (empty($uname)) {
-	   
-		header("Location: ../index.php?error=User Name is required");
-	    exit();
+
+	    $message = 'Please Enter A Username.';
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('../index.php');
+    </SCRIPT>";
 	}else if(empty($pass)){
-	   
-        header("Location: ../index.php?error=Password is required");
-	    exit();
+	        $message = 'Please Enter A Password.';
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('../index.php');
+    </SCRIPT>";
+        
 	}else{
 	  
 		$sql = "SELECT * FROM users WHERE user_name='$uname'";
@@ -42,8 +48,12 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		        exit();
             }else{
 			 
-				header("Location: ../index.php?error=Incorect User name or password");
-		        exit();
+				 $message = 'Unvalid Username Or Password.';
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('../index.php');
+    </SCRIPT>";
+    
 			}
 		}
 	

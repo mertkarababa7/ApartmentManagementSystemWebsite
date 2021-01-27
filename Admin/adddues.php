@@ -2,7 +2,7 @@
  include 'checklogin.php';
  include '../db_conn.php';
  include 'navbar.php';
- include 'registerdue.php';   
+ 
  ?>
 
 
@@ -21,7 +21,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Edit Admin</title>
+<title>Create Due</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -63,8 +63,8 @@ rel="stylesheet">
                                   </div>
                                   <div class="col-sm-6">
                                       <label>Due Amount </label>
-                                      <input type="text" class="form-control form-control-user" id="exampleLastName" name="amount"  >
-
+                                      <input  type="number" step="1" pattern="\d+" class="form-control form-control-user" id="exampleLastName" name="amount"  >
+ 
 
 
                                   </div>
@@ -77,12 +77,21 @@ rel="stylesheet">
                                   </div>
                                   <div class="col-sm-6">
                                       <label>Block </label>
-                                      <input type="text" class="form-control form-control-user" id="exampleLastName" name="Block">
+                                    <?php 
+  $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
+<select name="Block" CLASS="form-control ">
+    <option value="Block">Select Block</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
+    }
+    ?>        
+</select>
 
 
                                       <br>
-                                  </div>
-                                  <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
+                                  </div></div>
+                                  <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Open New Due"  />
                                   </div>
                                   <hr>
                                   <br><br><br><br><br><br>
@@ -101,15 +110,25 @@ rel="stylesheet">
                                       while($row = mysqli_fetch_array($result)){
                                         $Apartid = $row['apartment_id'];
                                         $zero='0';
-
-                                        $query="INSERT INTO dues (amount,details,Block,date,Apart_id) VALUES ('$amount','$details','$Block','$date','$Apartid')";
+                                        
+                                  $sqlusercount="SELECT  COUNT(*) as total FROM customer, flats 
+                                      WHERE customer.customer_id = flats.Ccustomer_id AND flats.Block ='$Block' and customer.Active=1 ";
+                                      $result= mysqli_query($conn, $sqlusercount);
+                                        $row =$result->fetch_assoc();
+                                        $numberofusers=$row['total']*$amount;
+                                        
+                                        $query="INSERT INTO dues (amount,details,Block,date,Apart_id,isactive,ExpectedMoney) VALUES ('$amount','$details','$Block','$date','$Apartid','1',' $numberofusers')";
                                         $data=mysqli_query($conn,$query);
                                         if(isset($data))
                                         {
                                          $last_id = $conn->insert_id;
+                                       
+
+
+                                      
                                        $sqlForAllUsers = "SELECT * FROM customer, flats 
-                                      WHERE customer.customer_id = flats.Ccustomer_id AND flats.Block ='$Block'  ";
-                                    $result2 = $conn->query($sqlForAllUsers);
+                                      WHERE customer.customer_id = flats.Ccustomer_id AND flats.Block ='$Block' and customer.Active=1 ";
+                                    $result2 = $conn->query($sqlForAllUsers); 
                                      if($result2->num_rows > 0){ 
                                          while ($row2 = $result2->fetch_assoc()){
                                               $customer_id = $row2["customer_id"];

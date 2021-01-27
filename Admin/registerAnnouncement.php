@@ -2,98 +2,95 @@
 include 'checklogin.php';
 include 'registerAnnouncementFunction.php';
 include '../db_conn.php';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-  <style>
-a.button {
-    background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 25px;
-  margin: 25px 20px 25px 0px;
-  width: 1000px;
-   border:2px solid black;
-  
-}
+
 </style>
 <meta charset="UTF-8">
 <title>Create Announcement </title>
 <link rel="stylesheet" href="Main.css">
-<link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css"> 
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content=""> 
 </head>
-<div class="topnav">
- <a href="registerCustomer.php" >Register Customer</a>
- <a href="registerAdmin.php" >Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Payments</a>
-  <a href="Landlord.php">Costumers</a>
-  <a href="expenses.php">Expenses</a>
-  <a href="admin.php" class="active">Return Home </a>
-  <a href="registerStaff.php">Register Staff</a>
-   <a href="search.php">Search</a>
-</div>
-<body>
- 
-  <form  method="post">
 
-<a href="viewAnnouncement.php" class="button">View Announcements</a>
+<body>
+  <div class="rlform">
+  <div class="rlform rlform-wrapper">
+   <div class="rlform-box">
+  <div class="rlform-box-inner">
+  <form  method="post" class=>
+
+
    
 </form>
  <h2>Create Announcement</h2>
 <form  method="post">
 
+    <div class="rlform-group">    
+    <label>Block</label>
+ 
+<select name="Header">
+    <option value="Dues">Dues</option>
+     <option value="Rules">Rules</option>
+      <option value="Other">Other</option>
+   
+         
+</select>
+ </div>
     <p>
-        <label for="Staff">Announcement/Event Header</label>
-        <input type="text" name="Header" value="<?php echo $_POST['Header'] ?? ''; ?>">
-    </p>
-    <p>
-        <label for="job"> Details</label>
+        <label for="job"> Announcement Details</label>
         <input type="text" name="Details"  value="<?php echo $_POST['Details'] ?? ''; ?>">
     </p>
      <p>
-        <label for="job"> Block Name</label>
-        <input type="text" name="Block" >
+         <div class="rlform-group">    
+    <label>Block</label>
+  <?php 
+  $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
+<select name="Block">
+    <option value="Block">Select Block</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
+    }
+    ?>        
+</select>
+ </div>
     </p>
            
-    <label>Participation is Mandatory or Not</label>
-    <select name="mandatory">
-    <option value="mandatory">Choose</option>
-     <option value="YES">YES</option>
-    <option value="NO">NO</option>
    
-  </select>
-     
-    <p>
+  
        
-    </p>
-       <div class="rlform-group">         
-    <label>Start Time (IF NECESSARY)</label>
-    <select name="Time">
-    <option value="Time">Event Time</option>
-     <option value="10-12">10:00-12:00</option>
-    <option value="12-14">12:00-14:00</option>
-    <option value="14-16">14:00-16:00</option>
-    <option value="16-18">16:00-18:00</option>
-    <option value="18-20">18:00-20:00</option>
-  </select>
-     </div>
           
     
    <div>
-    <button class="updatebutton" name="signUp">Create Announcement/Event
+    <button class="btn btn-primary btn-user" name="signUp">Create Announcement
     </button>
 
   </div>
 </form>
 </body>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 </html>

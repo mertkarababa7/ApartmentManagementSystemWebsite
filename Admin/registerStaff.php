@@ -2,6 +2,7 @@
 include 'checklogin.php';
 include 'registerFunctionStaff.php';
 include '../db_conn.php';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,42 +10,28 @@ include '../db_conn.php';
 <head>
 
   <style>
-a.button {
-    background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 25px;
-  margin: 25px 20px 25px 0px;
-  width: 1000px;
-   border:2px solid black;
-  
-}
+
 </style>
 <meta charset="UTF-8">
-<title>Register Staff </title>
+<title>Add Staff </title>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 <link rel="stylesheet" href="Main.css">
-<link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css">  
 
 </head>
-<div class="topnav">
- <a href="registerCustomer.php" >Register Customer</a>
- <a href="registerAdmin.php" >Register Admin</a>
-  <a href="logout.php">Admin LogOut </a>
-  <a href="Apartments.php">Apartments</a>
-  <a href="Tenants.php">Payments</a>
-  <a href="Landlord.php">Costumers</a>
-  <a href="expenses.php">Expenses</a>
-  <a href="registerAnnouncement.php">Create Announcements</a>
-  <a href="admin.php" class="active">Return Home</a>
-   <a href="search.php">Search</a>
-</div>
-  
-</div>
+
 <body>
+   <div class="rlform">
+  <div class="rlform rlform-wrapper">
+   <div class="rlform-box">
+  <div class="rlform-box-inner">
   <form  method="post">
 
 <a href="viewStaff.php" class="button">View Staff</a>
@@ -71,9 +58,19 @@ a.button {
       </p>
        <p>
         <label for="Staff">Block name</label>
-        <input type="text" name="Block">
+         <?php 
+  $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
+<select name="Block">
+    <option value="Block">Select Block</option>
+    <?php
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
+    }
+    ?>        
+</select>
+    
     </p>
-    <button class="updatebutton" name="signUp">Create A NEW STAFF
+    <button class="btn btn-primary btn-user " name="signUp">Create A NEW STAFF
     </button>
 
   </div>

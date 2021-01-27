@@ -39,7 +39,7 @@ include 'navbar.php';
 <head>
 
 
-  <title> Flats</title>
+  <title> Apartments</title>
 <style>
 body {
  background-image: url("homepage.jpg");
@@ -72,7 +72,7 @@ body {
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Flats</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Apartments</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -82,11 +82,9 @@ body {
     <thead>
   <tr "active-row">
     <th>Block</th>
-    <th>Door Number</th>
-    <th>Floor</th>
-       <th>Full</th>
-    <th>Update</th>
-     <th>Delete</th>
+    <th>Address</th>
+    <th>Total Flat number</th>
+   
    
      
      
@@ -96,39 +94,49 @@ body {
    </thead>
 
  <?php 
+$query1 = "SELECT count(door_number) FROM flats,apartment  where apartment.apartment_id=flats.Apart_id and flats.Block='A' ";
+ $result= mysqli_query($conn, $query1);
+   $row =$result->fetch_assoc();
+   $totalA=$row['count(door_number)'];
+   
 
-    $query = "SELECT * FROM flats ORDER BY flat_id ";
+
+   $totalC=0;
+$query2 = "SELECT count(door_number) FROM flats,apartment  where apartment.apartment_id=flats.Apart_id and flats.Block='B' ";
+ $result2= mysqli_query($conn, $query2);
+   $row =$result2->fetch_assoc();
+   $totalB=$row['count(door_number)'];
+
+    $query = "SELECT * FROM apartment ";
 
     $data = mysqli_query($conn,$query);
     $total=mysqli_num_rows($data);
     if($total!=0)
     {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
- if ($result['Block']=='B'){
+if ($result['Block']=='A'){
   echo "  <tbody><tr class='active-row'>
   <td>".$result['Block']."</td>
-<td>".$result['door_number']."</td>
-  <td>".$result['floor']."</td>
-  <td>".$result['isfull']."</td>
- 
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-  
+<td>".$result['Adress']."</td>
+  <td>".$totalA."</td>
   </tr>";
-
-}
-else{
- echo "  <tbody><tr class='table-success'>
+ }
+ elseif ($result['Block']=='B'){
+  echo "  <tbody><tr class='active-row'>
   <td>".$result['Block']."</td>
- <td>".$result['door_number']."</td>
-  <td>".$result['floor']."</td>
-<td>".$result['isfull']."</td>
- 
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
- 
+<td>".$result['Adress']."</td>
+  <td>".$totalB."</td>
   </tr>";
-}
+ } else {
+ echo "  <tbody><tr class='active-row'>
+  <td>".$result['Block']."</td>
+<td>".$result['Adress']."</td>
+  <td>".$totalC."</td>
+  </tr>";
+ }
+
+
+ 
 }}
 ?>
   

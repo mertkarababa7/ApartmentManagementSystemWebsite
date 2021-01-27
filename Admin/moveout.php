@@ -28,8 +28,28 @@ $customer_id=$_GET['ci'];
 
 $query="UPDATE customer
 
-SET door_number = ''
+SET Active = '0', OutDate=CURDATE()
 WHERE customer_id='$customer_id'";
+$data=mysqli_query($conn,$query);
+if($data)
+{
+	echo "Deleted";
+	header("Location: Landlord.php");
+}
+else
+{
+echo" not deleted";
+}
+ ?>
+
+ <?php
+$customer_id=$_GET['ci'];
+
+
+$query="UPDATE flats
+
+SET isfull = '0'
+WHERE cCustomer_id='$customer_id'";
 $data=mysqli_query($conn,$query);
 if($data)
 {

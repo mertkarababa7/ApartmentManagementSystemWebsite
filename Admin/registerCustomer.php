@@ -16,22 +16,23 @@ include 'navbar.php';
 </style>
 <head>
 <title>Add Customer</title>
-<script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
 <link rel="stylesheet" href="Main.css">
   <link rel="stylesheet" href="admin.css">  
 </head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Register Customer</title>
-	
+ <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 <body>
  <div class="rlform">
@@ -53,7 +54,7 @@ include 'navbar.php';
 
 		 <div class="rlform-group">         
     <label>Customer Password</label>
-    <input type="text" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
+    <input type="password" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
   
 	
    
@@ -77,7 +78,7 @@ include 'navbar.php';
   <?php 
   $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
 <select name="Block">
-    <option value="Block No">Select Block</option>
+    <option value="Block">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
         echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
@@ -85,37 +86,26 @@ include 'navbar.php';
     ?>        
 </select>
  </div>
-	
+	<br>
   <div class="rlform-group">    
     <label>Door Number</label>
   <?php 
-  $result = $conn->query("SELECT door_number FROM flats where isfull='0'  ORDER BY CASE WHEN door_number REGEXP '^[A-Z]{2}'
-    THEN 1 
-    ELSE 0
-    END ASC,
-    CASE WHEN door_number REGEXP '^[A-Z]{2}'
-    THEN LEFT(door_number, 2)
-    ELSE LEFT(door_number, 1)
-    END ASC,
-    CASE WHEN door_number REGEXP '^[A-Z]{2}'
-    THEN CAST(RIGHT(door_number, LENGTH(door_number) - 2) AS SIGNED)
-    ELSE CAST(RIGHT(door_number, LENGTH(door_number) - 1) AS SIGNED)
-    END DESC ") or die($conn->error);?>
+  $result = $conn->query("SELECT flat_id,door_number,Block FROM flats where isfull='0' ") or die($conn->error);?>
 <select name="door_number">
     <option value="Door Number">Select Door Number</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['door_number'] . "'>" . $row['door_number'] . "</option>";
+        echo "<option value='" . $row['door_number'] . "' >" . $row['door_number'] . "->" . $row['Block'] . "</option>";
     }
     ?>        
 </select>
  </div>
- 
+ <br>
   
 
 
 <div>
-	  <button class="rlform-btn" name="signUp">Create Customer
+	  <button class="btn btn-primary btn-user" name="signUp">Create Customer
 	  </button>
 
 	</div>
@@ -128,4 +118,12 @@ include 'navbar.php';
 
 	
 </body>
+ <script src="vendor/jquery/jquery.min.js"></script>
+       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+       <!-- Core plugin JavaScript-->
+       <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+       <!-- Custom scripts for all pages-->
+       <script src="js/sb-admin-2.min.js"></script>
 </html

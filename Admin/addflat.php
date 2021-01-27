@@ -2,13 +2,13 @@
 include 'checklogin.php';
 include '../db_conn.php';
 include 'navbar.php';
-include 'registerdue.php';   
+
 ?>
 
 
 <style>
   .bg-password-image2 {
-   background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+   background: url("https://media-blog.zingat.com/uploads/2016/10/Studyo-Daire-780x520.jpg");
   background-position: center;  
   background-size: cover;
 }
@@ -21,7 +21,7 @@ include 'registerdue.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Admin</title>
+    <title>Create Flat</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,18 +52,24 @@ include 'registerdue.php';
                                 <br><br><br><br>
                             </div>
 
-                            <form class="user">
+                           <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                      <label>Door Number </label>
+                                       <input type="text" name="doornumber" class="form-control form-control-user" id="exampleFirstName">
+                                      <br>
+                                    </div>
+                                    <div class="col-sm-6">
                                       <label>Floor </label>
-                                       <input type="text" name="floor"  class="form-control form-control-user" id="exampleFirstName">
-
-                                      <br><br>
- <div class="rlform-group">    
-    <label>Block Number</label>
+                                        <input type="floor" class="form-control form-control-user" id="exampleLastName" name="floor">
+                                        <br>
+                                      </div>
+ 
+  <div class="col-md-12">   
+    <label>Apartment</label>
   <?php 
   $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
-<select name="Block">
+<select name="Block" class="form-control">
     <option value="Block No">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
@@ -72,21 +78,13 @@ include 'registerdue.php';
     ?>        
 </select>
  </div>
-
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <label>Door Number </label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="doornumber"  >
- 
-  
-  
         
                                   
  
   
         <br>
                                     </div>
-                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
+                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Create New Flat"  />
                                </div>
                                 <hr>
                                 <br><br><br><br><br><br>
@@ -105,9 +103,9 @@ $query1 = "SELECT apartment_id FROM apartment WHERE Block ='$Block'";
                     $result = mysqli_query($conn, $query1);
                     while($row = mysqli_fetch_array($result)){
                         $Apartid = $row['apartment_id'];
-                        $customer_id=NULL;
+                        
 
-$query="INSERT INTO flats (Ccustomer_id,Apart_id,isfull,Block,door_number,floor) VALUES ('$customer_id',' $Apartid','0','$Block','$doornumber','$floor')";
+$query="INSERT INTO flats (Apart_id,isfull,Block,door_number,floor) VALUES ('$Apartid','0','$Block','$doornumber','$floor')";
 $data=mysqli_query($conn,$query);
 if(isset($data))
 {

@@ -1,6 +1,6 @@
 body {
  
- background-color: #cccccc;
+
    background-repeat: no-repeat;
    background-size: cover;
  font-family: 'Raleway', sans-serif;
@@ -19,7 +19,7 @@ body {
 
     border-radius: 4px;
 
-    background-color: #4e73df;
+    background-color: #FFF;
 }
 input[type=text], select {
   width:100%;

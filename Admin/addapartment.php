@@ -2,7 +2,7 @@
 include 'checklogin.php';
 include '../db_conn.php';
 include 'navbar.php';
-include 'registerdue.php';   
+ 
 ?>
 
 
@@ -21,7 +21,7 @@ include 'registerdue.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Admin</title>
+    <title>Create Apartment</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -57,22 +57,22 @@ include 'registerdue.php';
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                       <label>Block </label>
                                        <input type="text" name="Block"  class="form-control form-control-user" id="exampleFirstName">
-
+ <br><br>
                                       <br><br>
                                     </div>
                                     <div class="col-sm-6">
                                       <label>Address </label>
                                         <input type="text" class="form-control form-control-user" id="exampleLastName" name="address"  >
- 
+ <br><br>
   
   
         
                                   
  
-  
+  </div>
         <br>
                                     </div>
-                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
+                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Add New Apartment"  />
                                </div>
                                 <hr>
                                 <br><br><br><br><br><br>

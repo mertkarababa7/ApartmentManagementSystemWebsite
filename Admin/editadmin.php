@@ -11,7 +11,7 @@ $ph=$_GET['ph'];
 
 <style>
   .bg-password-image2 {
-  background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
+  background: url("https://cdn.onlinewebfonts.com/svg/img_410571.png");
   background-position: center;  
   background-size: cover;
 }
@@ -68,12 +68,13 @@ $ph=$_GET['ph'];
                                             placeholder="Last Name">
  
   
-        
+                                   </div>
                                     </div>
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Update Your Informations"  />
                                </div>
                                 <hr>
                                 <br><br><br><br><br><br>
+                                </form>
                                 
        <?php
 
@@ -94,7 +95,7 @@ if(isset($data))
 
     echo "<SCRIPT> //not showing me this
         alert('$message')
-        window.location.replace('admin.php');
+        window.location.replace('profile.php');
     </SCRIPT>";
 }
 else{
