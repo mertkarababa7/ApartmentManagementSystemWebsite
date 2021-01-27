@@ -1,6 +1,6 @@
 # This is an Apartment Management system by Mert Karababa
 
-<img src="images/charts.png" width="600" height="1200">
+<img src="images/charts.png" width="1200" height="1200">
 ### Login informations
 Admin user name : mert  
 admin password: mert     
