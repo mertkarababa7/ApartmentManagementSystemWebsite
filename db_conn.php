@@ -1,7 +1,7 @@
 
 <?php
 
-$db_name = "apartment";
+$db_name = "webapartment";
 
 $servername = "localhost";
 $username = "root";

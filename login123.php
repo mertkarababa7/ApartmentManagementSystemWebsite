@@ -1,6 +1,6 @@
  <?php 
 
-
+include 'sendmessage.php';
 include 'navbar.php';
 ?>
 
@@ -20,7 +20,7 @@ include 'navbar.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Login</title>
+    <title>Contact Us</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,21 +47,22 @@ include 'navbar.php';
                         <div class="p-5">
                             <div class="text-center">
                               
-                                <h1 class="h4 text-gray-900 mb-4">Admin Login</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Contact Us!</h1>
                                 <br><br><br><br>
                             </div>
- <form action="admin/login.php" method="post" class="user">
+ <form class="user" method="post">
+   
                            
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                      <label>Username </label>
-                                       <input type="text" name="uname"  class="form-control form-control-user" id="exampleFirstName">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                      <label>Email </label>
+                                       <input type="text" name="Email"  class="form-control form-control-user" id="exampleFirstName">
  <br><br>
                                       <br><br>
                                     </div>
-                                    <div class="col-sm-6">
-                                      <label>Password </label>
-                                        <input type="password" class="form-control form-control-user" id="exampleLastName" name="password"  >
+                                    <div class="col-sm-12">
+                                      <label>Leave A Message </label>
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="text"  >
  <br><br>
   
   
@@ -71,11 +72,14 @@ include 'navbar.php';
   </div>
         <br>
                                     </div>
-                             <div> <input  type="Submit" class="btn btn-primary btn-user btn-block" value="Login"  />
-                               </div>
+
+                                    <div>
+    <button class="btn btn-primary btn-user btn-block"" name="signUp"  onclick='return checkdelete()'>Send Message
+    </button></div>
                                 <hr>
-                                
-                                
+                             
+
+                       
          
                                 
                            
@@ -96,7 +100,13 @@ include 'navbar.php';
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-<?php 
-ob_flush(); ?>
- 
+
+ <script>
+  function checkdelete()
+  {
+    return confirm('Are you sure you want to send this message')
+  }
+
+
+</script>
 </html>
