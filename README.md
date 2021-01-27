@@ -107,3 +107,7 @@ Update 8 (04.01.2021)
 - Customer passwords are hashed.
 
 --------------------------------------------------------------------------------
+Update 9 (25.01.2021)
+- Admin can add dues with details
+- Admin can spend money that collected from dues with details
+- Admin can see who paid from Pie Chart
