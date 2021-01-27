@@ -16,12 +16,18 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
 
 	if (empty($cname)) {
 	   
-		header("Location: ../LoginCustomer.php?error=User Name is required");
-	    exit();
+		 $message = 'Please Enter A Username.';
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('../index.php');
+    </SCRIPT>";
 	}else if(empty($pass)){
 	   
-        header("Location: ../LoginCustomer.php?error=Password is required");
-	    exit();
+        $message = 'Please Enter A Password.';
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('../index.php');
+    </SCRIPT>";
 	}else{
 	  
 		$sql = "SELECT * FROM customer WHERE name='$cname'";
@@ -37,7 +43,7 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
             	header("Location: LoggedCustomer.php");	
 		        exit();
             }else{
-			 
+			echo "asdsadsad";
 				header("Location: ../LoginCustomer.php?error=Incorect User name or password");
 		        exit();
 			}

@@ -26,7 +26,7 @@
   color: white;
 }
 table, th, td {
-	background-color:#B4EEA2;
+	background-color:#F0F0FF;
   
 }
 
@@ -59,7 +59,7 @@ table, th, td {
 
 .one-box h3
 {
-	
+	/*-webkit-text-stroke: .8px black;*/
 	-webkit-text-fill-color: black;
 	-webkit-animation: fill 0.5s infinite alternate;
 	position: absolute;
@@ -76,7 +76,7 @@ table, th, td {
 	box-sizing: border-box;
 	width: 450px;
 	height: 32px;
-	background: transparent;
+	
 	outline: none;
 	border: 0px solid;
 	border-bottom: 1.5px solid white;
@@ -114,18 +114,7 @@ input[type="submit"]:hover
 	color: white;
 	
 }
-button {
-  border: none;
-  color: black;
-  padding: 12px 45px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color: #4CAF50
-}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;

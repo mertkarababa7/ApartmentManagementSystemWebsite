@@ -91,11 +91,12 @@ echo "  <tbody><tr class='active-row'>
 <td>".$result['Block']."</td>
 <td>".$result['Details']."</td>
 <td>".$result['date']."</td>
-        <td><form action='paymentexpense.php?id=$result[id]' method='POST'>
-        <div class='updatebutton'>
-          <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
-          <button class='updatebutton' type='submit'>Pay Expense</button>
-        </div></form></td>
+ <td> <a href='paymentExpensee.php?id=$result[id]' >
+        <div class='button'>
+        <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
+        <button style='margin:0px' class='btn btn-success pull-right 'type='submit'>Pay Rent Page </button>
+        </div>
+
         <td><a href='viewexpense.php?id=$result[id]' ><input type='submit' value='Check Details' id='updatebutton' ></a> </td>
 </tr>";
 

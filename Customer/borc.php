@@ -62,7 +62,7 @@
       while ($row = $run->fetch_assoc()) {
 
 
-
+ 
         echo "  <tbody><tr class='active-row'>
         <td>".$row['name']."</td>
         <td>".$row['surname']."</td>
@@ -71,10 +71,10 @@
         <td>".$row['door_number']."</td>
         <td>".$row['deposit']."</td>
         <td>".$row['Block']."</td>
-        <td> <form action='payment.php' method='POST'>
-        <div class='updatebutton'>
-        <input type='hidden' name='tid' value='<?php echo  $tid;?>'/>
-        <button style='margin:0px' class='btn btn-success pull-right 'type='submit'>PayRent</button>
+        <td> <a href='paymentRent.php' >
+        <div class='button'>
+        <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
+        <button style='margin:0px' class='btn btn-success pull-right 'type='submit'>Pay Rent Page </button>
         </div>
 
         </form></td>
@@ -99,12 +99,18 @@
       <th>Date</th>
       <th>Amount</th>
       <th colspan="2">Costumer Full name</th>
+      <th colspan="2">Credit Cart Informations</th>
     </tr>
   </thead>
   <tbody>
    <?php 
    include '../db_conn.php';
-   $sql = "select * from transaction where customer_id=$tid";
+   $sql1=" select *from creditcart where customer_id=$tid";
+   $result=$conn->query($sql1);
+   $row = $result->fetch_assoc();
+   $card=$row['cardnumber'];
+   $cardname=$row['name'];
+   $sql = "select * from transaction  where customer_id=$tid ";
    if ($result = $conn->query($sql)) {
 
 
@@ -118,6 +124,8 @@
         <td><?php echo $row['amount']?></td>
         <td><?php echo $row['name']?></td>
         <td><?php echo $row['surname']?></td>
+        <td><?php echo $cardname?></td>
+        <td><?php echo $card?></td>
       </tr> 
       <?php  
 

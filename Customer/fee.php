@@ -1,7 +1,7 @@
   <?php 
   include 'checkCustomerLogin.php';
   include '../db_conn.php';
-
+  include 'navbar.php';
   ?>
 
 
@@ -10,125 +10,133 @@
   <head>
   	<title> Fee </title>
     <style>
-      body {
+       
 
-       background-color: #cccccc;
-       background-repeat: no-repeat;
-       background-size: cover;
+  #updatebutton
 
-     }   
+  {
+    background-color:#4e73df;
+    color:white;
+    width:%100;
+    height:%100;
+    font-size:15px;
+  }
+
+
 
    </style>
 
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
    <link rel="stylesheet" href="main.css">
    <link rel="stylesheet" href="customer.css">
 
-   <div class="topnav">
-    <a href="LoggedCustomer.php" >Home Page</a>
-    <a href="borc.php">Pay Rent</a>
-    <a href="fee.php"class="active" >Pay Fee</a>
-    <a href="expenses.php" >Expenses</a>
-    <a href="logoutCustomer.php">Costumer Log Out </a>
-    <a href="Announcement.php" >Announcements </a>
- <a href="staff.php" >Staff </a>
-
-  </div>
+  
 </head>
 <body>
-  <h1 style="color: #fff;background: #4CAF50;padding: 15px;border-radius: 10px">Fees</h1><br><br>
 
-  <table class="styled-table" border="2" cellspacing="7">
+
+  <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Active Dues</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
     <tr class="active-row">
-      <th>Name</th>
-      <th>Surname</th>
-      <th>Monthly-Fee</th>
-      <th>Email</th>
-      <th>Door Number</th>
-      <th>Deposit</th>
-      <th>Your Apartment</th>
-      <th>Payment Button</th>
+      <th>Due Amount</th>
+      <th>Due Details</th>
+      <th>Due Opened Date</th>
+      <th>Due Block</th>
+      <th>Payment</th>
+      
     </tr>
-
-    <?php 
-    include '../db_conn.php';
+  <?php 
     $tid=$_SESSION['customer_id'];
+$block=$_SESSION['Block'];
+$ödeme=0;
+$query = "SELECT * FROM depts where customer_id='$tid' and ispaid='$ödeme' ORder by OpenedDate DESC";
+$result = $conn->query($query);
 
-    $sql = "select *,(select fee from flats where door_number=t.door_number)as fee,(select Block from flats where door_number=t.door_number)as Block from customer t where customer_id=$tid";
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total>0)
+   {
+while($result = mysqli_fetch_assoc($data)){   
+echo "  <tbody><tr class='table-danger'>
+<td>".$result['amount']."</td>
+<td>".$result['details']."</td>
+<td>".$result['OpenedDate']."</td>
+<td>".$result['Block']."</td>
 
-    $run= mysqli_query($conn, $sql);{
-
-      while ($row = $run->fetch_assoc()) {
-
-
-
-        echo "  <tbody><tr class='active-row'>
-        <td>".$row['name']."</td>
-        <td>".$row['surname']."</td>
-        <td>".$row['fee']."</td>
-        <td>".$row['email']."</td>
-        <td>".$row['door_number']."</td>
-        <td>".$row['deposit']."</td>
-        <td>".$row['Block']."</td>
-        <td> <form action='paymentfee.php' method='POST'>
-        <div class='button'>
-        <input type='hidden' name='tid' value='<?php echo  $tid;?>' />
-        <button style='margin:0px' class='btn btn-success pull-right 'type='submit'>PAY FEE</button>
-        </div>
-
-        </form></td>
+ <td> <a href='paymentfee.php?kid=$result[payment_id]' >
+        <input type='submit' value='Pay' id='updatebutton' ></a> </td>
 
 
-        </tr>"
-        ;
-        ?>
-      </table>
+       
+</tr>";
 
-
-    </div>
-  </div>
-
-  <?php
-}}
+}
+}
+else{
+  echo "You Have No Depts";
+}
 ?>
+    
 </div>
-<div  class="col-sm-3 box" style="background-color:#4CAF50; margin-left:10px;">
- <h3><b>Previous payments</b>
-   <table class="styled-table" border="2" cellspacing="7">
 
+ </table>
+</div></div></div>
+   <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="m-0 font-weight-bold text-primary">Payment History</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <tr class="active-row">
-      <th>Payment ID</th>
-      <th>Date</th>
-      <th>Amount</th>
+      <th>Paid Amount</th>
+      <th>Details</th>
+      <th>Due Opened Date</th>
+       <th>Due Paid Date</th>
       <th colspan="2">Costumer Full name</th>
     </tr>
   </thead>
   <tbody>
    <?php 
+
    include '../db_conn.php';
-   $sql = "select * from transactionFee where customer_id=$tid";
+      $name=$_SESSION['name'];
+$surname=$_SESSION['surname'];
+   $ödendi=1;
+   $sql = "SELECT* from depts WHERE customer_id='$tid' and ispaid='$ödendi'  ORder by OpenedDate desc ";
    if ($result = $conn->query($sql)) {
 
 
     while ($row = $result->fetch_assoc()) {
 
       ?>
-      <tr>
-
-        <td><?php echo $row['id']?></td>
-        <td><?php echo $row['date']?></td>
-        <td><?php echo $row['amount']?></td>
-        <td><?php echo $row['name']?></td>
-        <td><?php echo $row['surname']?></td>
+      <tbody><tr class='table-success'> 
+<td><?php echo $row['amount']?></td>
+        <td><?php echo $row['details']?></td>
+        <td><?php echo $row['OpenedDate']?></td>
+        <td><?php echo $row['PaymentDate']?></td>
+        <td><?php echo $name?></td>
+         <td><?php echo $surname?></td>
       </tr> 
       <?php  
 
 
     }
 
-    /* free result set */
     $result->close();
   }
 
