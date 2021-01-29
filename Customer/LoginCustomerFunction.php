@@ -33,19 +33,22 @@ if (isset($_POST['cname']) && isset($_POST['password'])) {
 		$sql = "SELECT * FROM customer WHERE name='$cname'";
 		$result = mysqli_query($conn, $sql);
 	    $row = mysqli_fetch_assoc($result);
-		 if (password_verify($pass, $row['CustomerPassword'])) 
+		 if ($row && password_verify($pass, $row['CustomerPassword'])) 
 		
             {
 			    $_SESSION['name'] = $row['name'];
             	$_SESSION['surname'] = $row['surname'];
             	$_SESSION['customer_id'] = $row['customer_id'];
             	$_SESSION['Block']=$row['Block'];
+            	$_SESSION['admin_id'] = $row['admin_id'];
+            	
             	header("Location: LoggedCustomer.php");	
 		        exit();
             }else{
-			echo "asdsadsad";
-				header("Location: ../LoginCustomer.php?error=Incorect User name or password");
-		        exit();
+			 echo "<SCRIPT> //not showing me this
+       	alert('Unvalid Username Or Password');
+        window.location.replace('../index.php');
+    </SCRIPT>";
 			}
 		}
 	

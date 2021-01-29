@@ -61,7 +61,7 @@ $ci=$_GET['ci'];
      <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
         <label for="User name">Your Email</label>
-        <input type="text" name="email" value="<?php echo "$em" ?>" id="firstName" class="form-control form-control-user">
+        <input type="email" name="email" value="<?php echo "$em" ?>" id="firstName" class="form-control form-control-user">
   
      <input type="hidden" name="CID"  value="<?php echo "$ci" ?>" id="lastName">
      <br><br>
@@ -69,7 +69,7 @@ $ci=$_GET['ci'];
 
                                     <div class="col-sm-6">
         <label for="name"> Your Phone Number</label>
-        <input type="text" name="phone"  value="<?php echo "$ph" ?>" id="lastName" class="form-control form-control-user">
+        <input type="number" step="1" pattern="\d+"  name="phone"  value="<?php echo "$ph" ?>" id="lastName" class="form-control form-control-user">
   
       </div>  
  </div>

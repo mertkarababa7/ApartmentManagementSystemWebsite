@@ -9,12 +9,7 @@ $Block=$_SESSION['Block'];
 <!DOCTYPE html>
 <html>
 <head>
- <style>
-    h2.headertekst {
-  text-align: center;
-  
-}
- </style>
+
 <title> Payment List </title>
 <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -68,12 +63,12 @@ $Block=$_SESSION['Block'];
          $sqlQuery = "SELECT CollectedMoney,Block,SpentMoney,id FROM dues Where id='$monthValue' and Block='$Block'";
 
            $fire = mysqli_query($conn,$sqlQuery);
-           $result32='The Collected Money';
-           $result33='The Money Spent';
+           $result32='Collected Money';
+           $result33='Outgoing';
            $result34='Money In The Case';
           
           while ($result = mysqli_fetch_assoc($fire)) {
-          
+            
             $balance=$result['CollectedMoney']-$result['SpentMoney'];
             
             echo"['".$result32."',".$result['CollectedMoney']."],";
@@ -106,7 +101,7 @@ $Block=$_SESSION['Block'];
 </head>
 <body>
 
-  <h2 class="headertekst" style="color:black"> What We Paid With Our Money</h2>
+  
 
 
             <div id="piechart" style="width: 900px; height: 500px;"></div>
@@ -132,7 +127,12 @@ $Block=$_SESSION['Block'];
             </div>
            
           </div>
-
+</div>  
+<br>
+   <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">What Spent On What?</h4>
+                            </div>
            <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -142,9 +142,9 @@ $Block=$_SESSION['Block'];
 
     <thead>
   <tr "active-row">
-    <th>Spent Money </th>
-    <th>Details </th>
-  <th>Spent Date </th>
+    <th class='centerText'>Spent Money </th>
+    <th class='centerText'>Details </th>
+  <th class='centerText'>Spent Date </th>
     
 
      
@@ -174,10 +174,10 @@ $total=mysqli_num_rows($data);
    {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
  
-echo "  <tbody id=Table><tr class='active-row'>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
-<td>".$result['SpentDate']."</td>
+echo "  <tbody id=Table><tr class='table-danger'>
+<td class='centerText'>".$result['amount']."</td>
+<td class='centerText'>".$result['details']."</td>
+<td class='centerText'>".$result['SpentDate']."</td>
 </tr></tbody>";
   
       

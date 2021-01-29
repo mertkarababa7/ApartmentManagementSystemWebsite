@@ -177,3 +177,13 @@ form.example::after {
 .dashbord-skyblue .detail-section{
   background-color:#803D9B;
 }
+
+
+.icon-red{
+  background-color:#ff0000!important;
+}
+
+.sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {
+    height: 3rem;
+    width: 3rem;
+}

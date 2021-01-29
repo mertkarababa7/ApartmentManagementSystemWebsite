@@ -84,7 +84,7 @@
                         </div>
                         <li class="nav-item">
                             <a class="nav-link" href="announcement.php">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-bullhorn"></i>
                                 <span>Announcements</span></a>
                             </li>
 
@@ -94,13 +94,22 @@
 
                         </div>
                         <li class="nav-item">
+                            <a class="nav-link" href="customermessage.php">
+                                <i class="fas fa-envelope fa-lg"></i>
+                                <span>Send Message</span></a>
+                            </li>
+
+                            <!-- Divider -->
+                            <hr class="sidebar-divider d-none d-md-block">
+                            <div class="sidebar-heading">
+
+                        </div>
+                        <li class="nav-item">
                             <a class="nav-link" href="LoggedCustomer.php">
                                 <i class="fas fa-user"></i>
                                 <span>My Profile</span></a>
                             </li>
-                            <!-- Divider -->
-                            <hr class="sidebar-divider d-none d-md-block">
-
+   <hr class="sidebar-divider d-none d-md-block">
                             <div class="text-center d-none d-md-inline">
                                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
                             </div>
@@ -170,67 +179,82 @@
                                 </li>
 
                                 <!-- Nav Item - Alerts -->
-                             <h4>   <li class="nav-item dropdown no-arrow mx-1">
+                                <h4>   <li class="nav-item dropdown no-arrow mx-1">
                                     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
+                                    <i class="fas fa-bell fa-lg fa-fw"></i>
                                     <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">1+</span>
+                                    <span class="badge badge-danger badge-counter">+3</span>
                                 </a>
                                 <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Last Announcement
+                                    Last Announcements
                                 </h6>
-                               
-                              
-                                <a class="dropdown-item d-flex align-items-center" a href="announcement.php">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-grey-1000"><?php
-                                $Block=$_SESSION['Block'];
-                                $sql1 = "SELECT id FROM announcement where Block='$Block'  ORDER BY id DESC ";
-                                $result= mysqli_query($conn, $sql1);
-                                $row =$result->fetch_assoc();
-                                $numberofusers=$row['id'];
-                                
 
-                                $query = "SELECT * FROM announcement where Block='$Block' ORDER BY openedDate  ";
 
-                                $data = mysqli_query($conn,$query);
-                                $total=mysqli_num_rows($data);                 
-                                if($total!=0)
-                                {
+                                <a class="dropdown-item px-0" a href="announcement.php">
+
+                                    <div class="container px-0">
+                                        <div class="row">
+                                            <?php
+                                            $Block=$_SESSION['Block'];
+                                            $sql1 = "SELECT id FROM announcement where Block='$Block'  ORDER BY id DESC ";
+                                            $result= mysqli_query($conn, $sql1);
+                                            $row =$result->fetch_assoc();
+                                            $numberofusers=$row['id'];
+
+
+                                            $query = "SELECT * FROM announcement where Block='$Block' ORDER BY openedDate DESC limit 3 ";
+
+                                            $data = mysqli_query($conn,$query);
+                                            $total=mysqli_num_rows($data);                 
+                                            if($total!=0)
+                                            {
 
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
-   if ($result['id'] == $numberofusers ) {
-      echo "  
-      ".$result['openedDate']." ";
-  ?>
-            </div>
-            <?php 
-              echo "  
-      ".$result['details']." ";
+  ?><div class="dropdown-item d-flex align-items-center"><div class="col-3">
+    <div class="icon-circle bg-warning <?php 
+    if($result['head'] == 'Dues')
+    {
+        echo "icon-red";
+    }
+    ?>">
+    <i class="fas <?php 
+    if($result['head']=='Dues')
+    {
+        echo "fa-exclamation-triangle";
+    }
+    else
+    {
+        echo "fa-exclamation";
+    }
+    ?> text-white"></i>
+</div>
+</div><div class="col-9"><div  class="small text-grey-1000"><?php
+$result1="Opened Date";
+echo "  
+".$result1 ." ".$result['openedDate']." ";?></div><div><?php
 
-            }
+echo "  
+".$result['details']." ";?></div></div></div><?php
+
+
 
 
 }
 }               ?>
-                                      
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500"  a href="announcement.php">Show All Announcements</a>
-                            </div>
-                        </li> </h4>
 
-                       
-                    
+</div>
+</div>
+</a>
+<a class="dropdown-item text-center small text-gray-500"  a href="announcement.php">Show All Announcements</a>
+</div>
+</li> </h4>
+
+
+
 
 <div class="topbar-divider d-none d-sm-block"></div>
 

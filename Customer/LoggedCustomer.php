@@ -2,6 +2,7 @@
 include 'checkCustomerLogin.php';
  include '../db_conn.php';
  include 'navbar.php';
+
    ?>
 
 
@@ -18,7 +19,7 @@ include 'checkCustomerLogin.php';
     height:%100;
     font-size:15px;
   }
-  
+
 
 </style>
 
@@ -61,9 +62,9 @@ include 'checkCustomerLogin.php';
 
    
   <tr class="active-row">
-    <th>Dues</th>
-        <th>Total Due Money</th>
-    <th>Number Of Dues</th>
+    <th class='centerText'>Dues</th>
+        <th class='centerText'>Total Due Money</th>
+    <th class='centerText'>Number Of Dues</th>
  
   
      
@@ -85,18 +86,18 @@ include 'checkCustomerLogin.php';
        {
 echo "  <tbody id=Table><tr class='active-row'>
 
-<td>".$ödenen."</td> 
-      <td>".$row['sum(amount)']."</td> 
-<td>".$row['count(ispaid)']."</td>
+<td class='centerText'>".$ödenen."</td> 
+      <td class='centerText'>".$row['sum(amount)']."</td> 
+<td class='centerText'>".$row['count(ispaid)']."</td>
 </tr></tbody>";
 
 }
 else {
   echo "  <tbody id=Table><tr class='table-danger'>
 
-<td>".$ödenmeyen."</td> 
-      <td>".$row['sum(amount)']."</td> 
-<td>".$row['count(ispaid)']."</td>
+<td class='centerText'>".$ödenmeyen."</td> 
+      <td class='centerText'>".$row['sum(amount)']."</td> 
+<td class='centerText'>".$row['count(ispaid)']."</td>
 </tr></tbody>";
 
 }
@@ -127,11 +128,11 @@ else {
    
   <tr class="active-row">
     <th>My Name</th>
-    <th>My Door Number</th>
-     <th>My Block</th>
-     <th>My Email</th>
-      <th>My Phone Number</th>
-       <th>Change My Informations</th>
+    <th  class='centerText'>My Door Number</th>
+     <th  class='centerText'>My Block</th>
+     <th  class='centerText'>My Email</th>
+      <th class='centerText'>My Phone Number</th>
+       <th  class='centerText'>Change My Informations</th>
   </tr>
 
 
@@ -150,13 +151,13 @@ else {
       
           echo "  <tbody><tr class='active-row'>
 <td>".$row['name']." ".$row['surname']."</td>
-<td>".$row['door_number']."</td>
+<td  class='centerText'>".$row['door_number']."</td>
 
-<td>".$row['Block']."</td>
-<td>".$row['email']."</td>
-<td>".$row['phone_number']."</td>
+<td class='centerText'>".$row['Block']."</td>
+<td class='centerText'>".$row['email']."</td>
+<td class='centerText'>".$row['phone_number']."</td>
 
-<td><a href='updateCostumer.php?ci=$row[customer_id]&em=$row[email]&ph=$row[phone_number]' ><input type='submit' value='Update' id='updatebutton' ></a> </td>
+<td class='centerText'><a href='updateCostumer.php?ci=$row[customer_id]&em=$row[email]&ph=$row[phone_number]' ><input type='submit' value='Update' id='updatebutton' ></a> </td>
  </tr>"
 
 ;
@@ -184,9 +185,9 @@ else {
 
    
   <tr class="active-row">
-    <th>My Apartment Address</th>
-        <th>My Block</th>
-    <th>My Door Number</th>
+    <th >My Apartment Address</th>
+        <th class='centerText'>My Block</th>
+    <th class='centerText'>My Door Number</th>
  
   
      
@@ -208,9 +209,9 @@ else {
       
           echo "  <tbody><tr class='active-row'>
 
-<td>".$row['Adress']."</td>
-<td>".$row['Block']."</td>
-<td>".$row['door_number']."</td>
+<td >".$row['Adress']."</td>
+<td class='centerText'>".$row['Block']."</td>
+<td class='centerText'>".$row['door_number']."</td>
 
  </tr>"
 

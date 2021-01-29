@@ -19,11 +19,11 @@
     color:white;
     width:%100;
     height:%100;
-    font-size:15px;
+    font-size:20px;
   }
 
 
-
+   
    </style>
 
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -51,13 +51,13 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-    <tr class="active-row">
+    <tr class="centerText">
       <th>Due Amount</th>
       <th>Due Details</th>
       <th>Due Opened Date</th>
       <th>Due Block</th>
       <th>Payment</th>
-      
+
     </tr>
   <?php 
     $tid=$_SESSION['customer_id'];
@@ -72,10 +72,10 @@ $total=mysqli_num_rows($data);
    {
 while($result = mysqli_fetch_assoc($data)){   
 echo "  <tbody><tr class='table-danger'>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
-<td>".$result['OpenedDate']."</td>
-<td>".$result['Block']."</td>
+<td class='centerText'>".$result['amount']."</td>
+<td class='centerText'>".$result['details']."</td>
+<td class='centerText'>".$result['OpenedDate']."</td>
+<td class='centerText'>".$result['Block']."</td>
 
  <td> <a href='paymentfee.php?kid=$result[payment_id]' >
         <input type='submit' value='Pay' id='updatebutton' ></a> </td>
@@ -102,7 +102,7 @@ else{
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <tr class="active-row">
+    <tr class="centerText">
       <th>Paid Amount</th>
       <th>Details</th>
       <th>Due Opened Date</th>
@@ -125,12 +125,12 @@ $surname=$_SESSION['surname'];
 
       ?>
       <tbody><tr class='table-success'> 
-<td><?php echo $row['amount']?></td>
-        <td><?php echo $row['details']?></td>
-        <td><?php echo $row['OpenedDate']?></td>
-        <td><?php echo $row['PaymentDate']?></td>
-        <td><?php echo $name?></td>
-         <td><?php echo $surname?></td>
+<td class="centerText"><?php echo $row['amount']?></td>
+        <td  class="centerText"><?php echo $row['details']?></td>
+        <td class="centerText"><?php echo $row['OpenedDate']?></td>
+        <td class="centerText"><?php echo $row['PaymentDate']?></td>
+        <td class="centerText"><?php echo $name?></td>
+         <td class="centerText"><?php echo $surname?></td>
       </tr> 
       <?php  
 
