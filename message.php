@@ -2,17 +2,19 @@
 
 include 'sendmessage.php';
 include 'navbar.php';
+include 'db_conn.php';
 ?>
 
 
-<style>
-  .bg-password-image2 {
-   background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
-  background-position: center;  
-  background-size: cover;
-}
-</style>
 
+ <style>
+  .bg-password-image2 {
+     background: url("https://www.shareicon.net/data/2017/06/22/887564_message_512x512.png");
+
+     background-position: center;  
+     background-size: cover;
+ }
+</style>
 
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +22,7 @@ include 'navbar.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Contact Us</title>
+    <title>Messages</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,40 +49,82 @@ include 'navbar.php';
                         <div class="p-5">
                             <div class="text-center">
                               
-                                <h1 class="h4 text-gray-900 mb-4">Contact Us!</h1>
-                                <br><br><br><br>
+                                <h1 class="h4 text-gray-900 mb-4">Send Message</h1>
+                                <br><br>
                             </div>
- <form class="user" method="post">
-   
-                           
+
+                            <form class="user">
                                 <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                      <label>Email </label>
-                                       <input type="text" name="Email"  class="form-control form-control-user" id="exampleFirstName">
- <br><br>
-                                      <br><br>
-                                    </div>
-                                    <div class="col-sm-12">
-                                      <label>Leave A Message </label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="text"  >
- <br><br>
-  
-  
-        
-                                  
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                      <label>Your E-mail </label>
+ <input type="email" name="head" class = "form-control">
  
-  </div>
-        <br>
-                                    </div>
-
-                                    <div>
-    <button class="btn btn-primary btn-user btn-block"" name="signUp"  onclick='return checkdelete()'>Send Message
-    </button></div>
-                                <hr>
-                             
-
-                       
          
+
+</div>
+                                    <div class="col-sm-6">
+                                      <label>Reciever </label>
+                                      <select name="head" class = "form-control" disabled="disabled">
+                                         <option value="Complaint"><?php 
+           
+         $query = "SELECT * FROM users where id='89'";
+
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+   if($total!=0)
+   {
+while($result = mysqli_fetch_assoc($data)){   
+
+       
+echo "".$result['user_name']; }}
+                                          ?>
+                                         
+                                          </option>
+                                       </select>
+                                        <br>
+                                      </div>
+                                     <br><br>
+                                    <div class="col-sm-12">
+                                      <label>Message Details </label>
+                                        <input  type="text" class="form-control form-control-user" id="exampleLastName" name="message">
+                                        <br>
+                                      </div>
+        
+        
+                                    </div>
+                             <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Send Message"  />
+                               </div>
+
+                                <hr>
+                                <br><br><br><br>
+                                
+       <?php
+
+
+if (isset($_GET['submit']))
+{
+
+  $head=$_GET['head'];
+   $message=$_GET['message'];
+  
+
+$query="INSERT INTO messages (message,customer_id,messagedate,admin_id,sender,reciever) VALUES('$message','0',CURDATE(),'89','$head' ,'admin')"; 
+$data=mysqli_query($conn,$query);
+if(isset($data))
+{
+
+ $message = 'Your message has been sent, we will get back to you as soon as possible.';
+
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('message.php');
+    </SCRIPT>";
+}
+else{
+ echo "There is an Error ";
+}
+}
+?>           
                                 
                            
                         </div>
@@ -101,12 +145,5 @@ include 'navbar.php';
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
- <script>
-  function checkdelete()
-  {
-    return confirm('Are you sure you want to send this message')
-  }
-
-
-</script>
+ 
 </html>
