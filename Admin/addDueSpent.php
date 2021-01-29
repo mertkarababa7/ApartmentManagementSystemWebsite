@@ -66,13 +66,15 @@ ob_start();
         <div class="col-md-12">  
         <label>Dues </label>                                 
  <select name="Did" class="form-control">
-
-    <option value="Did">Select Due</option>
+ 
+    <option value="Did" >Select Due</option>
     <?php 
-  $result = $conn->query("SELECT CollectedMoney,details,id,Block FROM dues where isactive=1 ORDER BY date DESC ") or die($conn->error);?>
+  $result = $conn->query("SELECT SpentMoney,CollectedMoney,details,id,Block FROM dues where isactive=1 ORDER BY date DESC ") or die($conn->error);?>
    <?php
     while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['id'] . "'>" . $row['details'] . " >" . $row['Block'] . "Block>" . $row['CollectedMoney'] . " TL Collected</option>";
+      $kalan=$row['CollectedMoney']-$row['SpentMoney'];
+
+        echo "<option value='" . $row['id'] . "'>" . $row['details'] . " >" . $row['Block'] . "Block>" . $kalan . " TL Left</option>";
     }
     ?>         
 </select>
@@ -83,34 +85,54 @@ ob_start();
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Spend Money On Selected Due"  />
                                </div>
                                 <hr>
-                                <br><br><br><br><br><br>
+                               
                                 
        <?php
 
-if (isset($_GET['submit']))
-{
+
+function validate($data){
+       $data = trim($data);
+     $data = stripslashes($data);
+     $data = htmlspecialchars($data);
+     return $data;
+  }
+  // datayı validate ile kontrol ettikten sonra html sayfasında ki text valuesinden postladı
+if($conn === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+
+if (isset($_GET['submit'])) {
+if (empty($_GET['details']) || empty($_GET['amount'])   ) {
+  echo "ERROR: Please Fill in the blanks";
+ 
+}
+else{
+
 
   $details=$_GET['details'];
    $amount=$_GET['amount'];
     $did=$_GET['Did'];
 
-$query="INSERT INTO duespent (amount,details,due_id,SpentDate) VALUES('$amount', '$details','$did',CURDATE())"; 
-$data=mysqli_query($conn,$query);
-if(isset($data))
-{
-$query1="UPDATE dues SET SpentMoney=SpentMoney+'$amount' where id ='$did'"; 
-$data=mysqli_query($conn,$query1);
- $message = 'Updated Successfully!! .';
+$sql="INSERT INTO duespent (amount,details,due_id,SpentDate) VALUES('$amount', '$details','$did',CURDATE())"; 
+if(mysqli_query($conn, $sql)){
+   
+     $message = 'UPDATED!! Spend Wisely My Friend!';
 
     echo "<SCRIPT> //not showing me this
         alert('$message')
         window.location.replace('admin.php');
     </SCRIPT>";
+        
+
+} else{ 
+    echo "ERROR: Please Fill in the blanks";
 }
-else{
- echo "There is an Error ";
+
+
+mysqli_close($conn);
 }
 }
+
 ?>           
                                 
                            

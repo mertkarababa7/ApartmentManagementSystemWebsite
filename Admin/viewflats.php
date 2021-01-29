@@ -19,7 +19,7 @@ include 'navbar.php';
     background-color:#f7786b;
     color:white;
     width:%100;
-    height:%100;
+    height:%100;  
     font-size:15px;
   }
  </style>
@@ -40,21 +40,9 @@ include 'navbar.php';
 
 
   <title> Flats</title>
-<style>
-body {
- background-image: url("homepage.jpg");
- background-color: #cccccc;
-   background-repeat: no-repeat;
-   background-size: cover;
- 
-}  
-
-</style>
 
 
 
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="Admin.css">
 
 </head>
 <body>
@@ -111,21 +99,21 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
   <td>".$result['floor']."</td>
   <td>".$result['isfull']."</td>
  
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' class='btn btn-primary' ></a></td>
+  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' class='btn btn-danger' ></a> </td>
   
   </tr>";
 
 }
 else{
- echo "  <tbody><tr class='table-success'>
+ echo "  <tbody><tr class='table-Active'>
   <td>".$result['Block']."</td>
  <td>".$result['door_number']."</td>
   <td>".$result['floor']."</td>
 <td>".$result['isfull']."</td>
  
-  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' id='updatebutton' ></a></td>
-  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
+  <td><a href='editflat.php?ci=$result[flat_id] & bo=$result[Block] &fl=$result[floor] &dr=$result[door_number] '><input type='submit' value='update' class='btn btn-primary' ></a></td>
+  <td><a href='deleteflat.php?ci=$result[flat_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' class='btn btn-danger' ></a> </td>
  
   </tr>";
 }

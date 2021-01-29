@@ -8,8 +8,11 @@ include 'navbar.php';
 <!DOCTYPE html>
 <html>
 <head>
- 
-<title> Payment List </title>
+ <style>
+   .textCenter{
+       text-align: center;}
+ </style>
+<title> Balance </title>
 <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -109,7 +112,7 @@ include 'navbar.php';
 </head>
 <body>
 
-  <h2> Payment List </h2>
+
 
 
             <div id="piechart" style="width: 900px; height: 500px;"></div>
@@ -155,7 +158,25 @@ include 'navbar.php';
           </div>
           <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Table For Customers</h4>
+                              <h4 class="m-0 font-weight-bold text-primary"><?php 
+         $sqlQuery = "SELECT due_id,ispaid,Block,customer_id, COUNT(*) FROM depts where YEAR(OpenedDate) = $yearValue and MONTH(OpenedDate) = $monthValue and Block='$blockValue' and  ispaid=0";
+            $fire = mysqli_query($conn,$sqlQuery);
+           
+           $result33='Customers Did Not Pay Yet !';
+           $result34='All Costumers Paid Their Dues';
+          while ($result = mysqli_fetch_assoc($fire)) 
+
+          {
+       if($result['COUNT(*)'] > 1  ){
+           echo"".$result['COUNT(*)']."  ".$result33."";
+          
+       }
+         else{
+ echo"    ".$result34."";
+         }
+}
+
+           ?></h4>
                         </div>
 
                         <script>
@@ -177,13 +198,13 @@ include 'navbar.php';
 
 
     <thead>
-  <tr "active-row">
-    <th>Customer Name </th>
-    <th>Surname </th>
-    <th>Paid Date</th>
-    <th>Amount</th>
+  <tr "active-row" class="textCenter">
+    <th>Customer Full Name </th>
+    
+    <th>Payment Date</th>
+    <th>Paid Amount</th>
     <th>Due Detail</th>
-
+     <th>Block </th>
      
 
   </tr>
@@ -199,7 +220,7 @@ include 'navbar.php';
    $surname=$row['surname'];
 
 
-         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id  and YEAR(OpenedDate) = $yearValue and MONTH(OpenedDate) = $monthValue and depts.Block='$blockValue' ORDER BY ispaid DESC";
+         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id  and YEAR(OpenedDate) = $yearValue and MONTH(OpenedDate) = $monthValue and depts.Block='$blockValue' ORDER BY ispaid ASC";
 $once = false;
 
 $data = mysqli_query($conn,$query);
@@ -213,21 +234,22 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
  if($result["ispaid"] == 1)
        {
 echo "  <tbody id=Table><tr class='active-row'>
-<td>".$result['name']."</td>
-<td>".$result['surname']."</td>
-<td>".$result['PaymentDate']."</td>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
-
+<td >".$result['name']." ".$result['surname']."</td>
+<td class='textCenter'>".$result['PaymentDate']."</td>
+<td class='textCenter'>".$result['amount']."</td>
+<td class='textCenter'>".$result['details']."</td>
+<td class='textCenter'>".$result['Block']."</td>
 </tr></tbody>";
   }
        else {
         echo "  <tbody id=Table><tr class='table-danger'>
-<td>".$result['name']."</td>
-<td>".$result['surname']."</td>
-<td>".$result['PaymentDate']."</td>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
+<td >".$result['name']." ".$result['surname']."</td>
+
+<td class='textCenter'>".$result['PaymentDate']."</td>
+<td class='textCenter'>".$result['amount']."</td>
+<td class='textCenter'>".$result['details']."</td>
+<td class='textCenter'>".$result['Block']."</td>
+
 </tr></tbody>";
 
 }

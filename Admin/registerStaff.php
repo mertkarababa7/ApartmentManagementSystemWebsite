@@ -5,62 +5,140 @@ include '../db_conn.php';
 include 'navbar.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-  <style>
+
+<!DOCTYPE html>
+<html>
+
+
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+body{
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #212529;
+    text-align: left;
+    background-color: #f5f8fa;
+}
+
+.navbar-laravel
+{
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
+
+.navbar-brand , .nav-link, .my-form, .login-form
+{
+    font-family: Raleway, sans-serif;
+}
+
+.my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.login-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.login-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
 
 </style>
-<meta charset="UTF-8">
-<title>Add Staff </title>
-<script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<head>
+<title>Register Staff</title>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-<link rel="stylesheet" href="Main.css">
-  <link rel="stylesheet" href="admin.css">  
 
 </head>
 
+ <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
 <body>
-   <div class="rlform">
-  <div class="rlform rlform-wrapper">
-   <div class="rlform-box">
-  <div class="rlform-box-inner">
-  <form  method="post">
+<main class="my-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Create Announcement</div>
+                        <div class="card-body">
+  <form name="my-form" method="post">
+                          
 
-<a href="viewStaff.php" class="button">View Staff</a>
-   
-</form>
+                                <div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right" >Full Name</label>
+     <div class="col-md-6">
+     <input type="text" name="name" value="<?php echo $_POST['name'] ?? ''; ?>" class="form-control" >   
+</select>
+   </div></div>
 
-<form  method="post">
-  <h2>Create Staff</h2>
-    <p>
-        <label for="Staff">Staff Name</label>
-        <input type="text" name="name" value="<?php echo $_POST['name'] ?? ''; ?>" id="firstName">
-    </p>
-    <p>
-        <label for="job"> JOB:</label>
-        <input type="text" name="job"  value="<?php echo $_POST['job'] ?? ''; ?>" id="lastName">
-    </p>
-     <p>
-        <label for="job"> Available Hours</label>
-        <input type="text" name="Details"  value="<?php echo $_POST['Details'] ?? ''; ?>" id="lastName">
-    </p>
-     <p>
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" name="phoneNumber" id="emailAddress">
-      </p>
-       <p>
-        <label for="Staff">Block name</label>
-         <?php 
+
+
+                                <div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right" >Phone Number</label>
+     <div class="col-md-6">
+     <input type="name" name="phoneNumber" value="<?php echo $_POST['phoneNumber'] ?? ''; ?>" class="form-control" >   
+</select>
+   </div></div>
+
+
+
+
+
+    <div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Job</label>
+      <div class="col-md-6">
+    <input type="text" name="job" value="<?php echo $_POST['job'] ?? ''; ?>" class="form-control" >
+   </div>
+</div>
+
+
+
+
+
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Available Hours</label>
+      <div class="col-md-6">         
+ 
+<select name="Details" class="form-control">
+       <option value="08:00-18:00">08:00-18:00</option>
+     <option value="18:00-00:00">18:00-00:00</option>
+      <option value="00:00-08:00">00:00-08:00r</option>        
+</select>
+  </div></div>
+
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Block</label>
+      <div class="col-md-6">          
+<select name="Block" class="form-control">
+   <?php 
   $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
-<select name="Block">
+
     <option value="Block">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
@@ -68,12 +146,43 @@ include 'navbar.php';
     }
     ?>        
 </select>
-    
-    </p>
-    <button class="btn btn-primary btn-user " name="signUp">Create A NEW STAFF
+</div></div>
+     
+<div>
+   <div class="col-md-6 offset-md-4">
+    <button class="btn btn-primary btn-user" name="signUp">Create Announcement
     </button>
 
   </div>
-</form>
+    </div>
+   </form>
+  </div>
+   </div>
+  </div>
+ </div>
+
+  
 </body>
-</html>
+ <script src="vendor/jquery/jquery.min.js"></script>
+       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+       <!-- Core plugin JavaScript-->
+       <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+       <!-- Custom scripts for all pages-->
+       <script src="js/sb-admin-2.min.js"></script>
+</html
+   
+
+  
+         
+
+
+ 
+           
+   
+  
+ 
+
+
+

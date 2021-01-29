@@ -89,7 +89,7 @@ body {
       <th>Outgoings</th>
  <th>Expected Money</th>
     <th>Is Due Active</th>
-   <th>Close The Due</th>
+ 
      
    
    
@@ -120,7 +120,7 @@ echo "  <tbody id=Table><tr class='active-row'>
 <td>".$result['ExpectedMoney']."</td>
 <td>".$result['isactive']."</td>
 <td><a href='closedue.php?ci=$result[id]'onclick='return checkdelete()' ><input type='submit' value='Close' id='dltbutton' ></a> </td>
-
+<td><a href='viewduespent.php?ci=$result[id]' ><input type='submit' value='Details' id='updatebutton' ></a> </td>
 </tr></tbody>";
 }
 else {
@@ -136,7 +136,7 @@ echo "  <tbody id=Table><tr class='table-danger'>
 <td>".$result['ExpectedMoney']."</td>
 <td>".$result['isactive']."</td>
 <td><a href='opendue.php?ci=$result[id]'onclick='return checkdelete1()' ><input type='submit' value='Open' id='updatebutton' ></a> </td>
-
+<td><a href='viewduespent.php?ci=$result[id]' ><input type='submit' value='Details' id='updatebutton' ></a> </td>
 </tr></tbody>";
 }
 }

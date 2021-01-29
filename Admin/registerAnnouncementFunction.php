@@ -1,6 +1,5 @@
 <?php
-
-$link = mysqli_connect("localhost", "root", "", "beren");
+include '../db_conn.php';
  
 function validate($data){
        $data = trim($data);
@@ -9,7 +8,7 @@ function validate($data){
 	   return $data;
 	}
 	// datayı validate ile kontrol ettikten sonra html sayfasında ki text valuesinden postladı
-if($link === false){
+if($conn === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
@@ -30,22 +29,22 @@ $Block=validate($_POST['Block']);
  $admin_id=$_SESSION['id'];
  
 $sql = "INSERT INTO announcement (head, details,openedDate,Block,admin_id) VALUES ('$Header', '$Details',CURDATE(),'$Block','$admin_id')";
-if(mysqli_query($link, $sql)){
-    ?>
-        <script>
+if(mysqli_query($conn, $sql)){
+   
+        $message = 'Announcement Created!! .';
 
-            alert('Successfull !!');
-            window.open('registerAnnouncement.php','_self');
-            
-        </script>
-        <?php
+    echo "<SCRIPT> //not showing me this
+        alert('$message')
+        window.location.replace('viewAnnouncement.php');
+    </SCRIPT>";
+        
 
 } else{ 
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 }
 
 
-mysqli_close($link);
+mysqli_close($conn);
 }
 }
 ?>

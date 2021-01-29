@@ -72,8 +72,6 @@ rel="stylesheet">
                                       <label>Due Date </label>
                                       <input type="date" class="form-control form-control-user" id="exampleLastName" name="date"  >
 
-
-
                                   </div>
                                   <div class="col-sm-6">
                                       <label>Block </label>
@@ -94,13 +92,18 @@ rel="stylesheet">
                                   <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Open New Due"  />
                                   </div>
                                   <hr>
-                                  <br><br><br><br><br><br>
+                                
 
                                   <?php
 
-                                  if (isset($_GET['submit']))
-                                  {
+                                  if (isset($_GET['submit'])){
+                                    if (empty($_GET['details']) || empty($_GET['amount']) || empty($_GET['date'])  ) {
+                                      echo "ERROR: Please Fill in the blanks";
+                                  }
+                         
+ 
 
+                            
                                       $amount=$_GET['amount'];
                                       $details=$_GET['details'];
                                       $Block=$_GET['Block'];
@@ -117,7 +120,7 @@ rel="stylesheet">
                                         $row =$result->fetch_assoc();
                                         $numberofusers=$row['total']*$amount;
                                         
-                                        $query="INSERT INTO dues (amount,details,Block,date,Apart_id,isactive,ExpectedMoney) VALUES ('$amount','$details','$Block','$date','$Apartid','1',' $numberofusers')";
+                                        $query="INSERT INTO dues (amount,details,Block,date,Apart_id,isactive,ExpectedMoney,CollectedMoney,SpentMoney) VALUES ('$amount','$details','$Block','$date','$Apartid','1',' $numberofusers','0','0')";
                                         $data=mysqli_query($conn,$query);
                                         if(isset($data))
                                         {
@@ -137,11 +140,11 @@ rel="stylesheet">
                                            mysqli_query($conn,$query1);
 
 
-                                           $message = 'Updated Successfully!! .';
+                                           $message = 'Due Created And Sent To All Customers!';
 
                                            echo "<SCRIPT> //not showing me this
                                            alert('$message')
-                                           window.location.replace('admin.php');
+                                           window.location.replace('dueview.php');
                                            </SCRIPT>";
                                        }
 }

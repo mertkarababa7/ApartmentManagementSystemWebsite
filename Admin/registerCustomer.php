@@ -11,15 +11,61 @@ include 'navbar.php';
 <html>
 
 
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
+
+body{
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #212529;
+    text-align: left;
+    background-color: #f5f8fa;
+}
+
+.navbar-laravel
+{
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
+
+.navbar-brand , .nav-link, .my-form, .login-form
+{
+    font-family: Raleway, sans-serif;
+}
+
+.my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.login-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.login-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
 
 </style>
 <head>
 <title>Add Customer</title>
 
-<link rel="stylesheet" href="Main.css">
-  <link rel="stylesheet" href="admin.css">  
+ 
 </head>
+
 
  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -35,63 +81,86 @@ include 'navbar.php';
     <meta name="author" content="">
 
 <body>
- <div class="rlform">
-  <div class="rlform rlform-wrapper">
-   <div class="rlform-box">
-	<div class="rlform-box-inner">
-	 <form method="post" >
-	  <h2>Customer Create Page</h2>
+<main class="my-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Register Customer</div>
+                        <div class="card-body">
+  <form name="my-form" method="post">
+                          
 
-     <div class="rlform-group">
-	  <label>Customer Name</label>
-	  <input type="text" name="name" value="<?php echo $_POST['name'] ?? ''; ?>" class="rlform-input" >
+                                <div class="form-group row">
+	  <label class="col-md-4 col-form-label text-md-right" >Customer Name</label>
+     <div class="col-md-6">
+	  <input type="text" name="name" value="<?php echo $_POST['name'] ?? ''; ?>"class="form-control">
+	 </div></div>
+		<div class="form-group row">
+	  <label class="col-md-4 col-form-label text-md-right">Customer Surname</label>
+      <div class="col-md-6">
+	  <input type="text" name="surname" value="<?php echo $_POST['surname'] ?? ''; ?>" class="form-control" >
 	 </div>
-		
-	 <div class="rlform-group">					
-	  <label>Customer Surname</label>
-	  <input type="text" name="surname" value="<?php echo $_POST['surname'] ?? ''; ?>" class="rlform-input" >
-	 </div>
-
-		 <div class="rlform-group">         
-    <label>Customer Password</label>
-    <input type="password" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="rlform-input" >
+</div>
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Customer Password</label>
+      <div class="col-md-6">         
+    <input type="password" name="CustomerPassword" value="<?php echo $_POST['CustomerPassword'] ?? ''; ?>" class="form-control" >
   
-	
+	</div></div>
    
-<div class="rlform-group">					
-	  <label>Phone Number</label>
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Customer Phone Number</label>
+      <div class="col-md-6">         
    
-	  <input type="number" step="1" pattern="\d+" name="phone_number" value="<?php echo $_POST['phone_number'] ?? ''; ?>" id="phone_number" class="rlform-input" >
+	  <input type="number" step="1" pattern="\d+" name="phone_number" value="<?php echo $_POST['phone_number'] ?? ''; ?>" id="phone_number" class="form-control" >
+  </div>
      </div>
 
-     <div class="rlform-group">         
-    <label>Email</label>
-    <input type="text" name="email" id="email" value="<?php echo $_POST['email'] ?? ''; ?>" class="rlform-input" >
-     </div>
 
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Customer E-mail</label>
+      <div class="col-md-6">          
+    
+    <input type="email" name="email" id="email" value="<?php echo $_POST['email'] ?? ''; ?>" class="form-control" >
+     </div>
+</div>
      
    
-  
-   
-	   <div class="rlform-group">    
-    <label>Block Number</label>
+ 
+<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Select Block</label>
+      <div class="col-md-6">       
+	  
   <?php 
   $result = $conn->query("SELECT Block FROM apartment GROUP BY Block ASC") or die($conn->error);?>
-<select name="Block">
+<select name="Block" class="form-control">
     <option value="Block">Select Block</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
+
         echo "<option value='" . $row['Block'] . "'>" . $row['Block'] . "</option>";
     }
     ?>        
 </select>
- </div>
-	<br>
-  <div class="rlform-group">    
-    <label>Door Number</label>
+ </div></div>
+
+	<div class="form-group row">
+    <label class="col-md-4 col-form-label text-md-right">Select Door Number</label>
+      <div class="col-md-6">   
+      <script>
+       function SetData(){
+   var select = document.getElementById('Block');
+   var agent_id = select.options[select.selectedIndex].value;
+   document.myform.action = "index.php?action=contact_agent&agent_id="+agent_id ; # or .getAttribute('action')
+   myform.submit();
+}
+      </script>  
   <?php 
+  
+
   $result = $conn->query("SELECT flat_id,door_number,Block FROM flats where isfull='0' ") or die($conn->error);?>
-<select name="door_number">
+<select name="door_number" class="form-control">
     <option value="Door Number">Select Door Number</option>
     <?php
     while ($row = mysqli_fetch_array($result)) {
@@ -100,13 +169,15 @@ include 'navbar.php';
     ?>        
 </select>
  </div>
- <br>
-  
-
-
+</div>
 <div>
+   <div class="col-md-6 offset-md-4">
 	  <button class="btn btn-primary btn-user" name="signUp">Create Customer
 	  </button>
+
+
+
+
 
 	</div>
 	  </div>
@@ -126,4 +197,4 @@ include 'navbar.php';
 
        <!-- Custom scripts for all pages-->
        <script src="js/sb-admin-2.min.js"></script>
-</html
+</html>

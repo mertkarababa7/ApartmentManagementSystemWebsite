@@ -70,12 +70,12 @@ include 'navbar.php';
                                   
  
   </div>
-        <br>
+       
                                     </div>
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Add New Apartment"  />
                                </div>
                                 <hr>
-                                <br><br><br><br><br><br>
+                               
                                 
        <?php
 
@@ -91,7 +91,7 @@ if(isset($data))
 {
 
 
- $message = 'Updated Successfully!! .';
+ $message = ' Apartment Created Succesfully!';
 
     echo "<SCRIPT> //not showing me this
         alert('$message')

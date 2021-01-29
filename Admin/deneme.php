@@ -1,27 +1,13 @@
-
 <?php 
-include 'checklogin.php';
-include '../db_conn.php';
-include 'navbar.php';
 
+ include '../db_conn.php';
+  include 'navbar.php';
 ?>
-<!DOCTYPE html>
+
+
 <html>
-<head>
-  <style>
-   
- </style>
-<title> Payment List </title>
-<script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
- <head>
+  <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -95,7 +81,7 @@ include 'navbar.php';
 
   <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Last Quarterly Due Balances</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">All Dues</h4>
                         </div>
                         <div class="card-body">
     <div id="columnchart_material" style="width: 100%; min-width: 25%; height: 500px;"></div>

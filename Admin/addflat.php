@@ -87,7 +87,7 @@ include 'navbar.php';
                              <div> <input  type="submit" class="btn btn-primary btn-user btn-block" name="submit" value="Create New Flat"  />
                                </div>
                                 <hr>
-                                <br><br><br><br><br><br>
+                               
                                 
        <?php
 
@@ -111,7 +111,7 @@ if(isset($data))
 {
 
 
- $message = 'Updated Successfully!! .';
+ $message = 'Flat Created Succesfully !';
 
     echo "<SCRIPT> //not showing me this
         alert('$message')

@@ -11,7 +11,7 @@ $ph=$_GET['ph'];
 
 <style>
   .bg-password-image2 {
-  background: url("https://cdn.onlinewebfonts.com/svg/img_410571.png");
+  background: url("https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
   background-position: center;  
   background-size: cover;
 }
@@ -56,15 +56,15 @@ $ph=$_GET['ph'];
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                      <label>E-mail </label>
-                                       <input type="text" name="email" value="<?php echo "$em" ?>" class="form-control form-control-user" id="exampleFirstName">
+                                      <label>Your E-mail </label>
+                                       <input type="email" name="email" value="<?php echo "$em" ?>" class="form-control form-control-user" id="exampleFirstName">
 
                                      <input type="hidden" name="ai"  value="<?php echo "$ai" ?>" id="lastName">
                                       <br><br>
                                     </div>
                                     <div class="col-sm-6">
-                                      <label>Phone Number </label>
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="phone"  value="<?php echo "$ph" ?>"
+                                      <label>Your Phone Number </label>
+                                        <input type="number" step="1" pattern="\d+"  class="form-control form-control-user" id="exampleLastName" name="phone"  value="<?php echo "$ph" ?>"
                                             placeholder="Last Name">
  
   
@@ -107,12 +107,7 @@ else{
                            
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
+             
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

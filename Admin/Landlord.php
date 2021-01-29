@@ -22,6 +22,8 @@ include 'navbar.php';
     height:%100;
     font-size:15px;
   }
+  .textCenter{
+       text-align: center;}
  </style>
 
 <!DOCTYPE html>
@@ -72,8 +74,8 @@ include 'navbar.php';
 
 
     <thead>
-  <tr "active-row">
-    <th>Name</th>
+  <tr "active-row" class="textCenter">
+    <th>Full Name</th>
     <th>Move In Date</th>
     <th>Email</th>
     <th>Phone</th>
@@ -99,12 +101,12 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
 if ($result['Active']=='1')
 {
 echo "  <tbody id=Table><tr class='active-row'>
-<td>".$result['name']." ".$result['surname']."</td>
+<td >".$result['name']." ".$result['surname']."</td>
 
-<td>".$result['date']."</td>
-<td>".$result['email']."</td>
-<td>".$result['phone_number']."</td>
-<td>".$result['Block']."->".$result['door_number']."</td>
+<td class='textCenter'>".$result['date']."</td>
+<td class='textCenter'>".$result['email']."</td>
+<td class='textCenter'>".$result['phone_number']."</td>
+<td class='textCenter'>".$result['Block']."->".$result['door_number']."</td>
 
 <td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
 <td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
@@ -114,21 +116,33 @@ echo "  <tbody id=Table><tr class='active-row'>
 
 else{
 echo "  <tbody id=Table><tr class='table-danger'>
-<td>".$result['name']." ".$result['surname']."</td>
-<td>".$result['date']."</td>
-<td>".$result['email']."</td>
-<td>".$result['phone_number']."</td>
-<td>".$result['Block']."->".$result['door_number']."</td>
+<td >".$result['name']." ".$result['surname']."</td>
+<td class='textCenter'>".$result['date']."</td>
+<td class='textCenter'>".$result['email']."</td>
+<td class='textCenter'>".$result['phone_number']."</td>
+<td class='textCenter'>".$result['Block']."->".$result['door_number']."</td>
 
 <td><a href='edit.php?ci=$result[customer_id] & na=$result[name] &su=$result[surname] & em=$result[email] &dn=$result[door_number]& pn=$result[phone_number]' ><input type='submit' value='update' id='updatebutton' ></a></td>
 <td><a href='delete.php?ci=$result[customer_id]'onclick='return checkdelete()' ><input type='submit' value='Delete' id='dltbutton' ></a> </td>
-<td>".$result['OutDate']."</td>
+<td class='textCenter'>".$result['OutDate']."</td>
 </tr></tbody>";
 }
 }
 }
 ?>
   
+  <tfoot>
+  <tr "active-row" class="textCenter">
+    <th>Full Name</th>
+    <th>Move In Date</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Door Number</th>
+     
+      <th colspan="2" align="center">Database Operations</th>
+       <th>Move Out</th>
+  </tr>
+   </tfoot>
 </table>
 </div>
 <script>

@@ -35,7 +35,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		$sql = "SELECT * FROM users WHERE user_name='$uname'";
 		$result = mysqli_query($conn, $sql);
 	    $row = mysqli_fetch_assoc($result);
-		 if (password_verify($pass, $row['password'])) 
+		 if ($row && password_verify($pass, $row['password'])) 
 		
             {
 			
@@ -50,7 +50,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 			 
 				 $message = 'Unvalid Username Or Password.';
     echo "<SCRIPT> //not showing me this
-        alert('$message')
+       	alert('Unvalid Username Or Password');
         window.location.replace('../index.php');
     </SCRIPT>";
     

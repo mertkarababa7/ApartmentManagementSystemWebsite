@@ -22,6 +22,7 @@ include 'navbar.php';
     height:%100;
     font-size:15px;
   }
+     
  </style>
 
 <!DOCTYPE html>
@@ -41,21 +42,11 @@ include 'navbar.php';
 
 	<title> Customer Payments</title>
 <style>
-body {
- background-image: url("homepage.jpg");
- background-color: #cccccc;
-   background-repeat: no-repeat;
-   background-size: cover;
- 
-}  
+
 
 </style>
 
-
-
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="Admin.css">
-
+  
 </head>
 <body>
 <script>
@@ -80,9 +71,8 @@ body {
 
 
     <thead>
-  <tr "active-row">
-    <th>Name</th>
-    <th>Surname</th>
+  <tr "active-row" class="textCenter">
+    <th>Full Name</th>
     <th>Paid Date</th>
     <th>Email</th>
     <th>Phone</th>
@@ -104,7 +94,7 @@ body {
    
 
 
-         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id ORDER BY  ispaid DESC";
+         $query = "SELECT * FROM depts,customer  where   depts.customer_id=customer.customer_id ORDER BY  ispaid ASC";
 $once = false;
 
 $data = mysqli_query($conn,$query);
@@ -118,23 +108,21 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
  if($result["ispaid"] == '1')
        {
 echo "  <tbody id=Table><tr class='active-row'>
-<td>".$result['name']."</td>
-<td>".$result['surname']."</td>
-<td>".$result['PaymentDate']."</td>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
-<td>".$result['Block']."</td>
+<td >".$result['name']."  ".$result['surname']."</td>
+<td class='textCenter'>".$result['PaymentDate']."</td>
+<td class='textCenter'>".$result['amount']."</td>
+<td class='textCenter'>".$result['details']."</td>
+<td class='textCenter'>".$result['Block']."</td>
 </tr></tbody>";
   }
        else {
 
         echo "  <tbody id=Table><tr class='table-danger'>
-<td>".$result['name']."</td>
-<td>".$result['surname']."</td>
-<td>".$result['PaymentDate']."</td>
-<td>".$result['amount']."</td>
-<td>".$result['details']."</td>
-<td>".$result['Block']."</td>
+<td>".$result['name']."  ".$result['surname']."</td>
+<td class='textCenter'>".$result['PaymentDate']."</td>
+<td class='textCenter'>".$result['amount']."</td>
+<td class='textCenter'>".$result['details']."</td>
+<td class='textCenter'>".$result['Block']."</td>
 
 </tr></tbody>";
 
@@ -143,10 +131,11 @@ echo "  <tbody id=Table><tr class='active-row'>
  echo "</tbody></table></div></div>";}
 
 ?>
+ 
+
   
 </table>
-  
-</table>
+
 </div>
 <script>
   function checkdelete()

@@ -6,6 +6,9 @@ include 'navbar.php';
  ?>
 
  <style>
+
+.hideextra { white-space: nowrap; overflow: hidden; text-overflow:ellipsis; }
+
   #updatebutton
   {
     background-color:#4e73df;
@@ -22,6 +25,7 @@ include 'navbar.php';
     height:%100;
     font-size:15px;
   }
+  
  </style>
 
 <!DOCTYPE html>
@@ -87,11 +91,11 @@ body {
 
 
     <thead>
-  <tr "active-row">
+  <tr "active-row" class="centerText">
     <th>Block</th>
     <th>Header</th>
-    <th>Details</th>
-    <th>Opened Date</th>
+    <th class="centerText">Details</th>
+    <th class="hideextra">Opened Date</th>
      <th>Delete</th>
    
      
@@ -112,10 +116,10 @@ body {
 while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through results
  if ($result['head']=='Dues' || $result['head']=='Rules'){
   echo "  <tbody><tr class='table-danger'>
-  <td>".$result['Block']."</td>
-  <td>".$result['head']."</td>
-<td>".$result['details']."</td>
-  <td>".$result['openedDate']."</td>
+  <td class='centerText'>".$result['Block']."</td>
+  <td class='centerText'>".$result['head']."</td>
+<td class='centerText'>".$result['details']."</td>
+  <td class='hideextra'>".$result['openedDate']."</td>
 
  
   
@@ -127,10 +131,10 @@ while($result = mysqli_fetch_assoc($data)){   //Creates a loop to loop through r
 }
 else{
    echo "  <tbody><tr class='table-success'>
-  <td>".$result['Block']."</td>
-  <td>".$result['head']."</td>
-<td>".$result['details']."</td>
-  <td>".$result['openedDate']."</td>
+  <td class='centerText'>".$result['Block']."</td>
+  <td class='centerText'>".$result['head']."</td>
+<td class='centerText'>".$result['details']."</td>
+  <td class='hideextra'>".$result['openedDate']."</td>
 
 
  
